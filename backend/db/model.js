@@ -132,7 +132,7 @@ export class MeasurementUnit extends Model {
 
 MeasurementUnit.init(
     {
-        measurementUnitID: {
+        measurementUnitId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
@@ -259,7 +259,39 @@ WeekMeal.init(
     }
 )
 
-// Relationships here
+// Relationships for UserRecipes
+User.hasMany(UserRecipe, { foreignKey: 'userId'})
+UserRecipe.belongsTo(User, { foreignKey: 'userId'})
+
+Recipe.hasMany(UserRecipe, { foreignKey: 'recipeId'})
+UserRecipe.belongsTo(Recipe, { foreignKey: 'recipeId'})
+
+// Relationships for RecipeIngredients
+Recipe.hasMany(RecipeIngredient, { foreignKey: 'recipeId'})
+RecipeIngredient.belongsTo(Recipe, { foreignKey: 'recipeId'})
+
+MeasurementUnit.hasMany(RecipeIngredient, { foreignKey: 'measurementUnitId'})
+RecipeIngredient.belongsTo(MeasurementUnit, { foreignKey: 'measurementUnitId'})
+
+MeasurementQuantity.hasMany(RecipeIngredient, { foreignKey: 'measurementQuantityId'})
+RecipeIngredient.belongsTo(MeasurementQuantity, { foreignKey: 'measurementQuantityId'})
+
+Ingredient.hasMany(RecipeIngredient, { foreignKey: 'ingredientId'})
+RecipeIngredient.belongsTo(Ingredient, { foreignKey: 'ingredientId'})
+
+// Relationships for Weeks
+User.hasMany(Week, { foreignKey: 'userId'})
+Week.belongsTo(User, { foreignKey: 'userId'})
+
+// Relationships for WeekMeals
+Week.hasMany(WeekMeal, { foreignKey: 'weekId'})
+WeekMeal.belongsTo(Week, { foreignKey: 'weekId'})
+
+Day.hasMany(WeekMeal, { foreignKey: 'dayId'})
+WeekMeal.belongsTo(Day, { foreignKey: 'dayId'})
+
+Recipe.hasMany(WeekMeal, { foreignKey: 'recipeId'})
+WeekMeal.belongsTo(Recipe, { foreignKey: 'recipeId'})
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
     console.log('Syncing database...');
