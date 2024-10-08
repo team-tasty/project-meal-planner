@@ -17,7 +17,7 @@ import App from "./App.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
 import { Navigate } from "react-router-dom";
-import Recipes from "./pages/Recipes.jsx";
+import Recipes from "./pages/Recipes/RecipesPage.jsx";
 
 const Router = () => {
   // Session Check stuff we will implement once we have Redux set up:
