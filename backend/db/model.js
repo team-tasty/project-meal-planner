@@ -161,7 +161,7 @@ MeasurementQuantity.init(
             primaryKey: true,
         },
         quantity: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false,
         }
     },
