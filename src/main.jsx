@@ -11,8 +11,10 @@ import store from "./redux/store.js";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import LandingPage from "./pages/LandingPage.jsx";
 import App from "./App.jsx";
 import { createRoot } from "react-dom/client";
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 const Router = () => {
   // Session Check stuff we will implement once we have Redux set up:
@@ -36,7 +38,11 @@ const Router = () => {
   // }, [userId]);
 
   const router = createBrowserRouter(
-    createRoutesFromElements(<Route path="/" element={<App />}></Route>)
+    createRoutesFromElements(
+      <Route path="/" element={<App />} errorElement={<ErrorPage />}>
+        <Route index element={<LandingPage />} />
+      </Route>
+    )
   );
   return <RouterProvider router={router} />;
 };
