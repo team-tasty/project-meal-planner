@@ -15,6 +15,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import App from "./App.jsx";
 import { createRoot } from "react-dom/client";
 import ErrorPage from "./pages/ErrorPage.jsx";
+import AuthPage from "./pages/AuthPage.jsx";
 
 const Router = () => {
   // Session Check stuff we will implement once we have Redux set up:
@@ -41,6 +42,7 @@ const Router = () => {
     createRoutesFromElements(
       <Route path="/" element={<App />} errorElement={<ErrorPage />}>
         <Route index element={<LandingPage />} />
+        <Route path="authPage" element={<AuthPage />} />
       </Route>
     )
   );
