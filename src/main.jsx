@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Provider } from "react-redux";
-// import store from "./redux/store.js";
+import store from "./redux/store.js";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
