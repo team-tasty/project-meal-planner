@@ -27,24 +27,19 @@ app.get('/api/logout', logout);
 app.post('/api/register', register);
 
 // Recipes Endpoints
-// TODO: import recipes functions
+import { recipeFns } from './recipeCtrl.js';
+const { recipeSearch } = recipeFns;
 
 // themealdb api request for recipe search
-app.get('/api/recipe-search/:userSearchStr');  // what is a better name for the user input string???
+app.post('/api/recipe-search', recipeSearch); // needs search input in body object
 // get user's saved recipes
 app.get('/api/user-recipes');
 // user saves a recipe
-app.get('/api/save-recipe');
+app.post('/api/save-recipe'); // needs recipe object in body object
 // user un-saves a recipe
-app.delete('/api/unsave-recipe');
+app.delete('/api/unsave-recipe/:userRecipeId');
 // display recipe modal
-// app/get('/app/recipe-detail/:recipeId'); // error because recipeId is not defined
-// rating for recipe
-app.get('/api/rate-recipe');
-// add week
-app.get('/api/add-week')
-// delete week
-app.delete('/api/delete-week/:weekId')
+app/post('/app/recipe-detail'); // needs recipeId in body object
 
 // Planner Endpoints
 // TODO: import planner functions
@@ -52,11 +47,15 @@ app.delete('/api/delete-week/:weekId')
 // get user week planner data
 app.get('/api/user-weeks');
 // user adds recipe to week
-app.post('/api/add-recipe/') // needs weekId and dayId and recipeId
+app.post('/api/add-recipe/') // needs weekId, dayId, and recipeId in body object
 // user moves recipe from one day to another day or to another week?
-app.put('/api/week-meal-edit/') // needs weekId and dayId
+app.put('/api/week-meal-edit/') // needs weekId and dayId in body object
 // user removes recipe from planner
 app.delete('/api/remove-week-meal/:weekMealId');
+// add week
+app.get('/api/add-week')
+// delete week
+app.delete('/api/delete-week/:weekId')
 
 // Grocery List Endpoints
 // TODO: import grocery list functions
