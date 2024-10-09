@@ -3,18 +3,20 @@ import { useState } from "react";
 const SearchAPI = ({ setRecipesData }) => {
   // set state values
   const [searchInput, setSearchInput] = useState("");
+  const [searchType, setSearchType] = useState("");
 
   // create function to handle search
   const handleSearch = async (e) => {
     e.preventDefault();
 
     // create body object
-    const searchValue = {
+    const searchInfo = {
       searchInput,
+      searchType,
     };
 
     // make call to backend endpoint
-    const res = await axios.post("/api/recipe-search", searchValue);
+    const res = await axios.post("/api/recipe-search", searchInfo);
 
     // if successful -- setRecipeData will = the new recipeData from the axios call, if not -- display message
     if (res.data.success) {
@@ -33,6 +35,9 @@ const SearchAPI = ({ setRecipesData }) => {
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
       />
+      {/* start here Thursday */}
+      <label htmlFor="dropDown"></label>
+      <select></select>
       <button type="submit">Search</button>
     </form>
   );
