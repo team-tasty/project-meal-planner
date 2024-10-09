@@ -20,29 +20,32 @@ import { Navigate } from "react-router-dom";
 import RecipesPage from "./components/Recipes/RecipesPage.jsx";
 import PlannerPage from "./components/Planner/PlannerPage.jsx";
 import GroceryListPage from "./components/GrocreyList/GroceryListPage.jsx";
+import { useEffect } from "react";
 
 const Router = () => {
   // Session Check stuff we will implement once we have Redux set up:
 
-  // const userId = useSelector((state) => state.userId);
-  // const dispatch = useDispatch();
+  const userId = useSelector((state) => state.userId);
+  console.log(userId);
+  const dispatch = useDispatch();
 
-  // const sessionCheck = async () => {
-  //   const res = await axios.get("/api/session-check");
+  const sessionCheck = async () => {
+    const res = await axios.get("/api/session-check");
+    console.log(res.data);
 
-  //   if (res.data.success) {
-  //     dispatch({
-  //       type: "USER_AUTH",
-  //       payload: res.data.userId,
-  //     });
-  //   }
-  // };
+    if (res.data.success) {
+      dispatch({
+        type: "USER_AUTH",
+        payload: res.data.userId,
+      });
+    }
+  };
 
-  // useEffect(() => {
-  //   sessionCheck();
-  // }, [userId]);
+  useEffect(() => {
+    sessionCheck();
+  }, [userId]);
 
-  const userId = true;
+  console.log(userId);
 
   const router = createBrowserRouter(
     createRoutesFromElements(

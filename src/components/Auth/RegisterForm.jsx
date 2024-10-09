@@ -31,7 +31,7 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
     if (res.data.success) {
       dispatch({
         type: "USER_AUTH",
-        payload: { userId: res.data.userId },
+        payload: res.data.userId,
       });
       navigate("userLandingPage"); // might not need with the session check?
     } else {
