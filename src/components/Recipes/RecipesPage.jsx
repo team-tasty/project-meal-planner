@@ -1,8 +1,17 @@
 import SearchAPI from "./SearchAPI";
 import RecipeCard from "./RecipeCard";
+import { useState } from "react";
 
 const RecipesPage = () => {
-  return <div>Recipes Page</div>;
+  // set state values
+  const [recipeData, setRecipeData] = useState([]);
+
+  return (
+    <div>
+      Recipes Page
+      <SearchAPI SetRecipeData={setRecipeData} />
+    </div>
+  );
 };
 
 export default RecipesPage;
