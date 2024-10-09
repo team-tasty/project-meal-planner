@@ -1,5 +1,6 @@
 import { useState } from "react";
 import RecipeCard from "../../Recipes/RecipeCard";
+import seedRecipeData from "../../../../backend/db/seedRecipeData.js";
 
 const SearchRecipes = ({ recipesData }) => {
   const [searchInput, setSearchInput] = useState("");
