@@ -39,7 +39,7 @@ export const authFns = {
       firstName: fname,
       lastName: lname,
       userName: username,
-      password: password, // change value to passwordHash once ready for encryption
+      password: passwordHash,
     });
 
     if (!newUser) {
@@ -74,20 +74,12 @@ export const authFns = {
       });
     }
 
-    // Use prior to encrypting passwords in db
-    if (password !== user.password) {
+    if(!bcryptjs.compareSync(password, user.password)) {
       return res.send({
-        message: "Password is incorrect",
-        success: false,
+        message: 'Password is incorrect',
+        success: false
       });
-    }
-    // Use once seed data passwords are encrypted
-    // if(!bcryptjs.compareSync(password, user.password)) {
-    //   return res.send({
-    //     message: 'Password is incorrect',
-    //     success: false
-    //   });
-    // };
+    };
 
     req.session.userId = user.userId;
 
