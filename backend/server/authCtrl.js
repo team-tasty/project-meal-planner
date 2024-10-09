@@ -1,20 +1,20 @@
 import { User } from "../db/model.js";
-import bcryptjs from 'bcryptjs';
+import bcryptjs from "bcryptjs";
 
 export const authFns = {
   sessionCheck: async (req, res) => {
     if (req.session.userId) {
       return res.send({
-        message: 'User is in session',
+        message: "User is in session",
         success: true,
-        userId: req.session.userId
+        userId: req.session.userId,
       });
     } else {
       return res.send({
-        message: 'No user in session',
-        success: false
+        message: "No user in session",
+        success: false,
       });
-    };
+    }
   },
 
   register: async (req, res) => {
@@ -23,15 +23,15 @@ export const authFns = {
     const user = await User.findOne({
       where: {
         userName: username,
-      }
+      },
     });
 
     if (user) {
       return res.send({
-        message: 'Username already exists',
-        success: false
+        message: "Username already exists",
+        success: false,
       });
-    };
+    }
 
     const passwordHash = bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
 
@@ -39,22 +39,22 @@ export const authFns = {
       firstName: fname,
       lastName: lname,
       userName: username,
-      password: password // change value to passwordHash once ready for encryption
+      password: password, // change value to passwordHash once ready for encryption
     });
 
     if (!newUser) {
       return res.send({
-        message: 'Registration failed',
-        success: false
+        message: "Registration failed",
+        success: false,
       });
-    };
+    }
 
     req.session.userId = newUser.userId;
 
     return res.send({
-      message: 'User registered successfully',
+      message: "User registered successfully",
       success: true,
-      userId: req.session.userId
+      userId: req.session.userId,
     });
   },
 
@@ -63,24 +63,24 @@ export const authFns = {
 
     const user = await User.findOne({
       where: {
-        userName: username
-      }
+        userName: username,
+      },
     });
 
     if (!user) {
       return res.send({
         message: "User not found",
-        success: false
+        success: false,
       });
-    };
+    }
 
     // Use prior to encrypting passwords in db
     if (password !== user.password) {
       return res.send({
-        message: 'Password is incorrect',
-        message: false
+        message: "Password is incorrect",
+        success: false,
       });
-    };
+    }
     // Use once seed data passwords are encrypted
     // if(!bcryptjs.compareSync(password, user.password)) {
     //   return res.send({
@@ -92,12 +92,11 @@ export const authFns = {
     req.session.userId = user.userId;
 
     return res.send({
-      message: 'User logged in successfully',
-      success: true
+      message: "User logged in successfully",
+      success: true,
+      userId: req.session.userId,
     });
   },
 
-  logout: async (req, res) => {
-
-  }
-}
+  logout: async (req, res) => {},
+};
