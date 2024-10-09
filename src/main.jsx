@@ -42,7 +42,7 @@ const Router = () => {
   //   sessionCheck();
   // }, [userId]);
 
-  const userId = true;
+  const userId = false;
 
   const router = createBrowserRouter(
     createRoutesFromElements(
