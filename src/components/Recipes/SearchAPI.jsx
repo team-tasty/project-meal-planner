@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SearchAPI = ({ setRecipeData }) => {
+const SearchAPI = ({ setRecipesData }) => {
   // set state values
   const [searchInput, setSearchInput] = useState("");
 
@@ -14,11 +14,11 @@ const SearchAPI = ({ setRecipeData }) => {
     };
 
     // make call to backend endpoint
-    const res = await axios.get("/api/searchAPI", searchValue);
+    const res = await axios.post("/api/recipe-search", searchValue);
 
     // if successful -- setRecipeData will = the new recipeData from the axios call, if not -- display message
     if (res.data.success) {
-      setRecipeData(res.data.searchResults);
+      setRecipesData(res.data.recipesData);
     } else {
       return <p>{res.data.message}</p>;
     }
