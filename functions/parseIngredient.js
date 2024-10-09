@@ -28,7 +28,10 @@ const convertIngredient = (str) => {
         }
     }
     finalStr = spaceStr
+    // This checks for ranges given by a user, and converts them to the minimum. Ex: 2-3 tsp should return 2 tsp
+    finalStr = finalStr.replace(/-\d+/g, "")
 
+    // return finalStr
     return parseFunction(finalStr)
 }
 
@@ -36,27 +39,28 @@ const convertIngredient = (str) => {
 // This function will separate the quantities from the units and manipulate them into consistent, usable data for the DB
 const parseFunction = (str) => {
     // First we'll grab the unit, which we can then convert into a consistent unit within another function
-    const strUnitArr = str.match(/[a-z\.]+/gi)
+    const strUnitArr = str.match(/[a-z]+/gi)
     const finalUnit = unitConvert(strUnitArr)
 
     // Next we can work with the numbers. We'll separate them, convert them to values we can use in javascript, and then sum them.
-    const strQtyArr = str.match(/[0-9\/]+/g)
-    console.log(strQtyArr, "1")
-    for (let i=0; i < strQtyArr.length; i++) {
-        if (strQtyArr[i].includes("/")) {
-            let fractionArr = strQtyArr[i].split("/")
-            strQtyArr[i] = (+fractionArr[0] / +fractionArr[1])
-        } else {
-            strQtyArr[i] = +strQtyArr[i]
+    const strQtyArr = str.match(/[0-9\/\.]{2,}|[0-9]+/g)
+    let finalQty = 0
+    if (Array.isArray(strQtyArr)) {
+        for (let i=0; i < strQtyArr.length; i++) {
+            if (strQtyArr[i].includes("/")) {
+                let fractionArr = strQtyArr[i].split("/")
+                strQtyArr[i] = (+fractionArr[0] / +fractionArr[1])
+            } else {
+                strQtyArr[i] = +strQtyArr[i]
+            }
         }
+        finalQty = strQtyArr.reduce((x,y) => x + y, 0)
     }
-    console.log(strQtyArr, "2")
-    const finalQty = strQtyArr.reduce((x,y) => x + y, 0)
 
     return [finalQty, finalUnit]
 
 }
 
-console.log(convertIngredient("175g/6oz"))
+console.log(convertIngredient("as required"))
 
 

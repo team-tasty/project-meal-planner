@@ -1,17 +1,17 @@
 // Americanized measurements
-const cupSet = new Set(["cups","cup", "c", "c."])
-const pintSet = new Set(["pints", "pint", "pt", "pt."])
-const quartSet = new Set(["quarts", "quart", "qt", "qt."])
-const gallonSet = new Set(["gallons", "gallon", "gal", "gal."])
-const poundSet = new Set(["pounds", "pound", "lbs", "lbs.", "lb", "lb"])
-const ounceSet = new Set(["ounces", "ounce", "oz", "oz."])
-const tspSet = new Set(["teaspoons", "teaspoon", "tsp", "tsp.", "t", "t."])
-const tbspSet = new Set(["tablespoon, tablespoons", "tbls", "tbls.", "tbs", "tbs.","tb", "tb.", "t", "t."])
+const cupSet = new Set(["cups", "cup", "c"])
+const pintSet = new Set(["pints", "pint", "pt"])
+const quartSet = new Set(["quarts", "quart", "qt"])
+const gallonSet = new Set(["gallons", "gallon", "gal"])
+const poundSet = new Set(["pounds", "pound", "lbs", "lb"])
+const ounceSet = new Set(["ounces", "ounce", "oz"])
+const tspSet = new Set(["teaspoons", "teaspoon", "tsp", "t"])
+const tbspSet = new Set(["tablespoon, tablespoons", "tbls", "tbs","tb", "t"])
 
 // Metric measurements
-const gramSet = new Set(["grams", "gram", "g", "g."])
-const mlSet = new Set(["milliliters", "milliliter", "mls", "mls.", "ml", "ml."])
-const literSet = new Set(["liters", "liter", "l", "l."])
+const gramSet = new Set(["grams", "gram", "g"])
+const mlSet = new Set(["milliliters", "milliliter", "mls", "ml"])
+const literSet = new Set(["liters", "liter", "l"])
 
 const unitConvert = (arr) => {
     let finalArr = []
