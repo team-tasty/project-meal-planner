@@ -11,15 +11,15 @@ import store from "./redux/store.js";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import UserLandingPage from "./pages/UserLandingPage.jsx";
+import UserLandingPage from "./components/UserLandingPage.jsx";
 import App from "./App.jsx";
 // import { createRoot } from "react-dom/client";
-import ErrorPage from "./pages/ErrorPage.jsx";
-import AuthPage from "./pages/AuthPage.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
+import AuthPage from "./components/Auth/AuthPage.jsx";
 import { Navigate } from "react-router-dom";
-import RecipesPage from "./pages/Recipes/RecipesPage.jsx";
-import PlannerPage from "./pages/Planner/PlannerPage.jsx";
-import GroceryListPage from "./pages/GrocreyList/GroceryListPage.jsx";
+import RecipesPage from "./components/Recipes/RecipesPage.jsx";
+import PlannerPage from "./components/Planner/PlannerPage.jsx";
+import GroceryListPage from "./components/GrocreyList/GroceryListPage.jsx";
 
 const Router = () => {
   // Session Check stuff we will implement once we have Redux set up:

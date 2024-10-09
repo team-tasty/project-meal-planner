@@ -1,5 +1,5 @@
 const PlannerPage = () => {
-  return <div></div>;
+  return <div>Weekly Planner</div>;
 };
 
 export default PlannerPage;
