@@ -66,4 +66,4 @@ const parseFunction = (str) => {
 
 }
 
-console.log(convertIngredient("175g/6oz"))
+export default convertIngredient
