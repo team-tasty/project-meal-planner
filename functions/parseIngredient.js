@@ -56,11 +56,14 @@ const parseFunction = (str) => {
         }
         finalQty = strQtyArr.reduce((x,y) => x + y, 0)
     }
+    try {
+        return [Number(finalQty), String(finalUnit)]
+    } catch (error) {
+        console.error(error)
+        return `Error occured: ${error}`
+    }
 
-    return [finalQty, finalUnit]
 
 }
 
-console.log(convertIngredient("as required"))
-
-
+console.log(convertIngredient("175g/6oz"))
