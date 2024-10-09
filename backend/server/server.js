@@ -18,12 +18,13 @@ app.use(
 );
 
 // Auth Endpoints
-// TODO: import auth functions
+import { authFns } from './authCtrl.js';
+const { sessionCheck, register, login, logout } = authFns;
 
-app.get('/api/session-check');
-app.post('/api/login');
-app.get('/api/logout');
-app.post('/api/register');
+app.get('/api/session-check', sessionCheck);
+app.post('/api/login', login);
+app.get('/api/logout', logout);
+app.post('/api/register', register);
 
 // Recipes Endpoints
 // TODO: import recipes functions
