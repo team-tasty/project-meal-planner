@@ -9,11 +9,10 @@ await db.sync({ force: true })
 console.log('Seeding database...')
 
 // // Creation of Users in DB
-const usersToCreate = []
 const fakeUserFirst = ['John', 'Barbara', 'Penny']
 const fakeUserLast = 'Danger'
-const password = 'test'
-let hashedPassword
+// const password = 'test'
+let hashedPassword = bcryptjs.hashSync("test", bcryptjs.genSaltSync(10))
 
 // Creates 3 users to add
 for (let i = 0; i < 3; i++) {
@@ -22,7 +21,7 @@ for (let i = 0; i < 3; i++) {
         firstName: fakeUserFirst[i],
         lastName: fakeUserLast,
         userName: username,
-        password: password,
+        password: hashedPassword,
     })
 }
 // Creates the Admin User
