@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
     case "USER_AUTH":
       return {
         ...state,
-        userId: action.payload.userId,
+        userId: action.payload,
       };
 
     // triggered from front end with this dispatch action object:

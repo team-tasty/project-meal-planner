@@ -29,7 +29,7 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
     if (res.data.success) {
       dispatch({
         type: "USER_AUTH",
-        payload: { userId: res.data.userId },
+        payload: res.data.userId,
       });
       // reset username and password fields
       setUsername("");
