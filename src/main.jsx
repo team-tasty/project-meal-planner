@@ -17,7 +17,9 @@ import App from "./App.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import AuthPage from "./pages/AuthPage.jsx";
 import { Navigate } from "react-router-dom";
-import Recipes from "./pages/Recipes/RecipesPage.jsx";
+import RecipesPage from "./pages/Recipes/RecipesPage.jsx";
+import PlannerPage from "./pages/Planner/PlannerPage.jsx";
+import GroceryListPage from "./pages/GrocreyList/GroceryListPage.jsx";
 
 const Router = () => {
   // Session Check stuff we will implement once we have Redux set up:
@@ -62,7 +64,15 @@ const Router = () => {
         <Route path="auth" element={<AuthPage />} />
         <Route
           path="recipes"
-          element={userId ? <Recipes /> : <Navigate to="/auth" />}
+          element={userId ? <RecipesPage /> : <Navigate to="/auth" />}
+        />
+        <Route
+          path="planner"
+          element={userId ? <PlannerPage /> : <Navigate to="/auth" />}
+        />
+        <Route
+          path="groceryList"
+          element={userId ? <GroceryListPage /> : <Navigate to="/auth" />}
         />
       </Route>
     )
