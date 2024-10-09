@@ -61,7 +61,10 @@ const Router = () => {
           path="userLandingPage"
           element={userId ? <UserLandingPage /> : <Navigate to="/auth" />}
         />
-        <Route path="auth" element={<AuthPage />} />
+        <Route
+          path="auth"
+          element={userId ? <Navigate to="/userLandingPage" /> : <AuthPage />}
+        />
         <Route
           path="recipes"
           element={userId ? <RecipesPage /> : <Navigate to="/auth" />}
