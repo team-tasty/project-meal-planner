@@ -98,5 +98,19 @@ export const authFns = {
     });
   },
 
-  logout: async (req, res) => {},
+  logout: async (req, res) => {
+    if (!req.session.userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    req.session.destroy();
+
+    return res.send({
+      message: 'User logged out successfully',
+      success: true
+    });
+  },
 };
