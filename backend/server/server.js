@@ -39,7 +39,7 @@ app.post('/api/save-recipe'); // needs recipe object in body object
 // user un-saves a recipe
 app.delete('/api/unsave-recipe/:userRecipeId');
 // display recipe modal
-app/post('/app/recipe-detail'); // needs recipeId in body object
+app.post('/app/recipe-detail'); // needs recipeId in body object
 
 // Planner Endpoints
 // TODO: import planner functions
