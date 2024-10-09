@@ -38,7 +38,7 @@ app.get('/api/save-recipe');
 // user un-saves a recipe
 app.delete('/api/unsave-recipe');
 // display recipe modal
-app/get('/app/recipe-detail/:recipeId');
+// app/get('/app/recipe-detail/:recipeId'); // error because recipeId is not defined
 // rating for recipe
 app.get('/api/rate-recipe');
 // add week
