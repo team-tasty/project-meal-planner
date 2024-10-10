@@ -1,14 +1,21 @@
 import groceryListPracticeData from "./groceryListPracticeData.js"
+import unitCombine from "./unitCombine.js"
 
-const groceryList = () => {
+const groceryList = (arrRecipes) => {
     let ingredientArr = []
     let finalArr = []
-    for (let i=0; i < groceryListPracticeData.length; i++) {
-        for (let j=0; j < groceryListPracticeData[i].recipeIngredients.length; j++) {
+
+    if (!Array.isArray(arrRecipes)) {
+        arrRecipes = []
+        console.error("Non-array entered into groceryList function")
+    }
+
+    for (let i=0; i < arrRecipes.length; i++) {
+        for (let j=0; j < arrRecipes[i].recipeIngredients.length; j++) {
             ingredientArr.push({
-                quantity: groceryListPracticeData[i].recipeIngredients[j].measurementQuantity.quantity,
-                unit: groceryListPracticeData[i].recipeIngredients[j].measurementUnit.unit,
-                ingredient: groceryListPracticeData[i].recipeIngredients[j].ingredient.ingredient
+                quantity: arrRecipes[i].recipeIngredients[j].measurementQuantity.quantity,
+                unit: arrRecipes[i].recipeIngredients[j].measurementUnit.unit,
+                ingredient: arrRecipes[i].recipeIngredients[j].ingredient.ingredient
             })
         }       
     }
@@ -25,8 +32,8 @@ const groceryList = () => {
         if (a.ingredient.length < b.ingredient.length) return -1
         if (a.ingredient.length > b.ingredient.length) return 1
 
-        // If both are the same length, they are considered equal
-        return 0
+        // If both are the same length, check the unit and organize alphabetically
+        return a.unit - b.unit
     })
 
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
@@ -108,17 +115,15 @@ const groceryList = () => {
 
         // If we don't match the above, then just place the entry into the array
         } else if (
-
             ingredientArr[i].unit !== ingredientArr[i-1].unit) {
                 finalArr.push({...ingredientArr[i]})
         }
-
     }
-    console.log(ingredientArr)
     return finalArr
+    // return unitCombine(finalArr)
 }
 
-console.log(groceryList())
+console.log(groceryList(groceryListPracticeData))
 
 export default groceryList
 
