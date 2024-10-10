@@ -29,7 +29,7 @@ const SearchAPI = ({ setRecipesData }) => {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSearch}>
       <label htmlFor="search"></label>
       <input
         type="text"
