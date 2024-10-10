@@ -13,6 +13,20 @@ export const recipeFns = {
       });
     };
 
+    // For use when allowing user to search by ingredient, category, or area in addition to recipe title (Work in Progress)
+    // const { searchInput, searchType } = req.body;
+
+    // const searchParams = new URLSearchParams({ [searchType]: searchInput }).toString();
+
+    // let searchRes;
+
+    // if (searchType === 's') {
+    //   searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?${searchParams}`);
+    // } else if (searchType === 'i' || searchType === 'c' || searchType === 'a') {
+    //   searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?${searchParams}`);
+    // }
+    
+    // For use when only doing recipe title search
     const { searchInput } = req.body;
 
     const searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`);
@@ -20,6 +34,13 @@ export const recipeFns = {
     if (!searchRes.data) {
       return res.send({
         message: 'Could not get data from external API',
+        success: false
+      });
+    };
+
+    if (!searchRes.data.meals) {
+      return res.send({
+        message: 'No results found',
         success: false
       });
     };
