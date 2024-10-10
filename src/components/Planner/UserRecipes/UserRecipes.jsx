@@ -22,6 +22,13 @@ const UserRecipes = () => {
         "https://mytxkitchen.com/wp-content/uploads/2022/08/Fudgy-Chocolate-Brownies-4-500x375.jpg",
       category: "Desserts",
     },
+    // {
+    //   recipeId: 3,
+    //   title: "Cookies",
+    //   image:
+    //     "https://mytxkitchen.com/wp-content/uploads/2022/08/Fudgy-Chocolate-Brownies-4-500x375.jpg",
+    //   category: "Desserts",
+    // },
   ]);
 
   return (
