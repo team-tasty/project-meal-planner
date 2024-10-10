@@ -10,3 +10,7 @@ button {
   background-color: greenyellow;
   border: 1px, solid, purple;
 }
+
+select {
+  border: 1px, solid, black;
+}
