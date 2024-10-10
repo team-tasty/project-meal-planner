@@ -29,7 +29,7 @@ await User.create({
     firstName: 'Admin',
     lastName: 'Istrator',
     userName: '1',
-    password: 'test',
+    password: hashedPassword,
 })
 
 // Add the Days to our DB
