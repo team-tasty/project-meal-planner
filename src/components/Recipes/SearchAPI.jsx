@@ -9,6 +9,8 @@ const SearchAPI = ({ setRecipesData }) => {
   const handleSearch = async (e) => {
     e.preventDefault();
 
+    // Connect to backend, may need to tweak once we have all the info
+
     // create body object
     const searchInfo = {
       searchInput,
@@ -36,8 +38,18 @@ const SearchAPI = ({ setRecipesData }) => {
         onChange={(e) => setSearchInput(e.target.value)}
       />
       {/* start here Thursday */}
-      <label htmlFor="dropDown"></label>
-      <select></select>
+      <label htmlFor="dropDown">Search By:</label>
+      <select
+        value={searchType}
+        required
+        onChange={(e) => setSearchType(e.target.value)}
+      >
+        <option value="" disabled></option>
+        <option value="s">Title</option>
+        <option value="i">Ingredient</option>
+        <option value="c">Category</option>
+        <option value="a">Area</option>
+      </select>
       <button type="submit">Search</button>
     </form>
   );

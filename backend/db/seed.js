@@ -29,7 +29,7 @@ await User.create({
     firstName: 'Admin',
     lastName: 'Istrator',
     userName: '1',
-    password: 'test',
+    password: hashedPassword,
 })
 
 // Add the Days to our DB
@@ -50,6 +50,7 @@ for (let i=0; i < recipeData.length; i++) {
     // Basic recipe info
     let userCalc = Math.floor((i/2) + 1)
     recipeCreated = await Recipe.create({
+        externalRecipeId: recipeData[i].idMeal,
         title: recipeData[i].strMeal,
         instruction: recipeData[i].strInstructions,
         image: recipeData[i].strMealThumb,
@@ -69,7 +70,7 @@ for (let i=0; i < recipeData.length; i++) {
         if (recipeData[i][ingredient]) {
             const measureParsed = convertIngredient(recipeData[i][measurement])
             ingredientCreated = await Ingredient.create({
-                ingredient: recipeData[i][ingredient]
+                ingredient: recipeData[i][ingredient].toLowerCase()
             })
             measurementQuantityCreated = await MeasurementQuantity.create({
                 quantity: measureParsed[0]
