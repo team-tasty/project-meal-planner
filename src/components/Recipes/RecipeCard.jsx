@@ -6,6 +6,7 @@ const RecipeCard = ({
   setModalData,
   setDisplayModal,
   displayModal,
+  index,
 }) => {
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category

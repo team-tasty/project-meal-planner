@@ -1,10 +1,12 @@
 import { useState } from "react";
 import RecipeCard from "../../Recipes/RecipeCard";
-import seedRecipeData from "../../../../backend/db/seedRecipeData.js";
+import { Draggable } from "react-beautiful-dnd";
 
 const SearchRecipes = ({ recipesData }) => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState(recipesData);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
 
   // create a function to handle search and filter data
   const handleSearch = (e) => {
@@ -18,8 +20,31 @@ const SearchRecipes = ({ recipesData }) => {
     setFilteredData(filtered);
   };
 
-  const recipeCards = filteredData.map((recipe) => {
-    return <RecipeCard key={recipe.recipeId} recipe={recipe} />;
+  const recipeCards = filteredData.map((recipe, index) => {
+    return (
+      <Draggable
+        key={recipe.recipeId}
+        draggableId={recipe.recipeId + ""}
+        index={index}
+      >
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <RecipeCard
+              key={recipe.recipeId}
+              index={index}
+              recipe={recipe}
+              setModalData={setModalData}
+              displayModal={displayModal}
+              setDisplayModal={setDisplayModal}
+            />
+          </div>
+        )}
+      </Draggable>
+    );
   });
 
   return (

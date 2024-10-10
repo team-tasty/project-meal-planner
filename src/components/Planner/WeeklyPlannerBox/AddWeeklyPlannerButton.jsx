@@ -1,5 +1,9 @@
 const AddWeeklyPlannerButton = () => {
-  return <div></div>;
+  return (
+    <div>
+      <button>Add Another Week</button>
+    </div>
+  );
 };
 
 export default AddWeeklyPlannerButton;

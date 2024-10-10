@@ -1,5 +1,9 @@
 const ResetWeeklyPlannerButton = () => {
-  return <div></div>;
+  return (
+    <div>
+      <button>Reset Weekly Planner</button>
+    </div>
+  );
 };
 
 export default ResetWeeklyPlannerButton;
