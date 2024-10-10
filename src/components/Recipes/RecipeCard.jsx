@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GoHeartFill } from "react-icons/go";
+import { Draggable } from "react-beautiful-dnd";
 
 const RecipeCard = ({
   recipe,
@@ -20,21 +21,28 @@ const RecipeCard = ({
   };
 
   return (
-    <div
-      onClick={() => {
-        setModalData([recipe]);
-        setDisplayModal(!displayModal);
-      }}
-      className="h-60 w-96 border border-black"
-    >
-      <img src={`${recipe.image}`} className="h-32 w-36" />
-      <h1>{recipe.title}</h1>
-      <h2>{recipe.category}</h2>
-      <GoHeartFill
-        className="h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
-        onClick={handleSave}
-      />
-    </div>
+    <Draggable draggableId="draggable-1" index={recipe.recipeId}>
+      {(provided) => (
+        <div
+          onClick={() => {
+            setModalData([recipe]);
+            setDisplayModal(!displayModal);
+          }}
+          className="h-60 w-96 border border-black"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <img src={`${recipe.image}`} className="h-32 w-36" />
+          <h1>{recipe.title}</h1>
+          <h2>{recipe.category}</h2>
+          <GoHeartFill
+            className="h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
+            onClick={handleSave}
+          />
+        </div>
+      )}
+    </Draggable>
   );
 };
 

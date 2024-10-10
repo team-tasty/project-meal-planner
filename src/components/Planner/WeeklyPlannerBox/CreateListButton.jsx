@@ -1,5 +1,9 @@
 const CreateListButton = () => {
-  return <div></div>;
+  return (
+    <div>
+      <button>Generate Grocery List</button>
+    </div>
+  );
 };
 
 export default CreateListButton;

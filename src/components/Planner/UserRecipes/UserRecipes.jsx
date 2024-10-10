@@ -2,6 +2,7 @@ import SearchRecipes from "./SearchRecipes.jsx";
 import RecipeCard from "../../Recipes/RecipeCard.jsx";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
+import { Droppable } from "react-beautiful-dnd";
 
 const UserRecipes = () => {
   // get userSavedRecipes from a loader function
@@ -23,7 +24,21 @@ const UserRecipes = () => {
     },
   ]);
 
-  return <SearchRecipes recipesData={recipesData} />;
+  return (
+    <Droppable droppableId="droppable-user-recipes">
+      {(provided) => (
+        <div
+          className="h-[550px] w-[300px] border border-black"
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+        >
+          <h2>Saved Recipes:</h2>
+          <SearchRecipes recipesData={recipesData} />
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
+  );
 };
 
 export default UserRecipes;
