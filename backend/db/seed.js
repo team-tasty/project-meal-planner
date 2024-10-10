@@ -70,7 +70,7 @@ for (let i=0; i < recipeData.length; i++) {
         if (recipeData[i][ingredient]) {
             const measureParsed = convertIngredient(recipeData[i][measurement])
             ingredientCreated = await Ingredient.create({
-                ingredient: recipeData[i][ingredient]
+                ingredient: recipeData[i][ingredient].toLowerCase()
             })
             measurementQuantityCreated = await MeasurementQuantity.create({
                 quantity: measureParsed[0]

@@ -21,7 +21,6 @@ const convertIngredient = (str) => {
     let spaceStr = ""
     for (let i = 0; i < finalStr.length; i++) {
         if (numSet.has(finalStr[i]) && letterSet.has(finalStr[i+1])) {
-            console.log("space check")
             spaceStr += finalStr[i] + " "
         } else {
             spaceStr += finalStr[i]
@@ -32,7 +31,7 @@ const convertIngredient = (str) => {
     finalStr = finalStr.replace(/-\d+/g, "")
 
     // return finalStr
-    return parseFunction(finalStr)
+    return parseFunction(finalStr.toLowerCase())
 }
 
 
