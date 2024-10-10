@@ -8,10 +8,10 @@ const PlannerPage = () => {
       <div className="flex justify-between h-[90vh] border border-black">
         <div>
           Weekly Planner
-          <WeeklyPlannerBox />
-        </div>
-        <div>
-          <UserRecipes />
+          <div className="flex justify-between border border-yellow-400">
+            <WeeklyPlannerBox />
+            <UserRecipes />
+          </div>
         </div>
       </div>
     </DragDropContext>
