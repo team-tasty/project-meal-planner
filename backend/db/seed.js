@@ -50,6 +50,7 @@ for (let i=0; i < recipeData.length; i++) {
     // Basic recipe info
     let userCalc = Math.floor((i/2) + 1)
     recipeCreated = await Recipe.create({
+        externalRecipeId: recipeData[i].idMeal,
         title: recipeData[i].strMeal,
         instruction: recipeData[i].strInstructions,
         image: recipeData[i].strMealThumb,

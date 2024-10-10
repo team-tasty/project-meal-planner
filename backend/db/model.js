@@ -76,6 +76,10 @@ Recipe.init(
             autoIncrement: true,
             primaryKey: true,
         },
+        externalRecipeId: {
+            type: DataTypes.INTEGER,
+            unique: true,
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,            
