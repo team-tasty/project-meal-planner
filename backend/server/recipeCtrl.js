@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../db/model.js";
+import { Ingredient, MeasurementQuantity, MeasurementUnit, Recipe, RecipeIngredient, User } from "../db/model.js";
 import convertIngredient from "../../functions/parseIngredient.js";
 
 export const recipeFns = {
@@ -99,5 +99,103 @@ export const recipeFns = {
       success: true,
       recipesData: recipesData,
     });
+  },
+
+  saveRecipe: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { recipeObj } = req.body;
+
+    // See if external recipe is already stored in local db (search local db for recipes with 'externalRecipeId' equal to recipeObj.recipeId)
+    const existingRecipe = await Recipe.findAll({
+      where: {
+        externalRecipeId: recipeObj.recipeId
+      }
+    })
+
+    // If recipe is not in local db, then create new 'recipe', 'ingredient', 'unit', 'quantity', and 'recipe ingredient' for each recipe and ingredient
+    if (!existingRecipe) {
+      let newRecipe;
+      let newRecipeIngredient;
+      let newIngredientName;
+      let newQuantity;
+      let newUnit;
+      
+      try {
+        newRecipe = await Recipe.create({
+          externalRecipeId: recipeObj.recipeId,
+          title: recipeObj.title,
+          image: recipeObj.image,
+          instruction: recipeObj.instruction,
+          category: recipeObj.category,
+          area: recipeObj.area,
+          tag: recipeObj.tag
+        });
+      } catch(error) {
+        console.log();
+        console.error(error);
+        console.log();
+
+        return res.send({
+          message: 'Failed to create new recipe in db',
+          success: false
+        });
+      };
+
+      for (const recipeIngredient of recipeObj.recipeIngredients) {
+        try {
+          newIngredientName = await Ingredient.create({
+            ingredient: recipeIngredient.ingredient
+          });
+
+          newQuantity = await MeasurementQuantity.create({
+            quantity: recipeIngredient.quantity
+          });
+
+          newUnit = await MeasurementUnit.create({
+            unit: recipeIngredient.unit
+          });
+        } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+  
+          return res.send({
+            message: 'Failed to create new ingredient name, quantity, and/or unit in db',
+            success: false
+          })
+        }
+
+        try {
+          newRecipeIngredient = RecipeIngredient.build();
+
+          newRecipeIngredient.addIngredient(newIngredientName);
+          newRecipeIngredient.addMeasurementQuantity(newQuantity);
+          newRecipeIngredient.addMeasurementUnit(newUnit);
+
+          newRecipeIngredient.addRecipe(newRecipe);
+
+          await newRecipeIngredient.save();
+
+        } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+          return res.send({
+            message: 'Failed to create new recipeIngredient in db',
+            success: false
+          });
+        };
+      };
+    };
+
+    // Once recipe is in local db, or if recipe is already in local db, create new userRecipe
   }
 }
