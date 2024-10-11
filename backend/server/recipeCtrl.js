@@ -247,5 +247,39 @@ export const recipeFns = {
       success: true,
       userRecipes: userRecipeArr
     });
+  },
+
+  unsaveRecipe: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { userRecipeId } = req.params;
+
+    try {
+      const userRecipeToDelete = await UserRecipe.findByPk(userRecipeId);
+
+      userRecipeToDelete.destroy();
+
+      return res.send({
+        message: 'Successfully deleted userRecipe from db',
+        success: true
+      });
+      
+    } catch(error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: 'Failed to delete userRecipe from db',
+        success: false
+      });
+    };
   }
 }
