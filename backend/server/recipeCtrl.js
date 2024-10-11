@@ -13,9 +13,25 @@ export const recipeFns = {
       });
     };
 
+    // For use when allowing user to search by ingredient, category, or area in addition to recipe title (Work in Progress)
+    // const { searchInput, searchType } = req.body;
+
+    // const searchParams = new URLSearchParams({ [searchType]: searchInput }).toString();
+
+    // let searchRes;
+
+    // if (searchType === 's') {
+    //   searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?${searchParams}`);
+    // } else if (searchType === 'i' || searchType === 'c' || searchType === 'a') {
+    //   searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?${searchParams}`);
+    // }
+    
+    // For use when only doing recipe title search
     const { searchInput } = req.body;
 
-    const searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`);
+    const searchParams = new URLSearchParams({ s: searchInput }).toString();
+
+    const searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?${searchParams}`);
 
     if (!searchRes.data) {
       return res.send({
@@ -24,7 +40,14 @@ export const recipeFns = {
       });
     };
 
-    const recipeData = [];
+    if (!searchRes.data.meals) {
+      return res.send({
+        message: 'No results found',
+        success: false
+      });
+    };
+
+    const recipesData = [];
     
     try {
       for (const meal of searchRes.data.meals) {
@@ -41,9 +64,15 @@ export const recipeFns = {
   
         // Recipe Ingredients loop
         for (let i = 1; i <= 20; i++) {
+          if (!meal[`strIngredient${i}`]) {
+            break
+          };
+          
           const recipeIngredientObj = {};
   
           const qtyUnitArr = convertIngredient(meal[`strMeasure${i}`]);
+
+          // console.log(`qtyUnitArr:`, qtyUnitArr);
   
           recipeIngredientObj.measurementQuantity = { quantity: qtyUnitArr[0] };
           recipeIngredientObj.measurementUnit = { unit: qtyUnitArr[1] };
@@ -52,7 +81,7 @@ export const recipeFns = {
           recipeObj.recipeIngredients.push(recipeIngredientObj);
         };
   
-        recipeData.push(recipeObj);
+        recipesData.push(recipeObj);
       };
     } catch(error) {
       console.log();
@@ -66,9 +95,9 @@ export const recipeFns = {
     };
 
     return res.send({
-      message: 'Successfully retreived, parsed, and manipulated data from external API',
+      message: 'Successfully retrieved, parsed, and manipulated data from external API',
       success: true,
-      recipeData: recipeData,
+      recipesData: recipesData,
     });
   }
 }
