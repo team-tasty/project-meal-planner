@@ -28,14 +28,14 @@ app.post('/api/register', register);
 
 // Recipes Endpoints
 import { recipeFns } from './recipeCtrl.js';
-const { recipeSearch } = recipeFns;
+const { recipeSearch, saveRecipe } = recipeFns;
 
 // themealdb api request for recipe search
 app.post('/api/recipe-search', recipeSearch); // needs search input in body object
 // get user's saved recipes
 app.get('/api/user-recipes');
 // user saves a recipe
-app.post('/api/save-recipe'); // needs recipe object in body object
+app.post('/api/save-recipe', saveRecipe); // needs recipe object in body object
 // user un-saves a recipe
 app.delete('/api/unsave-recipe/:userRecipeId');
 // display recipe modal
