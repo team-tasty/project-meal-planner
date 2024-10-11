@@ -1,5 +1,6 @@
 const initialState = {
   userId: null,
+  loading: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userId: action.payload,
+        loading: false,
       };
 
     // triggered from front end with this dispatch action object:
@@ -18,8 +20,15 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userId: null,
+        loading: false,
       };
 
+    case "LOADING":
+      return {
+        ...state,
+        userId: null,
+        loading: false,
+      };
     default:
       return state;
   }

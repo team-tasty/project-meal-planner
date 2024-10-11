@@ -4,10 +4,10 @@ import LogoutButton from "./LogoutButton";
 const Header = () => {
   return (
     <div className="h-[10vh] border border-black flex justify-around items-center">
-      <NavLink to="/userLandingPage">Home</NavLink>
-      <NavLink to="/recipes">Recipes</NavLink>
-      <NavLink to="/planner">Weekly Planner</NavLink>
-      <NavLink to="/groceryList">Grocery List</NavLink>
+      <NavLink to="/app/home">Home</NavLink>
+      <NavLink to="/app/recipes">Recipes</NavLink>
+      <NavLink to="/app/planner">Weekly Planner</NavLink>
+      <NavLink to="/app/groceryList">Grocery List</NavLink>
       <LogoutButton />
     </div>
   );
