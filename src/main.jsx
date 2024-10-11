@@ -50,16 +50,7 @@ const Router = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-        <Route
-          index
-          element={
-            userId ? (
-              <Navigate to="/userLandingPage" />
-            ) : (
-              <Navigate to="/auth" />
-            )
-          }
-        />
+        <Route index element={!userId && <Navigate to="/auth" />} />
         <Route
           path="userLandingPage"
           element={userId ? <UserLandingPage /> : <Navigate to="/auth" />}

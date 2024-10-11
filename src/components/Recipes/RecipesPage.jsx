@@ -15,8 +15,32 @@ const RecipesPage = () => {
       category: "Pasta",
       instruction:
         "Cook the pasta according to the box instructions. While the pasta is cooking, prepare the sauce by...",
-      tags: "noodles,dinner,poultry",
+      tag: "noodles,dinner,poultry",
       area: "Italian",
+      recipeIngredients: [
+        {
+          measurementQuantity: {
+            quantity: 2,
+          },
+          measurementUnit: {
+            unit: "tbsp",
+          },
+          ingredient: {
+            ingredient: "cajun",
+          },
+        },
+        {
+          measurementQuantity: {
+            quantity: 1,
+          },
+          measurementUnit: {
+            unit: "tsp",
+          },
+          ingredient: {
+            ingredient: "cayenne pepper",
+          },
+        },
+      ],
     },
     {
       recipeId: 2,
@@ -26,10 +50,36 @@ const RecipesPage = () => {
       category: "Desserts",
       instruction:
         "Prepare the brownies according to the box instructions. While the brownies are baking...",
-      tags: null,
+      tag: null,
       area: "American",
+      recipeIngredients: [
+        {
+          measurementQuantity: {
+            quantity: 3,
+          },
+          measurementUnit: {
+            unit: "tsp",
+          },
+
+          ingredient: {
+            ingredient: "sugar",
+          },
+        },
+        {
+          measurementQuantity: {
+            quantity: 2,
+          },
+          measurementUnit: {
+            unit: "large",
+          },
+          ingredient: {
+            ingredient: "eggs",
+          },
+        },
+      ],
     },
   ]);
+
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
 
