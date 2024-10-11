@@ -17,13 +17,21 @@ const RecipeCard = ({
   // console.log(recipeData);
 
   const handleSave = () => {
+    // make call to backend to save the recipe to our database
+    // create body object
+
+    // make axios call
+
+    // if successful...
+
+    // change the fill color of the heart
     setSaved(!saved);
   };
 
   return (
     <div
       onClick={() => {
-        setModalData([recipe]);
+        setModalData(recipe);
         setDisplayModal(!displayModal);
       }}
       className="h-60 w-96 border border-black"

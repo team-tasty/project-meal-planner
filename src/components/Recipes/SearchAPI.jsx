@@ -3,7 +3,7 @@ import { useState } from "react";
 const SearchAPI = ({ setRecipesData }) => {
   // set state values
   const [searchInput, setSearchInput] = useState("");
-  const [searchType, setSearchType] = useState("");
+  // const [searchType, setSearchType] = useState("");
 
   // create function to handle search
   const handleSearch = async (e) => {
@@ -14,7 +14,7 @@ const SearchAPI = ({ setRecipesData }) => {
     // create body object
     const searchInfo = {
       searchInput,
-      searchType,
+      // searchType,
     };
 
     // make call to backend endpoint
@@ -37,8 +37,8 @@ const SearchAPI = ({ setRecipesData }) => {
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
       />
-      {/* start here Thursday */}
-      <label htmlFor="dropDown">Search By:</label>
+      {/* Search by dropdown */}
+      {/* <label htmlFor="dropDown">Search By:</label>
       <select
         value={searchType}
         required
@@ -49,7 +49,7 @@ const SearchAPI = ({ setRecipesData }) => {
         <option value="i">Ingredient</option>
         <option value="c">Category</option>
         <option value="a">Area</option>
-      </select>
+      </select> */}
       <button type="submit">Search</button>
     </form>
   );
