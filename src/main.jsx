@@ -62,6 +62,15 @@ const Router = () => {
         <Route
           path="recipes"
           element={userId ? <RecipesPage /> : <Navigate to="/auth" />}
+          loader={async () => {
+            const searchInfo = {
+              searchInput: "de",
+              searchType: "s",
+            };
+            const res = await axios.post("/api/recipe-search", searchInfo);
+
+            return { recipesData: res.data.recipesData };
+          }}
         />
         <Route
           path="planner"

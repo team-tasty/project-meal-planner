@@ -3,10 +3,11 @@ import RecipeCard from "./RecipeCard";
 import RecipeModal from "./RecipeModal";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 const RecipesPage = () => {
   // Mock data to set up card display
-  const [recipesData, setRecipesData] = useState([]);
+  const [recipesData, setRecipesData] = useState(useLoaderData().recipesData);
 
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -23,23 +24,6 @@ const RecipesPage = () => {
     );
   });
 
-  // Populate this page with recipes to start. Make a call to the backend?
-  useEffect(() => {
-    const populateRecipes = async () => {
-      const searchInfo = {
-        searchInput: "de",
-        searchType: "s",
-      };
-      const res = await axios.post("/api/recipe-search", searchInfo);
-
-      if (res.data.success) {
-        setRecipesData(res.data.recipesData);
-      }
-    };
-
-    populateRecipes();
-  }, []);
-
   return (
     <>
       {displayModal && (
@@ -47,7 +31,7 @@ const RecipesPage = () => {
       )}
       <div>
         Recipes Page
-        <SearchAPI SetRecipesData={setRecipesData} />
+        <SearchAPI setRecipesData={setRecipesData} />
         {recipeCards}
       </div>
     </>
