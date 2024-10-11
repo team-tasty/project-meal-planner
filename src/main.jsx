@@ -19,6 +19,7 @@ import AuthPage from "./components/Auth/AuthPage.jsx";
 import RecipesPage from "./components/Recipes/RecipesPage.jsx";
 import PlannerPage from "./components/Planner/PlannerPage.jsx";
 import GroceryListPage from "./components/GrocreyList/GroceryListPage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const Router = () => {
   // Session Check
@@ -27,26 +28,26 @@ const Router = () => {
   console.log(userId);
   const dispatch = useDispatch();
 
-  const sessionCheck = async () => {
-    console.log("hello");
-    const res = await axios.get("/api/session-check");
-    console.log(res.data);
-    if (res.data.success) {
-      dispatch({
-        type: "USER_AUTH",
-        payload: res.data.userId,
-      });
-    } else {
-      dispatch({
-        type: "LOADING",
-      });
-    }
-  };
+  // const sessionCheck = async () => {
+  //   console.log("hello");
+  //   const res = await axios.get("/api/session-check");
+  //   console.log(res.data);
+  //   if (res.data.success) {
+  //     dispatch({
+  //       type: "USER_AUTH",
+  //       payload: res.data.userId,
+  //     });
+  //   } else {
+  //     dispatch({
+  //       type: "LOADING",
+  //     });
+  //   }
+  // };
 
-  useEffect(() => {
-    sessionCheck();
-  }, [userId]);
-  console.log(loading);
+  // useEffect(() => {
+  //   sessionCheck();
+  // }, [userId]);
+  // console.log(loading);
 
   const router = createBrowserRouter([
     {
@@ -60,17 +61,24 @@ const Router = () => {
       children: [
         {
           path: "auth",
-          element:
-            !userId && !loading ? <AuthPage /> : <Navigate to="/app/home" />,
+          element: userId ? <Navigate to="/app/home" /> : <AuthPage />,
         },
         {
           path: "home",
-          element: <UserLandingPage />,
+          element: (
+            <ProtectedRoute>
+              <UserLandingPage />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "recipes",
-          element:
-            userId && !loading ? <RecipesPage /> : <Navigate to="/app/auth" />,
+          element: (
+            <ProtectedRoute>
+              <RecipesPage />
+            </ProtectedRoute>
+          ),
+          // userId && !loading ? <RecipesPage /> : <Navigate to="/app/auth" />,
           loader: async () => {
             const searchInfo = {
               searchInput: "de",
@@ -83,17 +91,25 @@ const Router = () => {
         },
         {
           path: "planner",
-          element:
-            userId && !loading ? <PlannerPage /> : <Navigate to="/app/auth" />,
+          element: (
+            <ProtectedRoute>
+              <PlannerPage />
+            </ProtectedRoute>
+          ),
+          // userId && !loading ? <PlannerPage /> : <Navigate to="/app/auth" />,
         },
         {
           path: "groceryList",
-          element:
-            userId && !loading ? (
+          element: (
+            <ProtectedRoute>
               <GroceryListPage />
-            ) : (
-              <Navigate to="/app/auth" />
-            ),
+            </ProtectedRoute>
+          ),
+          // userId && !loading ? (
+          //   <GroceryListPage />
+          // ) : (
+          //   <Navigate to="/app/auth" />
+          // ),
         },
       ],
     },
