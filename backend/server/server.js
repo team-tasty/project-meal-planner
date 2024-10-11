@@ -40,12 +40,16 @@ app.post('/api/save-recipe'); // needs recipe object in body object
 app.delete('/api/unsave-recipe/:userRecipeId');
 // display recipe modal
 app.post('/app/recipe-detail'); // needs recipeId in body object
+// get externalRecipeId's of userRecipes to show if search recipe result is already saved or not
+app.get('/api/user-recipe-external-ids');
 
 // Planner Endpoints
 // TODO: import planner functions
 
 // get user week planner data
 app.get('/api/user-weeks');
+// get day names
+app.get('/api/days');
 // user adds recipe to week
 app.post('/api/add-recipe/') // needs weekId, dayId, and recipeId in body object
 // user moves recipe from one day to another day or to another week?
