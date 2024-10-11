@@ -15,7 +15,7 @@ const handleCategory = (convertedArr) => {
         ) {
             convertedArr[i].category = "canned"
         } else if (
-            convertedArr[i].ingredient.match(/canned/i) || 
+            convertedArr[i].ingredient.match(/frozen/i) || 
             convertedArr.unit === "frozen"
         ) {
             convertedArr[i].category = "frozen"
@@ -26,7 +26,8 @@ const handleCategory = (convertedArr) => {
         } else if (
             convertedArr[i].ingredient.match(bakingRegex) || 
             convertedArr[i].ingredient === "sugar" ||
-            convertedArr[i].ingredient === "pepper"
+            convertedArr[i].ingredient === "pepper" ||
+            convertedArr[i].ingredient === "black pepper"
         ) {
             convertedArr[i].category = "baking"
         } else if (
