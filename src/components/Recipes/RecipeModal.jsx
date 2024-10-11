@@ -9,13 +9,28 @@ const RecipeModal = ({ setDisplayModal, modalData }) => {
   // console.log(modalData.recipeIngredients[0].measurementUnit.unit); // unit
   // console.log(modalData.recipeIngredients[0].ingredient.ingredient); // ingredient name
 
-  const ingredients = modalData.recipeIngredients.map((ingredient) => {
-    return (
-      <li key={ingredient.ingredient.ingredient}>
-        {ingredient.measurementQuantity.quantity}{" "}
-        {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
-      </li>
-    );
+  const ingredients = modalData.recipeIngredients.map((ingredient, i) => {
+    if (!ingredient.measurementQuantity.quantity) {
+      return (
+        <li key={`${modalData.title}${i}`}>
+          {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+        </li>
+      );
+    } else if (ingredient.measurementUnit.unit === "null") {
+      return (
+        <li key={`${modalData.title}${i}`}>
+          {ingredient.measurementQuantity.quantity}{" "}
+          {ingredient.ingredient.ingredient}
+        </li>
+      );
+    } else {
+      return (
+        <li key={`${modalData.title}${i}`}>
+          {ingredient.measurementQuantity.quantity}{" "}
+          {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+        </li>
+      );
+    }
   });
   console.log(ingredients);
 

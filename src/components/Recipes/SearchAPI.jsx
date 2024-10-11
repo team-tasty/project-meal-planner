@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 const SearchAPI = ({ setRecipesData }) => {
   // set state values

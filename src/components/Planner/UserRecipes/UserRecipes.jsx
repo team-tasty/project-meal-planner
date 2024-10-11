@@ -14,6 +14,34 @@ const UserRecipes = () => {
       image:
         "https://borrowedbites.com/wp-content/uploads/2024/01/Square-One-Pot-Chicken-Alfredo.jpg",
       category: "Pasta",
+      instruction:
+        "Cook the pasta according to the box instructions. While the pasta is cooking, prepare the sauce by...",
+      tag: "noodles,dinner,poultry",
+      area: "Italian",
+      recipeIngredients: [
+        {
+          measurementQuantity: {
+            quantity: 2,
+          },
+          measurementUnit: {
+            unit: "tbsp",
+          },
+          ingredient: {
+            ingredient: "cajun",
+          },
+        },
+        {
+          measurementQuantity: {
+            quantity: 1,
+          },
+          measurementUnit: {
+            unit: "tsp",
+          },
+          ingredient: {
+            ingredient: "cayenne pepper",
+          },
+        },
+      ],
     },
     {
       recipeId: 2,
@@ -21,14 +49,36 @@ const UserRecipes = () => {
       image:
         "https://mytxkitchen.com/wp-content/uploads/2022/08/Fudgy-Chocolate-Brownies-4-500x375.jpg",
       category: "Desserts",
+      instruction:
+        "Prepare the brownies according to the box instructions. While the brownies are baking...",
+      tag: null,
+      area: "American",
+      recipeIngredients: [
+        {
+          measurementQuantity: {
+            quantity: 3,
+          },
+          measurementUnit: {
+            unit: "tsp",
+          },
+
+          ingredient: {
+            ingredient: "sugar",
+          },
+        },
+        {
+          measurementQuantity: {
+            quantity: 2,
+          },
+          measurementUnit: {
+            unit: "large",
+          },
+          ingredient: {
+            ingredient: "eggs",
+          },
+        },
+      ],
     },
-    // {
-    //   recipeId: 3,
-    //   title: "Cookies",
-    //   image:
-    //     "https://mytxkitchen.com/wp-content/uploads/2022/08/Fudgy-Chocolate-Brownies-4-500x375.jpg",
-    //   category: "Desserts",
-    // },
   ]);
 
   return (
