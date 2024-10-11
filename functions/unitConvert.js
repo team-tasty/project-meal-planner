@@ -6,7 +6,7 @@ const gallonSet = new Set(["gallons", "gallon", "gal"])
 const poundSet = new Set(["pounds", "pound", "lbs", "lb"])
 const ounceSet = new Set(["ounces", "ounce", "oz"])
 const tspSet = new Set(["teaspoons", "teaspoon", "tsp", "t"])
-const tbspSet = new Set(["tablespoon, tablespoons", "tbls", "tbs","tb", "t"])
+const tbspSet = new Set(["tablespoons", "tablespoon", "tbls", "tbsps", "tbsp", "tbs", "tb", "t"])
 
 // Metric measurements
 const gramSet = new Set(["grams", "gram", "g"])
