@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../db/model.js";
+import { Ingredient, MeasurementQuantity, MeasurementUnit, Recipe, RecipeIngredient, User, UserRecipe } from "../db/model.js";
 import convertIngredient from "../../functions/parseIngredient.js";
 
 export const recipeFns = {
@@ -98,6 +98,154 @@ export const recipeFns = {
       message: 'Successfully retrieved, parsed, and manipulated data from external API',
       success: true,
       recipesData: recipesData,
+    });
+  },
+
+  saveRecipe: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { recipeObj } = req.body;
+
+    // console.log();
+    // console.log(`recipeObj:`, recipeObj);
+    // console.log();
+
+    // See if external recipe is already stored in local db (search local db for recipes with 'externalRecipeId' equal to recipeObj.recipeId)
+    const existingRecipe = await Recipe.findOne({
+      where: {
+        externalRecipeId: recipeObj.recipeId
+      }
+    });
+
+    // console.log();
+    // console.log(`existing recipe`, existingRecipe);
+    // console.log();
+
+    // If recipe is not in local db, then create new 'recipe', 'ingredient', 'unit', 'quantity', and 'recipe ingredient' for each recipe and ingredient
+    if (!existingRecipe) {
+      let newRecipe;
+      let newRecipeIngredient;
+      let newIngredientName;
+      let newQuantity;
+      let newUnit;
+      
+      try {
+        newRecipe = await Recipe.create({
+          externalRecipeId: recipeObj.recipeId,
+          title: recipeObj.title,
+          image: recipeObj.image,
+          instruction: recipeObj.instruction,
+          category: recipeObj.category,
+          area: recipeObj.area,
+          tag: recipeObj.tag
+        });
+
+        // console.log();
+        // console.log(`newRecipe:`, newRecipe);
+        // console.log();
+
+      } catch(error) {
+        console.log();
+        console.error(error);
+        console.log();
+
+        return res.send({
+          message: 'Failed to create new recipe in db',
+          success: false
+        });
+      };
+
+      for (const recipeIngredient of recipeObj.recipeIngredients) {
+        // console.log();
+        // console.log(`recipeIngredient:`, recipeIngredient);
+        // console.log();
+
+        try {
+          newIngredientName = await Ingredient.create({
+            ingredient: recipeIngredient.ingredient.ingredient
+          });
+
+          newQuantity = await MeasurementQuantity.create({
+            quantity: recipeIngredient.measurementQuantity.quantity
+          });
+
+          newUnit = await MeasurementUnit.create({
+            unit: recipeIngredient.measurementUnit.unit
+          });
+          
+        } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+  
+          return res.send({
+            message: 'Failed to create new ingredient name, quantity, and/or unit in db',
+            success: false
+          })
+        }
+
+        try {
+          newRecipeIngredient = await RecipeIngredient.create()
+          
+          newRecipeIngredient.setIngredient(newIngredientName);
+          newRecipeIngredient.setMeasurementQuantity(newQuantity);
+          newRecipeIngredient.setMeasurementUnit(newUnit);
+
+          newRecipeIngredient.setRecipe(newRecipe);
+
+        } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+
+          return res.send({
+            message: 'Failed to create new recipeIngredient in db',
+            success: false
+          });
+        };
+      };
+    };
+
+    const recipeToAdd = await Recipe.findOne({
+      where: {
+        externalRecipeId: recipeObj.recipeId
+      }
+    });
+
+    const newUserRecipe = await UserRecipe.create({
+      userId,
+      recipeId: recipeToAdd.recipeId
+    });
+
+    if (!newUserRecipe) {
+      return res.send({
+        message: 'Failed to create new userRecipe in db',
+        success: false
+      });
+    };
+
+    const userRecipeArr = await UserRecipe.findAll({
+      where: {
+        userId
+      },
+      attributes: ['userRecipeId'],
+      include: {
+        model: Recipe,
+        attributes: ['externalRecipeId']
+      }
+    });
+
+    return res.send({
+      message: 'Successfully created userRecipe in db',
+      success: true,
+      userRecipes: userRecipeArr
     });
   }
 }
