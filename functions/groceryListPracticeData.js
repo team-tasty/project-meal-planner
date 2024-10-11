@@ -26,8 +26,7 @@ const groceryListPracticeData =
             measurementUnitId: 2,
             measurementQuantityId: 2,
             ingredientId: 2,
-            // changed the quantity to 3, from 2, for testing
-            measurementQuantity: { measurementQuantityId: 2, quantity: 3 },
+            measurementQuantity: { measurementQuantityId: 2, quantity: 2 },
             measurementUnit: { measurementUnitId: 2, unit: 'null' },
             ingredient: { ingredientId: 2, ingredient: 'egg' }
           },

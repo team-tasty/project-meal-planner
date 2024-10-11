@@ -23,7 +23,14 @@ const unitCombine = (arrIng) => {
             convertedArr.push(arrIng[i])
         }
     }
+    console.log("entered convertedArr")
     return convertedArr
 } 
+
+console.log(unitCombine([
+    { quantity: 1, unit: 'C', ingredient: 'milk' },
+    { quantity: 1, unit: 'L', ingredient: 'milk' },
+    { quantity: 1, unit: 'qt', ingredient: 'milk' }
+]))
 
 export default unitCombine

@@ -119,11 +119,12 @@ const groceryList = (arrRecipes) => {
                 finalArr.push({...ingredientArr[i]})
         }
     }
-    return finalArr
-    // return unitCombine(finalArr)
+    // return finalArr
+    return unitCombine(finalArr)
 }
 
 console.log(groceryList(groceryListPracticeData))
+
 
 export default groceryList
 
