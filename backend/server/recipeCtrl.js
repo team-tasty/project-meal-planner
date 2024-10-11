@@ -29,7 +29,9 @@ export const recipeFns = {
     // For use when only doing recipe title search
     const { searchInput } = req.body;
 
-    const searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`);
+    const searchParams = new URLSearchParams({ s: searchInput }).toString();
+
+    const searchRes = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?${searchParams}`);
 
     if (!searchRes.data) {
       return res.send({
@@ -45,7 +47,7 @@ export const recipeFns = {
       });
     };
 
-    const recipeData = [];
+    const recipesData = [];
     
     try {
       for (const meal of searchRes.data.meals) {
@@ -62,9 +64,15 @@ export const recipeFns = {
   
         // Recipe Ingredients loop
         for (let i = 1; i <= 20; i++) {
+          if (!meal[`strIngredient${i}`]) {
+            break
+          };
+          
           const recipeIngredientObj = {};
   
           const qtyUnitArr = convertIngredient(meal[`strMeasure${i}`]);
+
+          // console.log(`qtyUnitArr:`, qtyUnitArr);
   
           recipeIngredientObj.measurementQuantity = { quantity: qtyUnitArr[0] };
           recipeIngredientObj.measurementUnit = { unit: qtyUnitArr[1] };
@@ -73,7 +81,7 @@ export const recipeFns = {
           recipeObj.recipeIngredients.push(recipeIngredientObj);
         };
   
-        recipeData.push(recipeObj);
+        recipesData.push(recipeObj);
       };
     } catch(error) {
       console.log();
@@ -87,9 +95,9 @@ export const recipeFns = {
     };
 
     return res.send({
-      message: 'Successfully retreived, parsed, and manipulated data from external API',
+      message: 'Successfully retrieved, parsed, and manipulated data from external API',
       success: true,
-      recipeData: recipeData,
+      recipesData: recipesData,
     });
   }
 }
