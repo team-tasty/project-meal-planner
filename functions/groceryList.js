@@ -119,7 +119,6 @@ const groceryList = (arrRecipes) => {
                 finalArr.push({...ingredientArr[i]})
         }
     }
-    // return finalArr
     return unitCombine(finalArr)
 }
 

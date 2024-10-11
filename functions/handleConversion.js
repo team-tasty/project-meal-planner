@@ -71,8 +71,7 @@ const handleConversion = (qty1, unit1, qty2, unit2) => {
         console.error("Invalid units received in handleConversion")
         return
     }
-    console.log("Entered handleConversion")
-    return [convertQty, convertUnit]
+    return [+convertQty.toFixed(2), convertUnit]
 }
 
 export default handleConversion
