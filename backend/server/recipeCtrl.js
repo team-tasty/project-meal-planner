@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Ingredient, MeasurementQuantity, MeasurementUnit, Recipe, RecipeIngredient, User } from "../db/model.js";
+import { Ingredient, MeasurementQuantity, MeasurementUnit, Recipe, RecipeIngredient, User, UserRecipe } from "../db/model.js";
 import convertIngredient from "../../functions/parseIngredient.js";
 
 export const recipeFns = {
@@ -113,12 +113,20 @@ export const recipeFns = {
 
     const { recipeObj } = req.body;
 
+    // console.log();
+    // console.log(`recipeObj:`, recipeObj);
+    // console.log();
+
     // See if external recipe is already stored in local db (search local db for recipes with 'externalRecipeId' equal to recipeObj.recipeId)
-    const existingRecipe = await Recipe.findAll({
+    const existingRecipe = await Recipe.findOne({
       where: {
         externalRecipeId: recipeObj.recipeId
       }
-    })
+    });
+
+    // console.log();
+    // console.log(`existing recipe`, existingRecipe);
+    // console.log();
 
     // If recipe is not in local db, then create new 'recipe', 'ingredient', 'unit', 'quantity', and 'recipe ingredient' for each recipe and ingredient
     if (!existingRecipe) {
@@ -138,6 +146,11 @@ export const recipeFns = {
           area: recipeObj.area,
           tag: recipeObj.tag
         });
+
+        // console.log();
+        // console.log(`newRecipe:`, newRecipe);
+        // console.log();
+
       } catch(error) {
         console.log();
         console.error(error);
@@ -150,18 +163,23 @@ export const recipeFns = {
       };
 
       for (const recipeIngredient of recipeObj.recipeIngredients) {
+        // console.log();
+        // console.log(`recipeIngredient:`, recipeIngredient);
+        // console.log();
+
         try {
           newIngredientName = await Ingredient.create({
-            ingredient: recipeIngredient.ingredient
+            ingredient: recipeIngredient.ingredient.ingredient
           });
 
           newQuantity = await MeasurementQuantity.create({
-            quantity: recipeIngredient.quantity
+            quantity: recipeIngredient.measurementQuantity.quantity
           });
 
           newUnit = await MeasurementUnit.create({
-            unit: recipeIngredient.unit
+            unit: recipeIngredient.measurementUnit.unit
           });
+          
         } catch(error) {
           console.log();
           console.error(error);
@@ -174,20 +192,19 @@ export const recipeFns = {
         }
 
         try {
-          newRecipeIngredient = RecipeIngredient.build();
+          newRecipeIngredient = await RecipeIngredient.create()
+          
+          newRecipeIngredient.setIngredient(newIngredientName);
+          newRecipeIngredient.setMeasurementQuantity(newQuantity);
+          newRecipeIngredient.setMeasurementUnit(newUnit);
 
-          newRecipeIngredient.addIngredient(newIngredientName);
-          newRecipeIngredient.addMeasurementQuantity(newQuantity);
-          newRecipeIngredient.addMeasurementUnit(newUnit);
-
-          newRecipeIngredient.addRecipe(newRecipe);
-
-          await newRecipeIngredient.save();
+          newRecipeIngredient.setRecipe(newRecipe);
 
         } catch(error) {
           console.log();
           console.error(error);
           console.log();
+
           return res.send({
             message: 'Failed to create new recipeIngredient in db',
             success: false
@@ -196,6 +213,39 @@ export const recipeFns = {
       };
     };
 
-    // Once recipe is in local db, or if recipe is already in local db, create new userRecipe
+    const recipeToAdd = await Recipe.findOne({
+      where: {
+        externalRecipeId: recipeObj.recipeId
+      }
+    });
+
+    const newUserRecipe = await UserRecipe.create({
+      userId,
+      recipeId: recipeToAdd.recipeId
+    });
+
+    if (!newUserRecipe) {
+      return res.send({
+        message: 'Failed to create new userRecipe in db',
+        success: false
+      });
+    };
+
+    const userRecipeArr = await UserRecipe.findAll({
+      where: {
+        userId
+      },
+      attributes: ['userRecipeId'],
+      include: {
+        model: Recipe,
+        attributes: ['externalRecipeId']
+      }
+    });
+
+    return res.send({
+      message: 'Successfully created userRecipe in db',
+      success: true,
+      userRecipes: userRecipeArr
+    });
   }
 }
