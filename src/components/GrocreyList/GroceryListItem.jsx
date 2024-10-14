@@ -10,12 +10,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`canned${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`canned${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -29,12 +31,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`frozen${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`frozen${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -47,12 +51,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`processed${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`processed${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -65,12 +71,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`baking${index}`}>
+                <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`baking${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -83,12 +91,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`produce${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`produce${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -101,12 +111,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`dairy${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`dairy${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -119,12 +131,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`protein${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`protein${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
@@ -137,12 +151,14 @@ const GroceryListItem = () => {
         if (arrIng.unit === "null") {
           return (
             <li key={`other${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.ingredient}
             </li>
           )
         } else {
           return (
             <li key={`other${index}`}>
+              <input type="checkbox" className="ms-2 me-3" />
               {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
             </li>
           )
