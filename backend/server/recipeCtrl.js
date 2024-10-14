@@ -288,7 +288,7 @@ export const recipeFns = {
 
     if (!userId) {
       return res.send({
-        message: 'No user in session';
+        message: 'No user in session',
         success: false
       });
     };
@@ -320,7 +320,8 @@ export const recipeFns = {
       console.log();
 
       return res.send({
-        message: `Error getting user's saved recipes`
+        message: `Error getting user's saved recipes`,
+        success: false
       })
     }
     
