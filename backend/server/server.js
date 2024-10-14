@@ -44,22 +44,25 @@ app.delete('/api/unsave-recipe/:userRecipeId', unsaveRecipe);
 app.get('/api/user-recipe-external-ids', externalRecipeIds);
 
 // Planner Endpoints
-// TODO: import planner functions
+import { plannerFns } from './plannerCtrl.js';
+const { userWeeks, addUserWeek, deleteUserWeek, days, createWeekMeal, editWeekMeal, deleteWeekMeal } = plannerFns;
 
 // get user week planner data
-app.get('/api/user-weeks');
+app.get('/api/user-weeks', userWeeks);
 // get day names
-app.get('/api/days');
+app.get('/api/days', days);
 // user adds recipe to week
-app.post('/api/add-recipe/') // needs weekId, dayId, and recipeId in body object
+app.post('/api/create-week-meal/', createWeekMeal) // needs weekId, dayId, and recipeId in body object
 // user moves recipe from one day to another day or to another week?
-app.put('/api/week-meal-edit/') // needs weekId and dayId in body object
+app.put('/api/edit-week-meal/', editWeekMeal) // needs weekId and dayId in body object
 // user removes recipe from planner
-app.delete('/api/remove-week-meal/:weekMealId');
+app.delete('/api/remove-week-meal/:weekMealId', deleteWeekMeal);
 // add week
-app.get('/api/add-week')
+app.get('/api/add-week', addUserWeek)
 // delete week
-app.delete('/api/delete-week/:weekId')
+app.delete('/api/delete-week/:weekId', deleteUserWeek)
+// reset week
+// TODO: create reset or clear week endpoint (needs weekId)
 
 // Grocery List Endpoints
 // TODO: import grocery list functions

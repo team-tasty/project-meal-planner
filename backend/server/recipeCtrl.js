@@ -275,7 +275,7 @@ export const recipeFns = {
     try {
       const userRecipeToDelete = await UserRecipe.findByPk(userRecipeId);
 
-      userRecipeToDelete.destroy();
+      await userRecipeToDelete.destroy();
 
       return res.send({
         message: "Successfully deleted userRecipe from db",
