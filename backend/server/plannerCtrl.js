@@ -193,20 +193,12 @@ export const plannerFns = {
 
     const { weekId, dayId, recipeId } = req.body;
 
-    console.log();
-    console.log(`weekId:`, weekId);
-    console.log(`dayId:`, dayId);
-    console.log(`recipeId:`, recipeId);
-    console.log();
-
     try {
       const newWeekMeal = await WeekMeal.create({
         weekId,
         dayId,
         recipeId,
       });
-
-      console.log(`new user created`);
 
       if (!newWeekMeal) {
         return res.send({
@@ -232,7 +224,7 @@ export const plannerFns = {
 
       if (updatedUserWeeks.weeks.length === 0) {
         return res.send({
-          message: "Failed to get user weeks",
+          message: "Failed to get updated user weeks",
           success: false,
         });
       }
@@ -260,6 +252,62 @@ export const plannerFns = {
     if (!userId) {
       return res.send({
         message: "No user in session",
+        success: false,
+      });
+    }
+
+    const { weekMealId, weekId, dayId, recipeId } = req.body;
+
+    try {
+      const weekMealToUpdate = await WeekMeal.findByPk(weekMealId);
+
+      weekMealToUpdate.update({
+        weekId,
+        dayId,
+        recipeId,
+      });
+
+      if (!weekMealToUpdate) {
+        return res.send({
+          message: "Failed to update weekMeal in db",
+          success: false,
+        });
+      }
+
+      const updatedUserWeeks = await User.findByPk(userId, {
+        attributes: ["userId"],
+        include: [
+          {
+            model: Week,
+            include: [
+              {
+                model: WeekMeal,
+                include: [Day, Recipe],
+              },
+            ],
+          },
+        ],
+      });
+
+      if (updatedUserWeeks.weeks.length === 0) {
+        return res.send({
+          message: "Failed to get updated user weeks",
+          success: false,
+        });
+      }
+
+      return res.send({
+        message: "Successfully updated weekMeal in db",
+        success: true,
+        updatedUserWeeks: updatedUserWeeks.weeks,
+      });
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: "Error when updating weekMeal in db",
         success: false,
       });
     }
