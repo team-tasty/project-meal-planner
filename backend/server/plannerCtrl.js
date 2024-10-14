@@ -54,7 +54,7 @@ export const plannerFns = {
 
     try {
       await Week.create({
-        userId
+        userId,
       });
 
       const updatedUserWeeks = await User.findByPk(userId, {
@@ -74,24 +74,23 @@ export const plannerFns = {
 
       if (updatedUserWeeks.weeks.length === 0) {
         return res.send({
-          message: "Failed to get user weeks",
+          message: "Failed to get updated user weeks",
           success: false,
         });
       }
 
       return res.send({
-        message: 'Successfully created new week for user in db',
+        message: "Successfully created new week for user in db",
         success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks
-      })
-
-    } catch(error) {
+        updatedUserWeeks: updatedUserWeeks.weeks,
+      });
+    } catch (error) {
       console.log();
       console.error(error);
       console.log();
 
       return res.send({
-        message: 'Failed to create new week for user in db',
+        message: "Failed to create new week for user in db",
         success: false,
       });
     }
@@ -104,6 +103,51 @@ export const plannerFns = {
     if (!userId) {
       return res.send({
         message: "No user in session",
+        success: false,
+      });
+    }
+
+    const { weekId } = req.params;
+
+    try {
+      const weekToDelete = await Week.findByPk(weekId);
+
+      await weekToDelete.destroy();
+
+      const updatedUserWeeks = await User.findByPk(userId, {
+        attributes: ["userId"],
+        include: [
+          {
+            model: Week,
+            include: [
+              {
+                model: WeekMeal,
+                include: [Day, Recipe],
+              },
+            ],
+          },
+        ],
+      });
+
+      if (updatedUserWeeks.weeks.length === 0) {
+        return res.send({
+          message: "Failed to get updated user weeks",
+          success: false,
+        });
+      }
+
+      return res.send({
+        message: "Successfully deleted week in db",
+        success: true,
+        updatedUserWeeks: updatedUserWeeks.weeks,
+      });
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: "Failed to delete week from db",
         success: false,
       });
     }
