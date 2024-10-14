@@ -45,7 +45,7 @@ app.get('/api/user-recipe-external-ids', externalRecipeIds);
 
 // Planner Endpoints
 import { plannerFns } from './plannerCtrl.js';
-const { userWeeks, addUserWeek, deleteUserWeek, days, createWeekMeal, editWeekMeal, deleteWeekMeal } = plannerFns;
+const { userWeeks, addUserWeek, deleteUserWeek, days, createWeekMeal, editWeekMeal, deleteWeekMeal, resetWeek } = plannerFns;
 
 // get user week planner data
 app.get('/api/user-weeks', userWeeks);
@@ -62,7 +62,7 @@ app.get('/api/add-week', addUserWeek)
 // delete week
 app.delete('/api/delete-week/:weekId', deleteUserWeek)
 // reset week
-// TODO: create reset or clear week endpoint (needs weekId)
+app.delete('/api/reset-week/:weekId', resetWeek)
 
 // Grocery List Endpoints
 // TODO: import grocery list functions
