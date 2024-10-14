@@ -322,5 +322,50 @@ export const plannerFns = {
         success: false,
       });
     }
+
+    const { weekMealId } = req.params;
+
+    try {
+      const weekMealToDelete = await WeekMeal.findByPk(weekMealId);
+
+      console.log(weekMealToDelete.destroy());
+
+      const updatedUserWeeks = await User.findByPk(userId, {
+        attributes: ["userId"],
+        include: [
+          {
+            model: Week,
+            include: [
+              {
+                model: WeekMeal,
+                include: [Day, Recipe],
+              },
+            ],
+          },
+        ],
+      });
+
+      if (updatedUserWeeks.weeks.length === 0) {
+        return res.send({
+          message: "Failed to get updated user weeks",
+          success: false,
+        });
+      }
+
+      return res.send({
+        message: "Successfully deleted weekMeal in db",
+        success: true,
+        updatedUserWeeks: updatedUserWeeks.weeks,
+      });
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: "Error when deleting weekMeal from db",
+        success: false,
+      });
+    }
   },
 };
