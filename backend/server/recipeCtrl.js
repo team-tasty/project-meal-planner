@@ -347,4 +347,39 @@ export const recipeFns = {
       userRecipes: savedRecipes.userRecipes,
     });
   },
+
+  externalRecipeIds: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: "No user in session",
+        success: false,
+      });
+    }
+
+    const userRecipeArr = await UserRecipe.findAll({
+      where: {
+        userId,
+      },
+      attributes: ["userRecipeId"],
+      include: {
+        model: Recipe,
+        attributes: ["externalRecipeId"],
+      },
+    });
+
+    if (!userRecipeArr.length === 0) {
+      return res.send({
+        message: "No saved recipes found for this user",
+        success: false,
+      });
+    }
+
+    return res.send({
+      message: `Successfully got external API recipe id for user's saved recipes`,
+      success: true,
+      externalIdArr: userRecipeArr,
+    });
+  },
 };
