@@ -281,5 +281,53 @@ export const recipeFns = {
         success: false
       });
     };
+  },
+
+  userRecipes: async (req, res) => {
+    const userId  = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session';
+        success: false
+      });
+    };
+
+    const savedRecipes = await User.findByPk(userId, {
+      attributes: ['userId'],
+      include: [{
+        model: UserRecipe,
+        include: [{
+          model: Recipe,
+          include: [{
+            model: RecipeIngredient,
+            include: [Ingredient, MeasurementQuantity, MeasurementUnit]
+          }]
+        }]
+      }]
+    })
+
+    try {
+      if (savedRecipes.userRecipes.length === 0) {
+        return res.send({
+          message: 'No saved recipes found',
+          success: false
+        });
+      };
+    } catch(error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: `Error getting user's saved recipes`
+      })
+    }
+    
+    return res.send({
+      message: `Successfully got user's saved recipes`,
+      success: true,
+      userRecipes: savedRecipes.userRecipes
+    });
   }
 }
