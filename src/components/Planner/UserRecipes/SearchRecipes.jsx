@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RecipeCard from "../../Recipes/RecipeCard";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 const SearchRecipes = ({ recipesData }) => {
   const [searchInput, setSearchInput] = useState("");

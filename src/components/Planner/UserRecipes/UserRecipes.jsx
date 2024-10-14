@@ -2,7 +2,7 @@ import SearchRecipes from "./SearchRecipes.jsx";
 import RecipeCard from "../../Recipes/RecipeCard.jsx";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@hello-pangea/dnd";
 
 const UserRecipes = () => {
   // get userSavedRecipes from a loader function
