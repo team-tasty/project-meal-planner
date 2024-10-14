@@ -110,6 +110,12 @@ export const plannerFns = {
     const { weekId } = req.params;
 
     try {
+      await WeekMeal.destroy({
+        where: {
+          weekId,
+        },
+      });
+
       const weekToDelete = await Week.findByPk(weekId);
 
       await weekToDelete.destroy();
@@ -372,8 +378,8 @@ export const plannerFns = {
 
     if (!userId) {
       return res.send({
-        message: 'No user in session',
-        success: false
+        message: "No user in session",
+        success: false,
       });
     }
 
@@ -382,9 +388,9 @@ export const plannerFns = {
     try {
       await WeekMeal.destroy({
         where: {
-          weekId
-        }
-      })
+          weekId,
+        },
+      });
 
       const updatedUserWeeks = await User.findByPk(userId, {
         attributes: ["userId"],
@@ -419,9 +425,9 @@ export const plannerFns = {
       console.log();
 
       return res.send({
-        message: 'Error when resetting week in db',
-        success: false
+        message: "Error when resetting week in db",
+        success: false,
       });
     }
-  }
+  },
 };
