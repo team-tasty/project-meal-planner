@@ -164,6 +164,21 @@ export const plannerFns = {
         success: false,
       });
     }
+
+    const days = await Day.findAll();
+
+    if (days.length === 0) {
+      return res.send({
+        message: 'Failed to get days of the week from db',
+        success: false
+      });
+    }
+
+    return res.send({
+      message: 'Successfully got days of the week',
+      success: true,
+      days
+    });
   },
 
   createWeekMeal: async (req, res) => {
