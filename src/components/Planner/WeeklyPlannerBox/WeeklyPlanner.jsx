@@ -4,7 +4,7 @@ import DayDrop from "./DayDrop";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const WeeklyPlanner = ({ plannedRecipes }) => {
+const WeeklyPlanner = ({ plannedRecipes, handleDelete }) => {
   // set state values
   const [daysData, setDaysData] = useState([
     { dayId: 1, day: "Day 1" },
@@ -18,7 +18,13 @@ const WeeklyPlanner = ({ plannedRecipes }) => {
 
   const dayCards = daysData.map((day, index) => {
     return (
-      <DayDrop key={day.dayId} day={day} dayRecipes={plannedRecipes[index]} />
+      <DayDrop
+        key={day.dayId}
+        day={day}
+        dayRecipes={plannedRecipes[index]}
+        handleDelete={handleDelete}
+        dayIndex={index}
+      />
     );
   });
 

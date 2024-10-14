@@ -137,6 +137,7 @@ const PlannerPage = () => {
     console.log(`SOURCE:`, source);
     console.log("DESTINATION:", destination);
     console.log(plannedRecipes);
+
     // if dropped outside of any droppable, do nothing
     if (!destination) return;
     // If the item is dropped in the same place, do nothing
@@ -163,9 +164,12 @@ const PlannerPage = () => {
 
   console.log(plannedRecipes);
 
-  // handle a delettion from list 2 (plannedRecipes)
-  const handleDelete = (id, index) => {
-    setPlannedRecipes((prevList) => prevList.filter((_, i) => i !== index));
+  // handle a delettion from list 2 (plannedRecipes) NEED HELP HERE
+  const handleDelete = (dayIndex, recipeIndex) => {
+    const newPlannedRecipes = [...plannedRecipes];
+    newPlannedRecipes[dayIndex].splice(recipeIndex, 1);
+    // need a calla to the backend to update the db?
+    setPlannedRecipes(newPlannedRecipes);
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -173,7 +177,10 @@ const PlannerPage = () => {
         <div>
           Weekly Planner
           <div className="flex justify-between border border-yellow-400">
-            <WeeklyPlannerBox plannedRecipes={plannedRecipes} />
+            <WeeklyPlannerBox
+              plannedRecipes={plannedRecipes}
+              handleDelete={handleDelete}
+            />
             <UserRecipes plannedRecipes={plannedRecipes} />
           </div>
         </div>
