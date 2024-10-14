@@ -153,8 +153,6 @@ export const plannerFns = {
     }
   },
 
-  // TODO: create reset week controller function
-
   days: async (req, res) => {
     const userId = req.session.userId;
 
@@ -261,7 +259,7 @@ export const plannerFns = {
     try {
       const weekMealToUpdate = await WeekMeal.findByPk(weekMealId);
 
-      weekMealToUpdate.update({
+      await weekMealToUpdate.update({
         weekId,
         dayId,
         recipeId,
@@ -328,7 +326,7 @@ export const plannerFns = {
     try {
       const weekMealToDelete = await WeekMeal.findByPk(weekMealId);
 
-      console.log(weekMealToDelete.destroy());
+      await weekMealToDelete.destroy();
 
       const updatedUserWeeks = await User.findByPk(userId, {
         attributes: ["userId"],
@@ -368,4 +366,62 @@ export const plannerFns = {
       });
     }
   },
+
+  resetWeek: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    }
+
+    const { weekId } = req.params;
+
+    try {
+      await WeekMeal.destroy({
+        where: {
+          weekId
+        }
+      })
+
+      const updatedUserWeeks = await User.findByPk(userId, {
+        attributes: ["userId"],
+        include: [
+          {
+            model: Week,
+            include: [
+              {
+                model: WeekMeal,
+                include: [Day, Recipe],
+              },
+            ],
+          },
+        ],
+      });
+
+      if (updatedUserWeeks.weeks.length === 0) {
+        return res.send({
+          message: "Failed to get updated user weeks",
+          success: false,
+        });
+      }
+
+      return res.send({
+        message: "Successfully reset week in db",
+        success: true,
+        updatedUserWeeks: updatedUserWeeks.weeks,
+      });
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: 'Error when resetting week in db',
+        success: false
+      });
+    }
+  }
 };
