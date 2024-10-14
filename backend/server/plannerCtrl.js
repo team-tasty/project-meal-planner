@@ -169,15 +169,15 @@ export const plannerFns = {
 
     if (days.length === 0) {
       return res.send({
-        message: 'Failed to get days of the week from db',
-        success: false
+        message: "Failed to get days of the week from db",
+        success: false,
       });
     }
 
     return res.send({
-      message: 'Successfully got days of the week',
+      message: "Successfully got days of the week",
       success: true,
-      days
+      days,
     });
   },
 
@@ -187,6 +187,68 @@ export const plannerFns = {
     if (!userId) {
       return res.send({
         message: "No user in session",
+        success: false,
+      });
+    }
+
+    const { weekId, dayId, recipeId } = req.body;
+
+    console.log();
+    console.log(`weekId:`, weekId);
+    console.log(`dayId:`, dayId);
+    console.log(`recipeId:`, recipeId);
+    console.log();
+
+    try {
+      const newWeekMeal = await WeekMeal.create({
+        weekId,
+        dayId,
+        recipeId,
+      });
+
+      console.log(`new user created`);
+
+      if (!newWeekMeal) {
+        return res.send({
+          message: "Failed to create new weekMeal in db",
+          success: false,
+        });
+      }
+
+      const updatedUserWeeks = await User.findByPk(userId, {
+        attributes: ["userId"],
+        include: [
+          {
+            model: Week,
+            include: [
+              {
+                model: WeekMeal,
+                include: [Day, Recipe],
+              },
+            ],
+          },
+        ],
+      });
+
+      if (updatedUserWeeks.weeks.length === 0) {
+        return res.send({
+          message: "Failed to get user weeks",
+          success: false,
+        });
+      }
+
+      return res.send({
+        message: "Successfully created new weekMeal in db",
+        success: true,
+        updatedUserWeeks: updatedUserWeeks.weeks,
+      });
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: "Error when creating new weekMeal in db",
         success: false,
       });
     }
