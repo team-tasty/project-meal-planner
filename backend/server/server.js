@@ -61,6 +61,8 @@ app.delete('/api/remove-week-meal/:weekMealId', deleteWeekMeal);
 app.get('/api/add-week', addUserWeek)
 // delete week
 app.delete('/api/delete-week/:weekId', deleteUserWeek)
+// reset week
+// TODO: create reset or clear week endpoint (needs weekId)
 
 // Grocery List Endpoints
 // TODO: import grocery list functions
