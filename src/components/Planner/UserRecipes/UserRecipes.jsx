@@ -2,12 +2,12 @@ import SearchRecipes from "./SearchRecipes.jsx";
 import RecipeCard from "../../Recipes/RecipeCard.jsx";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@hello-pangea/dnd";
 
-const UserRecipes = () => {
+const UserRecipes = ({ plannedRecipes }) => {
   // get userSavedRecipes from a loader function
   // const { userRecipes } = useLoaderData();
-  const [recipesData, setRecipesData] = useState([
+  const [userSavedRecipes, setUserSavedRecipes] = useState([
     {
       recipeId: 1,
       title: "Chicken Alfredo",
@@ -79,6 +79,42 @@ const UserRecipes = () => {
         },
       ],
     },
+    {
+      recipeId: 3,
+      title: "Cookies",
+      image:
+        "https://images.aws.nestle.recipes/resized/5b069c3ed2feea79377014f6766fcd49_Original_NTH_Chocolate_Chip_Cookie_1080_850.jpg",
+      category: "Desserts",
+      instruction:
+        "Prepare the brownies according to the box instructions. While the brownies are baking...",
+      tag: null,
+      area: "American",
+      recipeIngredients: [
+        {
+          measurementQuantity: {
+            quantity: 3,
+          },
+          measurementUnit: {
+            unit: "tsp",
+          },
+
+          ingredient: {
+            ingredient: "sugar",
+          },
+        },
+        {
+          measurementQuantity: {
+            quantity: 2,
+          },
+          measurementUnit: {
+            unit: "large",
+          },
+          ingredient: {
+            ingredient: "eggs",
+          },
+        },
+      ],
+    },
   ]);
 
   return (
@@ -90,7 +126,7 @@ const UserRecipes = () => {
           {...provided.droppableProps}
         >
           <h2>Saved Recipes:</h2>
-          <SearchRecipes recipesData={recipesData} />
+          <SearchRecipes recipesData={userSavedRecipes} />
           {provided.placeholder}
         </div>
       )}

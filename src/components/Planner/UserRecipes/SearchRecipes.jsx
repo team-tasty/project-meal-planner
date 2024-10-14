@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RecipeCard from "../../Recipes/RecipeCard";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from "@hello-pangea/dnd";
 
 const SearchRecipes = ({ recipesData }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -34,7 +34,7 @@ const SearchRecipes = ({ recipesData }) => {
             {...provided.dragHandleProps}
           >
             <RecipeCard
-              // key={recipe.recipeId}
+              key={recipe.recipeId}
               index={index}
               recipe={recipe}
               setModalData={setModalData}
