@@ -4,7 +4,7 @@ import DayDrop from "./DayDrop";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const WeeklyPlanner = () => {
+const WeeklyPlanner = ({ plannedRecipes }) => {
   // set state values
   const [daysData, setDaysData] = useState([
     { dayId: 1, day: "Day 1" },
@@ -16,8 +16,10 @@ const WeeklyPlanner = () => {
     { dayId: 7, day: "Day 7" },
   ]);
 
-  const dayCards = daysData.map((day) => {
-    return <DayDrop key={day.dayId} day={day} />;
+  const dayCards = daysData.map((day, index) => {
+    return (
+      <DayDrop key={day.dayId} day={day} dayRecipes={plannedRecipes[index]} />
+    );
   });
 
   // make a backend call to get days within a useEffect?

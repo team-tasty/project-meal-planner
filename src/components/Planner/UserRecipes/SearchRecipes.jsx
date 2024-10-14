@@ -34,7 +34,7 @@ const SearchRecipes = ({ recipesData }) => {
             {...provided.dragHandleProps}
           >
             <RecipeCard
-              // key={recipe.recipeId}
+              key={recipe.recipeId}
               index={index}
               recipe={recipe}
               setModalData={setModalData}
