@@ -28,7 +28,7 @@ app.post('/api/register', register);
 
 // Recipes Endpoints
 import { recipeFns } from './recipeCtrl.js';
-const { recipeSearch, saveRecipe, unsaveRecipe, userRecipes } = recipeFns;
+const { recipeSearch, saveRecipe, unsaveRecipe, userRecipes, externalRecipeIds } = recipeFns;
 
 // themealdb api request for recipe search
 app.post('/api/recipe-search', recipeSearch); // needs search input in body object
@@ -38,10 +38,10 @@ app.get('/api/user-recipes', userRecipes);
 app.post('/api/save-recipe', saveRecipe); // needs recipe object in body object
 // user un-saves a recipe
 app.delete('/api/unsave-recipe/:userRecipeId', unsaveRecipe);
-// display recipe modal
-app.post('/app/recipe-detail'); // needs recipeId in body object
+// display recipe modal (not needed because data is aleady at front end)
+// app.post('/app/recipe-detail'); // needs recipeId in body object
 // get externalRecipeId's of userRecipes to show if search recipe result is already saved or not
-app.get('/api/user-recipe-external-ids');
+app.get('/api/user-recipe-external-ids', externalRecipeIds);
 
 // Planner Endpoints
 // TODO: import planner functions
