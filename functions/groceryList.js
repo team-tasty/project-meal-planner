@@ -90,29 +90,6 @@ const groceryList = (arrRecipes) => {
                 qtySum = 0
             }
 
-            // if (ingredientArr[i].unit === 'null' && qtySum !== 1) {
-            //     if (ingredientArr[i].ingredient.match(/s$/)) {
-            //         finalArr.push(`${qtySum} ${ingredientArr[i].ingredient}`)
-            //         qtySum = 0
-            //     } else {
-            //         finalArr.push(`${qtySum} ${ingredientArr[i].ingredient}s`)
-            //         qtySum = 0
-            //     }
-            // } else if (ingredientArr[i].unit === 'null') {
-            //     finalArr.push(`${qtySum} ${ingredientArr[i].ingredient}`)
-            //     qtySum = 0
-            // } else if (ingredientArr[i].unit !== 'null' && qtySum !== 1) {
-            //     if (ingredientArr[i].ingredient.match(/s$/)) {
-            //         finalArr.push(`${qtySum} ${ingredientArr[i].unit} ${ingredientArr[i].ingredient}`)
-            //         qtySum = 0
-            //     } else {
-            //         finalArr.push(`${qtySum} ${ingredientArr[i].unit} ${ingredientArr[i].ingredient}s`)
-            //         qtySum = 0
-            //     }
-            // } else {
-            //     finalArr.push(`${qtySum} ${ingredientArr[i].unit} ${ingredientArr[i].ingredient}`)
-            // }
-
         // If we don't match the above, then just place the entry into the array
         } else if (
             ingredientArr[i].unit !== ingredientArr[i-1].unit) {
@@ -122,7 +99,7 @@ const groceryList = (arrRecipes) => {
     return unitCombine(finalArr)
 }
 
-console.log(groceryList(groceryListPracticeData))
+// console.log(groceryList(groceryListPracticeData))
 
 
 export default groceryList

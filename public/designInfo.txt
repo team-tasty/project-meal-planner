@@ -1,0 +1,76 @@
+Step 1 - Understand the Project
+Project Goals
+1. What is the primary objective of this app?
+-The primary objective is to provide information and organize information for the user
+    a. First, they find recipes from an external API. They can look over the details of each recipe before deciding on whether to keep it
+    b. Second, we keep track of saved recipes, and allow them to pull up pertinent information whenever they'd like
+    c. The weekly planner lets them take recipes that are already saved, and then put them into days, allowing them to organize for a week's worth of meals
+    d. We generate grocery lists for the ingredients from the recipes they have in their weekly planner. This organizes data for easy use to take to the store
+
+2. Who is the target audience?
+-The target audience is more general; anyone looking to organize their meals, or find ideas for meals.
+-The big feature is simplicity in use; we want a simple user interface that either drags or clicks for its functionality.
+
+3. User Insights
+-Other users have indicated they'd like a few features:
+    a. ingredients placed into categories to allow for pre-organization before going to the store
+    b. combination of ingredients, so there aren't 4 entries for milk
+    c. being able to add their own recipes to this program
+
+4. User Scenarios
+-The first would be the standard flow: Login -> Recipe Search -> Meal Planner -> Drag Recipes -> Generate Grocery List
+-They should be able to just go to meal planner directly and see what they've already put together
+-A user can use this for three main purposes:
+    a. Finding/Saving Recipes
+    b. Organizing meals for the week
+    c. Generate Grocery List
+
+5. Establish Constraints
+-Our API is free, but has some issues. Specifically, data is not organized according to a specific syntax. Users can enter many styles of ingredients, which can make parsing them difficult
+-We've never used Drag n Drop before on an App. I think it's a great user experience, but we'll need to make sure we can make it work behind the scenes
+-Time. We only have so long, and when jumping into things we're not familiar with it can take more than we expect
+
+Step 2 - Map Out your User flow
+1. User Goals
+-Like above, there are three main goals that the user would want:
+    a. Finding/Saving Recipes
+    b. Organizing meals for the week
+    c. Generate Grocery List
+
+2. Key Touchpoints
+-Login
+-Recipe search
+    -Recipe information
+    -Recipe save
+-Weekly planner
+    -Saved Recipes
+    -Week container
+    -Day container
+    -Add/Remove recipes
+    -Add/Remove weeks
+    -Generate Grocery List
+-Grocery List
+    -See ingredients
+    -Indicate ingredient is/has been obtained
+
+3. Seamless Transitions / Interactive paths
+Login
+-Should be directed there at the first, session check
+-> After Login
+Taken to Landing page, which has instructions and a button to direct to recipe search
+-> Header
+Includes the recipe search, weekly planner, and ?Grocery List? portions, so that a user can travel between them whenever they'd like
+-> Recipe search
+Text search, which leads to recipe cards being displayed. There's a picture and a title on each card. If the user is intriguided, they can click on the card to open more details, such as ingredients and instructions.
+-> Recipe save
+If a user likes a recipe, they can save it with a simple click. They can also unsave it with that same mechanic
+-> Weekly Planner
+-A user's recipes will be automatically loaded when they come to this page. They'll be in the same style as the recipe search page
+    -**** Saved Recipe Search. How exactly do we want this to look?
+-The actual planner will be next to the saved recipes, each column side by side. This allows for simple drag n Drop
+-The recipe will copy into the planner, and can be further moved around as desired. Each recipe will also have a delete option to remove it from the planner
+-There will be a button for adding a week, as well as clearing a week. 
+-There will be a button to generate the shopping lists
+-> Grocery List
+-Ingredients will be automatically combined and organized from all of the recipes within the weekly container.
+-Each ingredient will have an indicator that the ingredient has been gotten or not. Checkbox most likely
