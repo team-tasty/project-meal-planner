@@ -1,5 +1,15 @@
 import axios from "axios";
-import { User, Week, Day, Recipe, WeekMeal } from "../db/model.js";
+import {
+  User,
+  Week,
+  Day,
+  Recipe,
+  WeekMeal,
+  RecipeIngredient,
+  Ingredient,
+  MeasurementQuantity,
+  MeasurementUnit,
+} from "../db/model.js";
 import getUserWeeks from "../../functions/getUserWeeks.js";
 
 export const plannerFns = {
@@ -20,6 +30,53 @@ export const plannerFns = {
     }
 
     return res.send(resObj);
+  },
+
+  singleWeek: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: `No user in session`,
+        success: false,
+      });
+    }
+
+    const { weekId } = req.body;
+
+    const week = await Week.findByPk(weekId, {
+      separate: true,
+      include: [
+        {
+          model: WeekMeal,
+          separate: true,
+          include: [
+            {
+              model: Recipe,
+              include: [
+                {
+                  model: RecipeIngredient,
+                  include: [Ingredient, MeasurementQuantity, MeasurementUnit],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+
+    if (week.weekMeals.length === 0) {
+      return res.send({
+        message: `Week contains no recipes`,
+        success: false,
+      });
+    }
+
+    return res.send({
+      message: `Successfuly got week data by weekId`,
+      success: true,
+      week,
+    });
   },
 
   addUserWeek: async (req, res) => {
