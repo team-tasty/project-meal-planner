@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GoHeartFill } from "react-icons/go";
+import axios from "axios";
 
 const RecipeCard = ({
   recipe,
@@ -10,7 +11,6 @@ const RecipeCard = ({
   handleDelete,
   dayIndex,
 }) => {
-  console.log("MODAL DISPLAY:", displayModal);
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
@@ -22,8 +22,21 @@ const RecipeCard = ({
   const handleSave = () => {
     // make call to backend to save the recipe to our database
     // create body object
+    const recipeObj = {
+      recipeId: something,
+      title: recipe.title,
+      instruction: recipe.instruction,
+      image: recipe.image,
+      category: recipe.category,
+      area: recipe.area,
+      tag: recipe.tag,
+      recipeIngredients: recipe.recipeIngredients,
+    };
+
+    console.log(recipeObj);
 
     // make axios call
+    const res = axios.post("/api/save-recipe", recipeObj);
 
     // if successful...
 
