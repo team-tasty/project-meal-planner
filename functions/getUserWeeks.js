@@ -10,7 +10,7 @@ import {
   WeekMeal,
 } from "../backend/db/model.js";
 
-const getUserWeeks = async (userId) => {
+const getUserWeeks = async (userId, weekId) => {
   const userWeeks = await User.findByPk(userId, {
     attributes: ["userId"],
     separate: true,
@@ -18,6 +18,7 @@ const getUserWeeks = async (userId) => {
       {
         model: Week,
         separate: true,
+        where: weekId ? { weekId } : {},
         include: [
           {
             model: WeekMeal,
