@@ -1,5 +1,6 @@
 import axios from "axios";
 import { User, Week, Day, Recipe, WeekMeal } from "../db/model.js";
+import getUserWeeks from "../../functions/getUserWeeks.js";
 
 export const plannerFns = {
   userWeeks: async (req, res) => {
@@ -12,33 +13,13 @@ export const plannerFns = {
       });
     }
 
-    const userWeeks = await User.findByPk(userId, {
-      attributes: ["userId"],
-      include: [
-        {
-          model: Week,
-          include: [
-            {
-              model: WeekMeal,
-              include: [Day, Recipe],
-            },
-          ],
-        },
-      ],
-    });
+    const resObj = await getUserWeeks(userId);
 
-    if (userWeeks.weeks.length === 0) {
-      return res.send({
-        message: "Failed to get user weeks",
-        success: false,
-      });
+    if (resObj.success) {
+      resObj.message = `Successfully got user weeks`;
     }
 
-    return res.send({
-      message: `Successfully got user's weeks`,
-      success: true,
-      userWeeks: userWeeks.weeks,
-    });
+    return res.send(resObj);
   },
 
   addUserWeek: async (req, res) => {
@@ -57,33 +38,13 @@ export const plannerFns = {
         userId,
       });
 
-      const updatedUserWeeks = await User.findByPk(userId, {
-        attributes: ["userId"],
-        include: [
-          {
-            model: Week,
-            include: [
-              {
-                model: WeekMeal,
-                include: [Day, Recipe],
-              },
-            ],
-          },
-        ],
-      });
+      const resObj = await getUserWeeks(userId);
 
-      if (updatedUserWeeks.weeks.length === 0) {
-        return res.send({
-          message: "Failed to get updated user weeks",
-          success: false,
-        });
+      if (resObj.success) {
+        resObj.message = `Successfully created new week for user in db`;
       }
 
-      return res.send({
-        message: "Successfully created new week for user in db",
-        success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks,
-      });
+      return res.send(resObj);
     } catch (error) {
       console.log();
       console.error(error);
@@ -120,33 +81,13 @@ export const plannerFns = {
 
       await weekToDelete.destroy();
 
-      const updatedUserWeeks = await User.findByPk(userId, {
-        attributes: ["userId"],
-        include: [
-          {
-            model: Week,
-            include: [
-              {
-                model: WeekMeal,
-                include: [Day, Recipe],
-              },
-            ],
-          },
-        ],
-      });
+      const resObj = await getUserWeeks(userId);
 
-      if (updatedUserWeeks.weeks.length === 0) {
-        return res.send({
-          message: "Failed to get updated user weeks",
-          success: false,
-        });
+      if (resObj.success) {
+        resObj.message = `Successfully deleted week in db`;
       }
 
-      return res.send({
-        message: "Successfully deleted week in db",
-        success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks,
-      });
+      return res.send(resObj);
     } catch (error) {
       console.log();
       console.error(error);
@@ -211,33 +152,13 @@ export const plannerFns = {
         });
       }
 
-      const updatedUserWeeks = await User.findByPk(userId, {
-        attributes: ["userId"],
-        include: [
-          {
-            model: Week,
-            include: [
-              {
-                model: WeekMeal,
-                include: [Day, Recipe],
-              },
-            ],
-          },
-        ],
-      });
+      const resObj = await getUserWeeks(userId);
 
-      if (updatedUserWeeks.weeks.length === 0) {
-        return res.send({
-          message: "Failed to get updated user weeks",
-          success: false,
-        });
+      if (resObj.success) {
+        resObj.message = `Successfully created new weekMeal in db`;
       }
 
-      return res.send({
-        message: "Successfully created new weekMeal in db",
-        success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks,
-      });
+      return res.send(resObj);
     } catch (error) {
       console.log();
       console.error(error);
@@ -278,33 +199,13 @@ export const plannerFns = {
         });
       }
 
-      const updatedUserWeeks = await User.findByPk(userId, {
-        attributes: ["userId"],
-        include: [
-          {
-            model: Week,
-            include: [
-              {
-                model: WeekMeal,
-                include: [Day, Recipe],
-              },
-            ],
-          },
-        ],
-      });
+      const resObj = await getUserWeeks(userId);
 
-      if (updatedUserWeeks.weeks.length === 0) {
-        return res.send({
-          message: "Failed to get updated user weeks",
-          success: false,
-        });
+      if (resObj.success) {
+        resObj.message = `Successfully updated weekMeal in db`;
       }
 
-      return res.send({
-        message: "Successfully updated weekMeal in db",
-        success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks,
-      });
+      return res.send(resObj);
     } catch (error) {
       console.log();
       console.error(error);
@@ -334,33 +235,13 @@ export const plannerFns = {
 
       await weekMealToDelete.destroy();
 
-      const updatedUserWeeks = await User.findByPk(userId, {
-        attributes: ["userId"],
-        include: [
-          {
-            model: Week,
-            include: [
-              {
-                model: WeekMeal,
-                include: [Day, Recipe],
-              },
-            ],
-          },
-        ],
-      });
+      const resObj = await getUserWeeks(userId);
 
-      if (updatedUserWeeks.weeks.length === 0) {
-        return res.send({
-          message: "Failed to get updated user weeks",
-          success: false,
-        });
+      if (resObj.success) {
+        resObj.message = `Successfully deleted weekMeal in db`;
       }
 
-      return res.send({
-        message: "Successfully deleted weekMeal in db",
-        success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks,
-      });
+      return res.send(resObj);
     } catch (error) {
       console.log();
       console.error(error);
@@ -392,33 +273,13 @@ export const plannerFns = {
         },
       });
 
-      const updatedUserWeeks = await User.findByPk(userId, {
-        attributes: ["userId"],
-        include: [
-          {
-            model: Week,
-            include: [
-              {
-                model: WeekMeal,
-                include: [Day, Recipe],
-              },
-            ],
-          },
-        ],
-      });
+      const resObj = await getUserWeeks(userId);
 
-      if (updatedUserWeeks.weeks.length === 0) {
-        return res.send({
-          message: "Failed to get updated user weeks",
-          success: false,
-        });
+      if (resObj.success) {
+        resObj.message = `Successfully reset week in db`;
       }
 
-      return res.send({
-        message: "Successfully reset week in db",
-        success: true,
-        updatedUserWeeks: updatedUserWeeks.weeks,
-      });
+      return res.send(resObj);
     } catch (error) {
       console.log();
       console.error(error);
