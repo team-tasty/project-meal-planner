@@ -37,12 +37,12 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
         handleDelete={handleDelete}
       />
     ) : (
-      // </div>
+      <div></div>
       //   )}
       // // </Draggable>
-      <div className="border border-black h-32 w-72 flex items-center justify-center">
-        Drag Recipe Here
-      </div>
+      // <div className="border border-black h-32 w-72 flex items-center justify-center">
+      //   Drag Recipe Here
+      // </div>
     );
   });
 
@@ -50,7 +50,7 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
     <Droppable droppableId={`${day.dayId}`} direction="vertical">
       {(provided) => (
         <div
-          className="h-[450px] w-[500px] border border-black flex"
+          className="min-h-20 min-w-[800px] border border-black flex"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >

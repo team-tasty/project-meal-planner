@@ -3,6 +3,7 @@ import RemoveWeeklyPlannerButton from "./RemoveWeeklyPlannerButton";
 import DayDrop from "./DayDrop";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import WeeklyGroceryListButton from "./WeeklyGroceryListButton";
 
 const WeeklyPlanner = ({ plannedRecipes, handleDelete }) => {
   // set state values
@@ -42,8 +43,11 @@ const WeeklyPlanner = ({ plannedRecipes, handleDelete }) => {
   return (
     <div className="border border-blue-800">
       {dayCards}
-      <ResetWeeklyPlannerButton />
-      <RemoveWeeklyPlannerButton />
+      <div className="flex justify-center gap-4">
+        <ResetWeeklyPlannerButton />
+        <RemoveWeeklyPlannerButton />
+        <WeeklyGroceryListButton />
+      </div>
     </div>
   );
 };

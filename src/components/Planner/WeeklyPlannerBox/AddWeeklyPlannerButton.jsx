@@ -1,7 +1,12 @@
+import axios from "axios";
+
 const AddWeeklyPlannerButton = () => {
+  const handleAddWeek = () => {
+    // make backend call to add another week
+  };
   return (
     <div>
-      <button>Add Another Week</button>
+      <button onClick={handleAddWeek}>+ Add Week</button>
     </div>
   );
 };

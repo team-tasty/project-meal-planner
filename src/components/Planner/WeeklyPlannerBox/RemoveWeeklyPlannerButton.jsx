@@ -1,7 +1,13 @@
+import axios from "axios";
+
 const RemoveWeeklyPlannerButton = () => {
+  const handleRemoveWeek = () => {
+    // make backend call to remove current week
+  };
+
   return (
     <div>
-      <button>Remove A Week</button>
+      <button onClick={handleRemoveWeek}>- Remove Current Week</button>
     </div>
   );
 };
