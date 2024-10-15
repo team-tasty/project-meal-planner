@@ -121,7 +121,7 @@ const UserRecipes = ({ plannedRecipes }) => {
     <Droppable droppableId="droppable-user-recipes">
       {(provided) => (
         <div
-          className="h-[550px] w-[400px] border border-black"
+          className=" w-[350px] border border-black"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >

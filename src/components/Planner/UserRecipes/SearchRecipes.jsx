@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RecipeCard from "../../Recipes/RecipeCard";
 import { Draggable } from "@hello-pangea/dnd";
+import RecipeModal from "../../Recipes/RecipeModal";
 
 const SearchRecipes = ({ recipesData }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -40,6 +41,7 @@ const SearchRecipes = ({ recipesData }) => {
               setModalData={setModalData}
               displayModal={displayModal}
               setDisplayModal={setDisplayModal}
+              modalData={modalData}
             />
           </div>
         )}
@@ -59,6 +61,9 @@ const SearchRecipes = ({ recipesData }) => {
         />
         <button type="submit">Search</button>
       </form>
+      {displayModal && (
+        <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
+      )}
       {recipeCards}
     </div>
   );

@@ -1,7 +1,12 @@
+import axios from "axios";
+
 const ResetWeeklyPlannerButton = () => {
+  const handleResetWeek = () => {
+    // make backend call to reset the week
+  };
   return (
     <div>
-      <button>Reset Weekly Planner</button>
+      <button onClick={handleResetWeek}>Reset Weekly Planner</button>
     </div>
   );
 };

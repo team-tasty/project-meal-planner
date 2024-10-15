@@ -1,7 +1,6 @@
 import WeeklyPlanner from "./WeeklyPlanner";
 import AddWeeklyPlannerButton from "./AddWeeklyPlannerButton";
-import CreateListButton from "./CreateListButton";
-import ResetAllWeeklyPlannersButton from "./ResetAllWeeklyPlannersButton";
+import CreateListButton from "./FullGroceryListButton";
 
 const WeeklyPlannerBox = ({ plannedRecipes, handleDelete }) => {
   return (
@@ -10,9 +9,10 @@ const WeeklyPlannerBox = ({ plannedRecipes, handleDelete }) => {
         plannedRecipes={plannedRecipes}
         handleDelete={handleDelete}
       />
-      <AddWeeklyPlannerButton />
-      <ResetAllWeeklyPlannersButton />
-      <CreateListButton />
+      <div className="flex justify-center gap-4">
+        <AddWeeklyPlannerButton />
+        <CreateListButton />
+      </div>
     </div>
   );
 };

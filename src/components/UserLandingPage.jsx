@@ -12,7 +12,7 @@ const UserLandingPage = () => {
       <h3>Step 4: Drag and drop your favorites to different days.</h3>
       <h3>Step 5: Generate a grocery list from your completed meal plan.</h3>
 
-      <button onClick={() => navigate("/recipes")}>Get Started</button>
+      <button onClick={() => navigate("/app/recipes")}>Get Started</button>
     </div>
   );
 };

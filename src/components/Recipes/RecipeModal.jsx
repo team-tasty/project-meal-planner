@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const RecipeModal = ({ setDisplayModal, modalData }) => {
   // console.log(modalData);
@@ -7,7 +7,7 @@ const RecipeModal = ({ setDisplayModal, modalData }) => {
   // console.log(modalData.recipeIngredients[0].measurementQuantity);
   // console.log(modalData.recipeIngredients[0].measurementQuantity.quantity); // quantity number
   // console.log(modalData.recipeIngredients[0].measurementUnit.unit); // unit
-  // console.log(modalData.recipeIngredients[0].ingredient.ingredient); // ingredient name
+  // console.log(modalData.recipeIngredients[0].ingredient.ingredient); // ingredient names
 
   const ingredients = modalData.recipeIngredients.map((ingredient, i) => {
     if (!ingredient.measurementQuantity.quantity) {
@@ -37,16 +37,25 @@ const RecipeModal = ({ setDisplayModal, modalData }) => {
   // loop to find all ingredients and get them to display in the modal
 
   return (
-    <div className="absolute flex justify-center top-[25vh] left-[25vw] bottom-[25vh] right-[25vw] z-20 border border-black bg-green-500 h-[50vh] w-[50vw]">
-      <div className="flex flex-col justify-center h-full w-[90%]">
-        This is the modal
-        <h2>{modalData.title}</h2>
-        <h3>{modalData.category}</h3>
-        <h3>{modalData.area}</h3>
-        <h3>{modalData.tag}</h3>
+    <div className="absolute flex justify-center top-[6vh] left-[10vw] bottom-[6vh] right-[10vw] z-20 border border-black bg-green-500 h-[88vh] w-[80vw]">
+      <div className="flex flex-col gap-5 h-full w-[92%]">
+        <div className="flex justify-end mt-5">
+          <button onClick={() => setDisplayModal(false)}>X</button>
+        </div>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2>{modalData.title}</h2>
+          </div>
+          <div className="flex items-center gap-4">
+            <h3>Category: {modalData.category}</h3>
+            <h3>Area: {modalData.area}</h3>
+            {modalData.tag && <h3>Tags: {modalData.tag}</h3>}
+          </div>
+        </div>
+
         <img src={`${modalData.image}`} className="h-32 w-36" />
-        <h3>{modalData.instruction}</h3>
-        <ul className="list-disc">{ingredients}</ul>
+        <h3 className="">{modalData.instruction}</h3>
+        <ul className="list-disc ml-5 columns-2 ">{ingredients}</ul>
       </div>
     </div>
   );

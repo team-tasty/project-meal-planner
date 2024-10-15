@@ -154,7 +154,10 @@ const PlannerPage = () => {
 
     // Add the item to list 2 (plannedRecipes)
     const newPlannedRecipes = [...plannedRecipes];
-    newPlannedRecipes[+destination.droppableId - 1].push(draggedItem);
+
+    if (newPlannedRecipes[+destination.droppableId - 1].length < 3) {
+      newPlannedRecipes[+destination.droppableId - 1].push(draggedItem);
+    }
 
     // set request to update the db
 
@@ -173,10 +176,10 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex justify-between h-[90vh] border border-black">
+      <div className="flex justify-between h-[90vh]">
         <div>
           Weekly Planner
-          <div className="flex justify-between border border-yellow-400">
+          <div className="flex justify-between w-[98vw]">
             <WeeklyPlannerBox
               plannedRecipes={plannedRecipes}
               handleDelete={handleDelete}
