@@ -83,7 +83,5 @@ const convertIngredient = (str) => {
     // return finalStr
     return parseFunction(finalStr.toLowerCase())
 }
-console.log(convertIngredient("1 ½ tablespoon"))
-
 
 export default convertIngredient
