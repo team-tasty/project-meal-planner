@@ -44,53 +44,23 @@ export const plannerFns = {
 
     const { weekId } = req.body;
 
-    const week = await Week.findByPk(weekId, {
-      separate: true,
-      include: [
-        {
-          model: User,
-          attributes: [],
-          where: {
-            userId,
-          },
-        },
-        {
-          model: WeekMeal,
-          separate: true,
-          include: [
-            {
-              model: Recipe,
-              include: [
-                {
-                  model: RecipeIngredient,
-                  include: [Ingredient, MeasurementQuantity, MeasurementUnit],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    });
+    try {
+      const resObj = await getUserWeeks(userId, weekId);
 
-    if (!week?.weekMeals) {
+      if (resObj.success) {
+        resObj.message = `Successfully got week data by weekId`;
+      }
+
+      return res.send(resObj);
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
       return res.send({
-        message: `This week does not belong to user`,
-        success: false,
+        message: `Error when trying to get week data by weekId`,
       });
     }
-
-    if (week.weekMeals.length === 0) {
-      return res.send({
-        message: `Week contains no recipes`,
-        success: false,
-      });
-    }
-
-    return res.send({
-      message: `Successfuly got week data by weekId`,
-      success: true,
-      week,
-    });
   },
 
   addUserWeek: async (req, res) => {
