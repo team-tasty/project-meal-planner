@@ -1,4 +1,4 @@
-import { User } from "../db/model.js";
+import { User, Week } from "../db/model.js";
 import bcryptjs from "bcryptjs";
 
 export const authFns = {
@@ -51,6 +51,28 @@ export const authFns = {
 
     req.session.userId = newUser.userId;
 
+    try {
+      const newWeek = await Week.create({
+        userId: newUser.userId,
+      });
+
+      if (!newWeek) {
+        return res.send({
+          message: `Failed to create new week for new user`,
+          success: false,
+        });
+      }
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: `Error when creating new week for new user`,
+        success: false,
+      });
+    }
+
     return res.send({
       message: "User registered successfully",
       success: true,
@@ -74,12 +96,12 @@ export const authFns = {
       });
     }
 
-    if(!bcryptjs.compareSync(password, user.password)) {
+    if (!bcryptjs.compareSync(password, user.password)) {
       return res.send({
-        message: 'Password is incorrect',
-        success: false
+        message: "Password is incorrect",
+        success: false,
       });
-    };
+    }
 
     req.session.userId = user.userId;
 
@@ -93,16 +115,16 @@ export const authFns = {
   logout: async (req, res) => {
     if (!req.session.userId) {
       return res.send({
-        message: 'No user in session',
-        success: false
+        message: "No user in session",
+        success: false,
       });
-    };
+    }
 
     req.session.destroy();
 
     return res.send({
-      message: 'User logged out successfully',
-      success: true
+      message: "User logged out successfully",
+      success: true,
     });
   },
 };
