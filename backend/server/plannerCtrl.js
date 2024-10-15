@@ -48,6 +48,13 @@ export const plannerFns = {
       separate: true,
       include: [
         {
+          model: User,
+          attributes: [],
+          where: {
+            userId,
+          },
+        },
+        {
           model: WeekMeal,
           separate: true,
           include: [
@@ -64,6 +71,13 @@ export const plannerFns = {
         },
       ],
     });
+
+    if (!week?.weekMeals) {
+      return res.send({
+        message: `This week does not belong to user`,
+        success: false,
+      });
+    }
 
     if (week.weekMeals.length === 0) {
       return res.send({
