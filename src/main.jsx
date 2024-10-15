@@ -20,6 +20,7 @@ import RecipesPage from "./components/Recipes/RecipesPage.jsx";
 import PlannerPage from "./components/Planner/PlannerPage.jsx";
 import GroceryListPage from "./components/GrocreyList/GroceryListPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import AddRecipeForm from "./components/Recipes/AddRecipeForm.jsx";
 
 const Router = () => {
   // Session Check
@@ -78,7 +79,7 @@ const Router = () => {
               <RecipesPage />
             </ProtectedRoute>
           ),
-          // userId && !loading ? <RecipesPage /> : <Navigate to="/app/auth" />,
+
           loader: async () => {
             const searchInfo = {
               searchInput: "de",
@@ -96,7 +97,6 @@ const Router = () => {
               <PlannerPage />
             </ProtectedRoute>
           ),
-          // userId && !loading ? <PlannerPage /> : <Navigate to="/app/auth" />,
         },
         {
           path: "groceryList",
@@ -105,64 +105,21 @@ const Router = () => {
               <GroceryListPage />
             </ProtectedRoute>
           ),
-          // userId && !loading ? (
-          //   <GroceryListPage />
-          // ) : (
-          //   <Navigate to="/app/auth" />
-          // ),
+        },
+        {
+          path: "addRecipe",
+          element: (
+            <ProtectedRoute>
+              <AddRecipeForm />
+            </ProtectedRoute>
+          ),
         },
       ],
     },
   ]);
 
-  // OLD MAIN JSX
-  //   createRoutesFromElements(
-  //     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-  //       <Route index element={!userId && <Navigate to="/auth" />} />
-  //       <Route
-  //         path="userLandingPage"
-  //         element={userId ? <UserLandingPage /> : <Navigate to="/auth" />}
-  //       />
-  //       <Route
-  //         path="auth"
-  //         element={userId ? <Navigate to="/userLandingPage" /> : <AuthPage />}
-  //       />
-  //       <Route
-  //         path="recipes"
-  //         element={userId ? <RecipesPage /> : <Navigate to="/auth" />}
-  //         loader={async () => {
-  //           const searchInfo = {
-  //             searchInput: "de",
-  //             searchType: "s",
-  //           };
-  //           const res = await axios.post("/api/recipe-search", searchInfo);
-
-  //           return { recipesData: res.data.recipesData };
-  //         }}
-  //       />
-  //       <Route
-  //         path="planner"
-  //         element={userId ? <PlannerPage /> : <Navigate to="/auth" />}
-  //       />
-  //       <Route
-  //         path="groceryList"
-  //         element={userId ? <GroceryListPage /> : <Navigate to="/auth" />}
-  //       />
-  //     </Route>
-  //   )
-  // );
   return <RouterProvider router={router} />;
 };
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-//       <Route index element={<LandingPage />} />
-//       <Route path="auth" element={<AuthPage />} />
-//       <Route path="recipes" element={<Recipes />} />
-//     </Route>
-//   )
-// );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
