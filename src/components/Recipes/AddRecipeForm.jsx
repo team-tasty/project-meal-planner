@@ -1,4 +1,5 @@
 import { useState } from "react";
+import unitConvert from "../../../functions/unitConvert";
 
 const AddRecipeForm = () => {
   // set state values for form inputs
@@ -9,51 +10,76 @@ const AddRecipeForm = () => {
   const [area, setArea] = useState("");
   const [instruction, setInstruction] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [unit, setUnit] = useState([]);
+  const [unit, setUnit] = useState("");
   const [name, setName] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [isAddingNewIngredient, setIsAddingNewIngredient] = useState(false);
 
   const handleAddRecipe = () => {
     // make backend call to add a user recipe to the db and save it to user
   };
-
-  const handleAddIngredient = () => {
-    setIsAddingNewIngredient(true);
-    const handleDeleteIngredient = () => {};
-    return (
-      <div>
-        <label htmlFor="quantity">Quantity</label>
-        <input
-          value={quantity}
-          type="number"
-          placeholder="2"
-          required
-          onChange={(e) => setQuantity(e.target.value)}
-        />
-        <label htmlFor="unit">Unit</label>
-        <input
-          value={unit}
-          type="text"
-          pattern="text"
-          placeholder="cups"
-          required
-          onChange={(e) => setUnit(e.target.value)}
-        />
-        <label htmlFor="name">Name</label>
-        <input
-          value={name}
-          type="text"
-          placeholder="flour"
-          required
-          onChange={(e) => setName(e.target.value)}
-        />
-
-        <button onClick={handleDeleteIngredient}>Trash</button>
-      </div>
-    );
+  const handleCancelIngredient = () => {
+    // reset all values and toggle state
   };
+  const handleAddIngredient = () => {
+    // run unit through converter function
+    const strUnitArr = unit.match(/[a-z]+/gi);
+    const convertedUnit = unitConvert(strUnitArr);
+    console.log(convertedUnit);
+
+    // create ingredient object
+    const ingredientObj = {
+      measurementQuantity: {
+        quantity: quantity,
+      },
+      measurementUnit: {
+        unit: convertedUnit,
+      },
+      ingredient: {
+        ingredient: name,
+      },
+    };
+    console.log(ingredientObj);
+    // push ingredient object to ingredients array
+    const newIngredients = [...ingredients];
+    newIngredients.push(ingredientObj);
+    console.log(newIngredients);
+    setIngredients(newIngredients);
+
+    // reset unit, quanitity, name state values
+    setUnit("");
+    setQuantity("");
+    setName("");
+    // set show to false
+    setIsAddingNewIngredient(false);
+  };
+
+  // display ingredients list
+  const ingredientList = ingredients.map((ingredient, i) => {
+    if (!ingredient.measurementQuantity.quantity) {
+      return (
+        <li key={`${ingredient.ingredient.ingreident}${i}`}>
+          {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+        </li>
+      );
+    } else if (ingredient.measurementUnit.unit === "null") {
+      return (
+        <li key={`${ingredient.ingredient.ingredient}${i}`}>
+          {ingredient.measurementQuantity.quantity}{" "}
+          {ingredient.ingredient.ingredient}
+        </li>
+      );
+    } else {
+      return (
+        <li key={`${ingredient.ingredient.ingredient}${i}`}>
+          {ingredient.measurementQuantity.quantity}{" "}
+          {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+        </li>
+      );
+    }
+  });
   return (
-    <div>
+    <div className="">
       Add your own recipe form:
       <form onSubmit={handleAddRecipe}>
         <label htmlFor="title">Recipe Title</label>
@@ -105,9 +131,55 @@ const AddRecipeForm = () => {
           onChange={(e) => setInstruction(e.target.value)}
           className="border border-black p-2"
         />
-        <button onClick={handleAddIngredient} type="button">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsAddingNewIngredient(!isAddingNewIngredient);
+          }}
+          type="button"
+        >
           Add Ingredient
         </button>
+        {isAddingNewIngredient && (
+          <div>
+            <label htmlFor="quantity">Quantity</label>
+            <input
+              value={quantity}
+              type="number"
+              placeholder="2"
+              required
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+            <label htmlFor="unit">Unit</label>
+            <input
+              value={unit}
+              type="text"
+              pattern="text"
+              placeholder="cups"
+              required
+              onChange={(e) => setUnit(e.target.value)}
+            />
+            <label htmlFor="name">Name</label>
+            <input
+              value={name}
+              type="text"
+              placeholder="flour"
+              required
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <button onClick={handleCancelIngredient}>Cancel</button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAddIngredient();
+              }}
+            >
+              Save Ingredient
+            </button>
+          </div>
+        )}
+        {ingredientList}
       </form>
     </div>
   );
