@@ -48,12 +48,10 @@ const getUserWeeks = async (userId) => {
   }
 
   return {
-    // message: `Successfully got user weeks`,
+    // message to be included in controller function
     success: true,
     userWeeks: userWeeks.weeks,
   };
 };
 
 export default getUserWeeks;
-
-console.log(`user weeks for userId 1:`, await getUserWeeks(1))
