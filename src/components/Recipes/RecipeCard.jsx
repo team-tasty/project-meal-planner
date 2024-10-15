@@ -10,6 +10,7 @@ const RecipeCard = ({
   handleDelete,
   dayIndex,
 }) => {
+  console.log("MODAL DISPLAY:", displayModal);
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
@@ -55,7 +56,14 @@ const RecipeCard = ({
         <h2>{recipe.category}</h2>
       </div>
       {handleDelete && (
-        <button onClick={() => handleDelete(dayIndex, index)}>Delete</button>
+        <button
+          onClick={(e) => {
+            handleDelete(dayIndex, index);
+            e.stopPropagation();
+          }}
+        >
+          Delete
+        </button>
       )}
       {!handleDelete && (
         <GoHeartFill

@@ -1,6 +1,7 @@
 import { Droppable, Draggable } from "@hello-pangea/dnd";
 import RecipeCard from "../../Recipes/RecipeCard";
 import { useState } from "react";
+import RecipeModal from "../../Recipes/RecipeModal";
 
 const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
   const [displayModal, setDisplayModal] = useState(false);
@@ -49,14 +50,20 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
     <Droppable droppableId={`${day.dayId}`} direction="vertical">
       {(provided) => (
         <div
-          className="h-[800px] w-[1000px] border border-black flex"
+          className="h-[450px] w-[500px] border border-black flex"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <div>
+          <div className="mt-5">
             <h2>{day.day}:</h2>
           </div>
-          <div className="flex flex-col">{recipeCards}</div>
+          <div className="flex flex-col mt-5">{recipeCards}</div>
+          {displayModal && (
+            <RecipeModal
+              setDisplayModal={setDisplayModal}
+              modalData={modalData}
+            />
+          )}
           {provided.placeholder}
         </div>
       )}

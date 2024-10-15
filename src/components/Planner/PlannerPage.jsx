@@ -176,10 +176,10 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex justify-between h-[90vh] border border-black">
+      <div className="flex justify-between h-[90vh]">
         <div>
           Weekly Planner
-          <div className="flex justify-between border border-yellow-400">
+          <div className="flex justify-between w-[98vw]">
             <WeeklyPlannerBox
               plannedRecipes={plannedRecipes}
               handleDelete={handleDelete}
