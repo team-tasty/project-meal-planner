@@ -1,5 +1,6 @@
 import { useState } from "react";
 import unitConvert from "../../../functions/unitConvert";
+import { useNavigate } from "react-router-dom";
 
 const AddRecipeForm = () => {
   // set state values for form inputs
@@ -12,20 +13,15 @@ const AddRecipeForm = () => {
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
   const [name, setName] = useState("");
-  const [ingredients, setIngredients] = useState([]);
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
   const [isAddingNewIngredient, setIsAddingNewIngredient] = useState(false);
 
-  const handleAddRecipe = () => {
-    // make backend call to add a user recipe to the db and save it to user
-  };
-  const handleCancelIngredient = () => {
-    // reset all values and toggle state
-  };
+  const navigate = useNavigate();
+
   const handleAddIngredient = () => {
     // run unit through converter function
     const strUnitArr = unit.match(/[a-z]+/gi);
     const convertedUnit = unitConvert(strUnitArr);
-    console.log(convertedUnit);
 
     // create ingredient object
     const ingredientObj = {
@@ -39,12 +35,12 @@ const AddRecipeForm = () => {
         ingredient: name,
       },
     };
-    console.log(ingredientObj);
+
     // push ingredient object to ingredients array
-    const newIngredients = [...ingredients];
+    const newIngredients = [...recipeIngredients];
     newIngredients.push(ingredientObj);
-    console.log(newIngredients);
-    setIngredients(newIngredients);
+
+    setRecipeIngredients(newIngredients);
 
     // reset unit, quanitity, name state values
     setUnit("");
@@ -54,26 +50,71 @@ const AddRecipeForm = () => {
     setIsAddingNewIngredient(false);
   };
 
+  // function to cancel adding an ingredient
+  const handleCancelIngredient = () => {
+    // reset all values
+    setUnit("");
+    setQuantity("");
+    setName("");
+    // set show to false
+    setIsAddingNewIngredient(false);
+  };
+
+  // function to delete ingredient once saved
+  const handleDeleteIngredient = (index) => {
+    // remove the chosen ingredient from the ingredients array
+    const newIngredients = [...recipeIngredients];
+    newIngredients.splice(index, 1);
+    setRecipeIngredients(newIngredients);
+  };
+
+  console.log(recipeIngredients);
+
+  const handleAddRecipe = () => {
+    // create body object
+    const newRecipe = {
+      title,
+      instruction,
+      image,
+      category,
+      area,
+      tag,
+      recipeIngredients,
+    };
+    // make backend call to add a user recipe to the db and save it to user
+    const res = axios.post("/api/addRecipe", newRecipe);
+
+    // if succesfful
+    if (res.data.success) {
+      navigate(-1);
+    } else {
+      return <p>{res.data.message}</p>;
+    }
+  };
+
   // display ingredients list
-  const ingredientList = ingredients.map((ingredient, i) => {
+  const ingredientList = recipeIngredients.map((ingredient, index) => {
     if (!ingredient.measurementQuantity.quantity) {
       return (
-        <li key={`${ingredient.ingredient.ingreident}${i}`}>
+        <li key={`${ingredient.ingredient.ingreident}${index}`}>
           {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+          <button onClick={(e) => handleDeleteIngredient(index)}>Trash</button>
         </li>
       );
     } else if (ingredient.measurementUnit.unit === "null") {
       return (
-        <li key={`${ingredient.ingredient.ingredient}${i}`}>
+        <li key={`${ingredient.ingredient.ingredient}${index}`}>
           {ingredient.measurementQuantity.quantity}{" "}
           {ingredient.ingredient.ingredient}
+          <button onClick={(e) => handleDeleteIngredient(index)}>Trash</button>
         </li>
       );
     } else {
       return (
-        <li key={`${ingredient.ingredient.ingredient}${i}`}>
+        <li key={`${ingredient.ingredient.ingredient}${index}`}>
           {ingredient.measurementQuantity.quantity}{" "}
           {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+          <button onClick={(e) => handleDeleteIngredient(index)}>Trash</button>
         </li>
       );
     }
@@ -131,21 +172,25 @@ const AddRecipeForm = () => {
           onChange={(e) => setInstruction(e.target.value)}
           className="border border-black p-2"
         />
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsAddingNewIngredient(!isAddingNewIngredient);
-          }}
-          type="button"
-        >
-          Add Ingredient
-        </button>
+        {ingredientList}
+        {!isAddingNewIngredient && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsAddingNewIngredient(!isAddingNewIngredient);
+            }}
+            type="button"
+          >
+            + Add Ingredient
+          </button>
+        )}
         {isAddingNewIngredient && (
           <div>
             <label htmlFor="quantity">Quantity</label>
             <input
               value={quantity}
               type="number"
+              min={0}
               placeholder="2"
               required
               onChange={(e) => setQuantity(e.target.value)}
@@ -168,18 +213,21 @@ const AddRecipeForm = () => {
               onChange={(e) => setName(e.target.value)}
             />
 
-            <button onClick={handleCancelIngredient}>Cancel</button>
+            <button onClick={handleCancelIngredient} type="button">
+              Cancel
+            </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleAddIngredient();
               }}
+              type="button"
             >
               Save Ingredient
             </button>
           </div>
         )}
-        {ingredientList}
+        <button type="submit">Submit Recipe</button>
       </form>
     </div>
   );
