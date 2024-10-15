@@ -13,12 +13,15 @@ import {
 const getUserWeeks = async (userId) => {
   const userWeeks = await User.findByPk(userId, {
     attributes: ["userId"],
+    separate: true,
     include: [
       {
         model: Week,
+        separate: true,
         include: [
           {
             model: WeekMeal,
+            separate: true,
             include: [
               Day,
               {
