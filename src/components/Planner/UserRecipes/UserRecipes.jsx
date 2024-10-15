@@ -3,6 +3,7 @@ import RecipeCard from "../../Recipes/RecipeCard.jsx";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import { Droppable } from "@hello-pangea/dnd";
+import AddUserRecipeButton from "../../Recipes/AddUserRecipeButton.jsx";
 
 const UserRecipes = ({ plannedRecipes }) => {
   // get userSavedRecipes from a loader function
@@ -127,6 +128,7 @@ const UserRecipes = ({ plannedRecipes }) => {
         >
           <h2>Saved Recipes:</h2>
           <SearchRecipes recipesData={userSavedRecipes} />
+          <AddUserRecipeButton />
           {provided.placeholder}
         </div>
       )}

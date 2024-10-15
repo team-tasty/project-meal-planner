@@ -4,6 +4,7 @@ import RecipeModal from "./RecipeModal";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import AddUserRecipeButton from "./AddUserRecipeButton";
 
 const RecipesPage = () => {
   // Mock data to set up card display
@@ -25,7 +26,7 @@ const RecipesPage = () => {
   });
 
   return (
-    <>
+    <div className="flex justify-between">
       {displayModal && (
         <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
       )}
@@ -34,7 +35,10 @@ const RecipesPage = () => {
         <SearchAPI setRecipesData={setRecipesData} />
         {recipeCards}
       </div>
-    </>
+      <div>
+        <AddUserRecipeButton />
+      </div>
+    </div>
   );
 };
 
