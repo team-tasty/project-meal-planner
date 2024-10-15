@@ -26,7 +26,18 @@ const RecipeCard = ({
 
     // if successful...
 
-    // change the fill color of the heart
+    // change the fill color of the heart/checkmark/star
+    setSaved(!saved);
+  };
+
+  // only if saved
+  const handleUnsave = () => {
+    // make call to backend to delete recipe from our db
+    // will need id or some identifier to send back
+
+    // if successful...
+
+    // change the fill color of save icon to white
     setSaved(!saved);
   };
 
@@ -36,17 +47,21 @@ const RecipeCard = ({
         setModalData(recipe);
         setDisplayModal(!displayModal);
       }}
-      className="h-60 w-96 border border-black"
+      className="h-32 w-72 border border-black flex items-center justify-around"
     >
-      <img src={`${recipe.image}`} className="h-32 w-36" />
-      <h1>{recipe.title}</h1>
-      <h2>{recipe.category}</h2>
-      <GoHeartFill
-        className="h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
-        onClick={handleSave}
-      />
+      <img src={`${recipe.image}`} className="h-20 w-24" />
+      <div>
+        <h1>{recipe.title}</h1>
+        <h2>{recipe.category}</h2>
+      </div>
       {handleDelete && (
         <button onClick={() => handleDelete(dayIndex, index)}>Delete</button>
+      )}
+      {!handleDelete && (
+        <GoHeartFill
+          className="h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
+          onClick={handleSave}
+        />
       )}
     </div>
   );

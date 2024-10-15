@@ -9,6 +9,7 @@ input {
 button {
   background-color: greenyellow;
   border: 1px, solid, purple;
+  height: 30px;
 }
 
 select {

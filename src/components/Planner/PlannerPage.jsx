@@ -154,7 +154,10 @@ const PlannerPage = () => {
 
     // Add the item to list 2 (plannedRecipes)
     const newPlannedRecipes = [...plannedRecipes];
-    newPlannedRecipes[+destination.droppableId - 1].push(draggedItem);
+
+    if (newPlannedRecipes[+destination.droppableId - 1].length < 3) {
+      newPlannedRecipes[+destination.droppableId - 1].push(draggedItem);
+    }
 
     // set request to update the db
 
