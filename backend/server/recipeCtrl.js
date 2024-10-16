@@ -387,7 +387,6 @@ export const recipeFns = {
 
     try {
       newRecipe = await Recipe.create({
-        externalRecipeId: recipeObj.recipeId,
         title: recipeObj.title,
         image: recipeObj.image,
         instruction: recipeObj.instruction,
