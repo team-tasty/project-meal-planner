@@ -13,19 +13,28 @@ const RecipeCard = ({
   externalIds,
   setExternalIds,
 }) => {
+  // set state values
+  const [saved, setSaved] = useState(false);
+  const [userRecipeId, setUserRecipeId] = useState(null);
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
   // do map of externalIds to get each userRecipe
+  let userExternalRecipesIds;
   let userRecipesIds;
   if (externalIds) {
+    userExternalRecipesIds = externalIds.map((userRecipe) => {
+      return userRecipe.recipe.externalRecipeId; // returns array with all the external ids
+    });
     userRecipesIds = externalIds.map((userRecipe) => {
-      return userRecipe.recipe.externalRecipeId;
+      return userRecipe.userRecipeId; // returns an array with all the userRecipe ids
     });
   }
 
-  // set state values
-  const [saved, setSaved] = useState(false);
+  // console.log("RECIPE:", recipe);
+  // console.log("externalIds: ", externalIds);
+  // console.log("userExternalRecipesIds: ", userExternalRecipesIds);
+
   // const [recipeData, setRecipeData] = useState([recipe]);
   // console.log(recipeData);
 
@@ -61,24 +70,45 @@ const RecipeCard = ({
     if (saved) {
       // make call to backend to delete recipe from our db
       // will need id or some identifier to send back
-      const res = await axios.delete(`/api/unsave-recipe/${recipe.recipeId}`);
-      console.log(res.data);
+      if (!externalIds) {
+        // = this component is on the Planner page
+        const res = await axios.delete(
+          `/api/unsave-recipe/${recipe.userRecipeId}`
+        );
+        console.log(res.data);
 
-      // if successful...
-      if (res.data.success) {
-        // change the fill color of save icon to white
-        // setSaved(false);
-        // update the externalIds Array
-        setExternalIds(res.data.externalIds);
+        if (res.data.success) {
+          // do what? update userRecipes?
+        }
+      } else {
+        // = this component is on the Recipes page
+        const res = await axios.delete(`/api/unsave-recipe/${SOMETHING}`);
+        console.log(res.data);
+
+        // if successful...
+        if (res.data.success) {
+          // change the fill color of save icon to white
+          // setSaved(false);
+          // update the externalIds Array
+          setExternalIds(res.data.externalIds);
+        }
       }
     }
   };
 
   useEffect(() => {
     if (externalIds) {
-      if (userRecipesIds.includes(+recipe.recipeId)) {
-        setSaved(true);
-      }
+      // if (userExternalRecipesIds.includes(+recipe.recipeId)) {
+      //   setSaved(true);
+      // }
+      const externalRecipe = externalIds.find((externalRecipe) => {
+        // console.log("RECIPE.RECIPEID:", recipe.recipeId)
+        return externalRecipe.recipe.recipeExternalId === recipe.recipeId;
+      });
+      console.log("EXTERNALRECIPE:", externalRecipe);
+      if (externalRecipe) setSaved(true);
+    } else {
+      setSaved(true);
     }
   }, [externalIds]);
 
