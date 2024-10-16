@@ -23,7 +23,6 @@ const groceryList = (objRecipes) => {
         }
   
     }
-    console.log("Initial pull", ingredientArr)
     // Old connection
     // for (let i=0; i < arrRecipes.length; i++) {
     //     for (let j=0; j < arrRecipes[i].recipeIngredients.length; j++) {
@@ -54,7 +53,6 @@ const groceryList = (objRecipes) => {
 
         return 0
     })
-    console.log("after sort", ingredientArr)
 
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
     let qtySum = 0
@@ -118,9 +116,6 @@ const groceryList = (objRecipes) => {
     }
     return unitCombine(finalArr)
 }
-
-console.log(groceryList(userWeeksExampleRes2))
-
 
 export default groceryList
 

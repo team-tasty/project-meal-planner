@@ -68,6 +68,11 @@ const convertIngredient = (str) => {
     finalStr = (updatedStr.split("?"))[0]
     // This checks for ranges given by a user, and converts them to the minimum. Ex: 2-3 tsp should return 2 tsp
     finalStr = finalStr.replace(/-[ \d]+/g, "")
+    // This removes multiplicative entries for ingredient quantities. Ex: 1 x 400 ml should return 400 ml; 2 x 400 ml should return 800 ml
+    finalStr = finalStr.replace(/\d+ ?[x\*] ?\d+/g, (multEntry) => {
+        const multArr = multEntry.match(/\d+/g)
+        return `${multArr[0] * multArr[1]}`
+    })
     // This adds spaces between quantities and units. Ex: "175g" should return "175 g"
     let spaceStr = ""
     for (let i = 0; i < finalStr.length; i++) {
