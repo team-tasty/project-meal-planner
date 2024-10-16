@@ -86,11 +86,13 @@ app.delete("/api/delete-week-meal/:weekMealId", deleteWeekMeal);
 app.delete("/api/reset-week/:weekId", resetWeek);
 
 // Grocery List Endpoints
-// TODO: import grocery list functions
+import { gListFns } from "./gListCtrl.js";
+const { groceryList } = gListFns;
 
-// generate grocery list
-app.get("/api/grocery-list-data");
-// save grocery list to db (stretch goal)
+// generate grocery list for specific week
+app.get("/api/grocery-list/:weekId", groceryList); // needs weekId in req.params
+// generate grocery list for all weeks
+app.get("/api/grocery-list", groceryList);
 // app.get('/api/save-grocery-list'); // stretch goal
 
 ViteExpress.listen(app, port, () => {
