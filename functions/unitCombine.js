@@ -10,7 +10,7 @@ const unitCombine = (arrIng) => {
         if (
             i + 1 < arrIng.length 
             &&
-            (arrIng[i].ingredient === arrIng[i+1].ingredient || `${arrIng[i].ingredient}s` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}s`) 
+            (arrIng[i].ingredient === arrIng[i+1].ingredient || `${arrIng[i].ingredient}s` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}s` || `${arrIng[i].ingredient}es` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}es`) 
             &&
             ((conversionVolSet.has(arrIng[i].unit) && conversionVolSet.has(arrIng[i+1].unit)) || (conversionWeightSet.has(arrIng[i].unit) && conversionWeightSet.has(arrIng[i+1].unit)))
         ) {

@@ -6,166 +6,85 @@ const GroceryListItem = () => {
 
   const testData = groceryList(userWeeksExampleRes2)
 
-  const cannedList = testData.map((arrIng, index) => {
-    if (arrIng.category === "canned") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`canned${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`canned${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-    return
-  }).filter(Boolean)
+  const cannedList = testData.filter((arrIng) => arrIng.category === "canned")
+  .map((arrIng, index) => {
+    return (
+      <li key={`canned${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const frozenList = testData.map((arrIng, index) => {
-    if (arrIng.category === "frozen") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`frozen${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`frozen${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const frozenList = testData.filter((arrIng) => arrIng.category === "frozen")
+  .map((arrIng, index) => {
+    return (
+      <li key={`frozen${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const processedList = testData.map((arrIng, index) => {
-    if (arrIng.category === "processed") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`processed${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`processed${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const processedList = testData.filter((arrIng) => arrIng.category === "processed")
+  .map((arrIng, index) => {
+    return (
+      <li key={`processed${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const bakingList = testData.map((arrIng, index) => {
-    if (arrIng.category === "baking") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`baking${index}`}>
-                <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`baking${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const bakingList = testData.filter((arrIng) => arrIng.category === "baking")
+  .map((arrIng, index) => {
+    return (
+      <li key={`baking${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const produceList = testData.map((arrIng, index) => {
-    if (arrIng.category === "produce") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`produce${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`produce${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const produceList = testData.filter((arrIng) => arrIng.category === "produce")
+  .map((arrIng, index) => {
+    return (
+      <li key={`produce${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const dairyList = testData.map((arrIng, index) => {
-    if (arrIng.category === "dairy") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`dairy${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`dairy${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const dairyList = testData.filter((arrIng) => arrIng.category === "dairy")
+  .map((arrIng, index) => {
+    return (
+      <li key={`dairy${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const proteinList = testData.map((arrIng, index) => {
-    if (arrIng.category === "protein") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`protein${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`protein${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const proteinList = testData.filter((arrIng) => arrIng.category === "protein")
+  .map((arrIng, index) => {
+    return (
+      <li key={`protein${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
-  const otherList = testData.map((arrIng, index) => {
-    if (arrIng.category === "other") {
-        if (arrIng.unit === "null") {
-          return (
-            <li key={`other${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.ingredient}
-            </li>
-          )
-        } else {
-          return (
-            <li key={`other${index}`}>
-              <input type="checkbox" className="ms-2 me-3" />
-              {arrIng.quantity} {arrIng.unit} {arrIng.ingredient}
-            </li>
-          )
-        }
-    }
-  }).filter(Boolean)
+  const otherList = testData.filter((arrIng) => arrIng.category === "other")
+  .map((arrIng, index) => {
+    return (
+      <li key={`other${index}`}>
+        <input type="checkbox" className="ms-2 me-3" />
+        {arrIng.quantity > 0 ? `${arrIng.quantity} ` : ""}{arrIng.unit !== "null" ? arrIng.unit : ""} {arrIng.ingredient}
+      </li>
+    )
+  })
 
   return (
   <>

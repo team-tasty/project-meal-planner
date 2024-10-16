@@ -556,7 +556,7 @@ const userWeeksExampleRes2 =
                               },
                               "measurementUnit": {
                                   "measurementUnitId": 30,
-                                  "unit": "tsp"
+                                  "unit": "Tbsp"
                               }
                           },
                           {
@@ -1146,11 +1146,11 @@ const userWeeksExampleRes2 =
                                   "ingredient": "borlotti beans"
                               },
                               "measurementQuantity": {
-                                  "quantity": 402
+                                  "quantity": 800
                               },
                               "measurementUnit": {
                                   "measurementUnitId": 71,
-                                  "unit": "x g tins"
+                                  "unit": "g tins"
                               }
                           },
                           {
@@ -1200,11 +1200,11 @@ const userWeeksExampleRes2 =
                                   "ingredient": "plum tomatoes"
                               },
                               "measurementQuantity": {
-                                  "quantity": 402
+                                  "quantity": 800
                               },
                               "measurementUnit": {
                                   "measurementUnitId": 68,
-                                  "unit": "x g"
+                                  "unit": "g"
                               }
                           },
                           {
