@@ -1,3 +1,4 @@
+const userWeeksExampleRes2 =
 {
   "success": true,
   "userWeeks": [
@@ -2368,3 +2369,5 @@
   ],
   "message": "Successfully got user weeks"
 }
+
+export default userWeeksExampleRes2
