@@ -34,6 +34,7 @@ const {
   unsaveRecipe,
   userRecipes,
   externalRecipeIds,
+  createRecipe,
 } = recipeFns;
 
 // TheMealDB api request for recipe search
@@ -48,6 +49,8 @@ app.delete("/api/unsave-recipe/:userRecipeId", unsaveRecipe);
 // app.post('/app/recipe-detail'); // needs recipeId in body object
 // get externalRecipeId's of userRecipes to show if search recipe result is already saved or not
 app.get("/api/user-recipe-external-ids", externalRecipeIds);
+// create new personal recipe
+app.post("/api/create-recipe", createRecipe); // needs recipe object in body object
 
 // Planner Endpoints
 import { plannerFns } from "./plannerCtrl.js";
@@ -56,7 +59,7 @@ const {
   addUserWeek,
   deleteUserWeek,
   days,
-  createWeekMeal,
+  addWeekMeal,
   editWeekMeal,
   deleteWeekMeal,
   resetWeek,
@@ -74,11 +77,11 @@ app.delete("/api/delete-week/:weekId", deleteUserWeek);
 // get day names
 app.get("/api/days", days);
 // user adds recipe to week
-app.post("/api/create-week-meal/", createWeekMeal); // needs weekId, dayId, and recipeId in body object
+app.post("/api/add-week-meal/", addWeekMeal); // needs weekId, dayId, and recipeId in body object
 // user moves recipe from one day to another day or to another week?
 app.put("/api/edit-week-meal/", editWeekMeal); // needs weekId and dayId in body object
 // user removes recipe from planner
-app.delete("/api/remove-week-meal/:weekMealId", deleteWeekMeal);
+app.delete("/api/delete-week-meal/:weekMealId", deleteWeekMeal);
 // reset week
 app.delete("/api/reset-week/:weekId", resetWeek);
 
