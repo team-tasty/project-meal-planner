@@ -167,7 +167,7 @@ export const plannerFns = {
     });
   },
 
-  createWeekMeal: async (req, res) => {
+  addWeekMeal: async (req, res) => {
     const userId = req.session.userId;
 
     if (!userId) {
