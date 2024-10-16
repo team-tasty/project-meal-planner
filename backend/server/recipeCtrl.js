@@ -304,9 +304,11 @@ export const recipeFns = {
 
     const savedRecipes = await User.findByPk(userId, {
       attributes: ["userId"],
+      separate: true,
       include: [
         {
           model: UserRecipe,
+          separate: true,
           include: [
             {
               model: Recipe,
