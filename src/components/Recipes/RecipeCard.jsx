@@ -17,9 +17,12 @@ const RecipeCard = ({
   // to display in each card: image, title, category
 
   // do map of externalIds to get each userRecipe
-  const userRecipesIds = externalIds.map((userRecipe) => {
-    return userRecipe.recipe.externalRecipeId;
-  });
+  let userRecipesIds;
+  if (externalIds) {
+    userRecipesIds = externalIds.map((userRecipe) => {
+      return userRecipe.recipe.externalRecipeId;
+    });
+  }
 
   // set state values
   const [saved, setSaved] = useState(false);
@@ -59,6 +62,7 @@ const RecipeCard = ({
       // make call to backend to delete recipe from our db
       // will need id or some identifier to send back
       const res = await axios.delete(`/api/unsave-recipe/${recipe.recipeId}`);
+      console.log(res.data);
 
       // if successful...
       if (res.data.success) {
@@ -71,8 +75,10 @@ const RecipeCard = ({
   };
 
   useEffect(() => {
-    if (userRecipesIds.includes(+recipe.recipeId)) {
-      setSaved(true);
+    if (externalIds) {
+      if (userRecipesIds.includes(+recipe.recipeId)) {
+        setSaved(true);
+      }
     }
   }, [externalIds]);
 

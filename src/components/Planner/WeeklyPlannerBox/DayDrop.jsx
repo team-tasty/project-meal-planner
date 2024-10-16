@@ -30,7 +30,7 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
         key={dayRecipes[index].recipeId}
         index={index}
         dayIndex={dayIndex}
-        recipe={dayRecipes[index]}
+        recipe={dayRecipes[index].recipe}
         setModalData={setModalData}
         displayModal={displayModal}
         setDisplayModal={setDisplayModal}
