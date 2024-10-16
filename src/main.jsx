@@ -90,7 +90,7 @@ const Router = () => {
 
             return {
               recipesData: res.data.recipesData,
-              externalIds: res2.data.externalIdArr,
+              externalIds: res2.data.externalIds,
             };
           },
         },
