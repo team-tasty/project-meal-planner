@@ -34,6 +34,7 @@ const {
   unsaveRecipe,
   userRecipes,
   externalRecipeIds,
+  createRecipe,
 } = recipeFns;
 
 // TheMealDB api request for recipe search
@@ -48,6 +49,8 @@ app.delete("/api/unsave-recipe/:userRecipeId", unsaveRecipe);
 // app.post('/app/recipe-detail'); // needs recipeId in body object
 // get externalRecipeId's of userRecipes to show if search recipe result is already saved or not
 app.get("/api/user-recipe-external-ids", externalRecipeIds);
+// create new personal recipe
+app.post("/api/create-recipe", createRecipe); // needs recipe object in body object
 
 // Planner Endpoints
 import { plannerFns } from "./plannerCtrl.js";
