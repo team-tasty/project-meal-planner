@@ -225,22 +225,24 @@ export const recipeFns = {
       });
     }
 
-    const userRecipeArr = await UserRecipe.findAll({
-      where: {
-        userId,
-      },
-      attributes: ["userRecipeId"],
-      include: {
-        model: Recipe,
-        attributes: ["externalRecipeId"],
-      },
-    });
+    try {
+      const resObj = await getExternalIds(userId);
 
-    return res.send({
-      message: "Successfully created userRecipe in db",
-      success: true,
-      userRecipes: userRecipeArr,
-    });
+      if (resObj.success) {
+        resObj.message = `Successfully created userRecipe in db`;
+      }
+
+      return res.send(resObj);
+    } catch (error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: `Error when trying to get external ids`,
+        success: false,
+      });
+    }
   },
 
   unsaveRecipe: async (req, res) => {
