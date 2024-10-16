@@ -1,9 +1,10 @@
 import groceryList from "../../../functions/groceryList.js";
 import groceryListPracticeData from "../../../functions/groceryListPracticeData.js";
+import userWeeksExampleRes2 from "../../../functions/userWeeksExampleRes2.js";
 
 const GroceryListItem = () => {
 
-  const testData = groceryList(groceryListPracticeData)
+  const testData = groceryList(userWeeksExampleRes2)
 
   const cannedList = testData.map((arrIng, index) => {
     if (arrIng.category === "canned") {
