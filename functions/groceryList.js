@@ -66,7 +66,7 @@ const groceryList = (objRecipes) => {
             ( i === 0 || 
             (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient)
             )
-        )g
+        )
         && 
         // Check if the next ingredient matches
         (
