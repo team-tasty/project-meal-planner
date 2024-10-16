@@ -44,7 +44,7 @@ app.get("/api/user-recipes", userRecipes);
 // user saves a recipe
 app.post("/api/save-recipe", saveRecipe); // needs recipe object in body object
 // user un-saves a recipe
-app.delete("/api/unsave-recipe/:userRecipeId", unsaveRecipe);
+app.delete("/api/unsave-recipe/:userRecipeId", unsaveRecipe); // needs userRecipeId in req.params
 // display recipe modal (not needed because data is already at front end)
 // app.post('/app/recipe-detail'); // needs recipeId in body object
 // get externalRecipeId's of userRecipes to show if search recipe result is already saved or not
