@@ -10,6 +10,7 @@ const RecipeCard = ({
   index,
   handleDelete,
   dayIndex,
+  userRecipesIds,
 }) => {
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
@@ -19,11 +20,25 @@ const RecipeCard = ({
   // const [recipeData, setRecipeData] = useState([recipe]);
   // console.log(recipeData);
 
-  const handleSave = () => {
+  const userRecipesIdsSet = new Set([userRecipesIds]);
+  console.log(userRecipesIdsSet.has(recipe.recipeId));
+  console.log(userRecipesIdsSet.has(`${recipe.recipeId}`));
+
+  console.log(userRecipesIds);
+
+  console.log(recipe.recipeId);
+  console.log(userRecipesIds.includes(recipe.recipeId));
+  console.log(userRecipesIds.includes(`${recipe.recipeId}`));
+
+  if (userRecipesIds.includes(`${recipe.recipeId}`)) {
+    setSaved(true);
+  }
+
+  const handleSave = async () => {
     // make call to backend to save the recipe to our database
     // create body object
     const recipeObj = {
-      recipeId: something,
+      recipeId: recipe.recipeId,
       title: recipe.title,
       instruction: recipe.instruction,
       image: recipe.image,
@@ -33,15 +48,15 @@ const RecipeCard = ({
       recipeIngredients: recipe.recipeIngredients,
     };
 
-    console.log(recipeObj);
-
     // make axios call
-    const res = axios.post("/api/save-recipe", recipeObj);
+    const res = await axios.post("/api/save-recipe", { recipeObj });
+    console.log(res.data);
 
     // if successful...
-
-    // change the fill color of the heart/checkmark/star
-    setSaved(!saved);
+    if (res.data.success) {
+      // change the fill color of the heart/checkmark/star
+      setSaved(true);
+    }
   };
 
   // only if saved
@@ -80,8 +95,15 @@ const RecipeCard = ({
       )}
       {!handleDelete && (
         <GoHeartFill
-          className="h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
-          onClick={handleSave}
+          className={
+            saved
+              ? "h-10 w-10 fill-red-500 stroke-red-500 stroke-[1px]"
+              : "h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
+          }
+          onClick={(e) => {
+            handleSave();
+            e.stopPropagation();
+          }}
         />
       )}
     </div>

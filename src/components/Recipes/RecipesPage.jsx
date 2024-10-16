@@ -9,6 +9,16 @@ import AddUserRecipeButton from "./AddUserRecipeButton";
 const RecipesPage = () => {
   // Mock data to set up card display
   const [recipesData, setRecipesData] = useState(useLoaderData().recipesData);
+  const { externalIds } = useLoaderData();
+  console.log(recipesData);
+  console.log(externalIds);
+
+  // do map of externalIds to get each userRecipe
+  const userRecipesIds = externalIds.map((userRecipe) => {
+    return userRecipe.recipe.externalRecipeId;
+  });
+
+  console.log(userRecipesIds);
 
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -21,6 +31,7 @@ const RecipesPage = () => {
         setModalData={setModalData}
         setDisplayModal={setDisplayModal}
         displayModal={displayModal}
+        userRecipesIds={userRecipesIds}
       />
     );
   });
