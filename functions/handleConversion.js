@@ -69,6 +69,7 @@ const handleConversion = (qty1, unit1, qty2, unit2) => {
         convertUnit = unit2
     } else {
         console.error("Invalid units received in handleConversion")
+        console.error(qty1, unit1, qty2, unit2)
         return
     }
     return [+convertQty.toFixed(2), convertUnit]

@@ -1,10 +1,17 @@
 import groceryListPracticeData from "./groceryListPracticeData.js"
 import userWeeksExampleRes2 from "./userWeeksExampleRes2.js" 
 import unitCombine from "./unitCombine.js"
+import util from 'util'
 
 const groceryList = (objRecipes) => {
     let ingredientArr = []
     let finalArr = []
+
+    const unitOrder = ["C", "pt", "qt", "gal", "oz", "tsp", "Tbsp", "ml", "L", "lb", "g"]
+    const getUnitOrder = (unit) => {
+        const index = unitOrder.indexOf(unit)
+        return index === -1 ? 12 : index
+    }
 
     if (!Array.isArray(objRecipes.userWeeks)) {
         objRecipes = []
@@ -35,24 +42,28 @@ const groceryList = (objRecipes) => {
     // }
     ingredientArr.sort((a, b) => {
         // Removes the 's' at the end of a pluralized word to normalize singular/plural forms
-        const singularA = a.ingredient.replace(/s$/, '')
-        const singularB = b.ingredient.replace(/s$/, '')
+        const singularA = a.ingredient.replace(/(es|s)$/, '')
+        const singularB = b.ingredient.replace(/(es|s)$/, '')
 
         // Compare the singular forms alphabetically
         if (singularA < singularB) return -1
         if (singularA > singularB) return 1
 
-        // If the singular forms are the same, prioritize singular over plural
-        // if (a.ingredient.length < b.ingredient.length) return -1
-        // if (a.ingredient.length > b.ingredient.length) return 1
-
         // If both are the same length, check the unit and organize alphabetically
+        // We're also sorting first by standard units, and then other units
+        const unitAOrder = getUnitOrder(a.unit)
+        const unitBOrder = getUnitOrder(b.unit)
 
-        if (a.unit < b.unit) return -1
-        if (a.unit > b.unit) return 1
+        if (unitAOrder < unitBOrder) return -1
+        if (unitAOrder > unitBOrder) return 1
+
+        // If the singular forms are the same, prioritize singular over plural
+        if (a.ingredient.length < b.ingredient.length) return -1
+        if (a.ingredient.length > b.ingredient.length) return 1
 
         return 0
     })
+    // console.log(util.inspect(ingredientArr, {maxArrayLength: null}))
 
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
     let qtySum = 0
@@ -60,16 +71,20 @@ const groceryList = (objRecipes) => {
         if (
         // Check if it's the first entry, or a unique entry. Pass by the last entry
         (
-            i !== ingredientArr.length &&
-            ( i === 0 || 
-            (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient)
+            i < ingredientArr.length 
+            &&
+            ( 
+            i === 0 || 
+            ingredientArr[i].unit !== ingredientArr[(i-1)].unit ||
+            (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient)
             )
         )
         && 
         // Check if the next ingredient matches
         (
             i+1 < ingredientArr.length && 
-            (ingredientArr[i].ingredient === ingredientArr[(i+1)].ingredient || `${ingredientArr[i].ingredient}s` === ingredientArr[(i+1)].ingredient) || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}s`)
+            (ingredientArr[i].ingredient === ingredientArr[(i+1)].ingredient || `${ingredientArr[i].ingredient}s` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}s` || `${ingredientArr[i].ingredient}es` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}es`)
+        )
         &&
         // Check if the units are the same
         (ingredientArr[i].unit === ingredientArr[(i+1)].unit)
@@ -77,9 +92,14 @@ const groceryList = (objRecipes) => {
         {
             for (let j = i; j < ingredientArr.length; j++) {
                 // sums the quantities of all matching ingredients **********
-                if (j === i || ingredientArr[j].ingredient === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}s` || `${ingredientArr[j].ingredient}s` === ingredientArr[(j-1)].ingredient) {
+                if (
+                    (j === i || ingredientArr[j].ingredient === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}s` || `${ingredientArr[j].ingredient}s` === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient)
+                    &&
+                    (j === i || ingredientArr[j].unit === ingredientArr[(j-1)].unit)
+                ) {
                     qtySum += ingredientArr[j].quantity
                 } else {
+            
                     break
                 }
             }
@@ -110,7 +130,8 @@ const groceryList = (objRecipes) => {
             }
 
         // If we don't match the above, then just place the entry into the array
-        } else if (i === 0 || ingredientArr[i].unit !== ingredientArr[i-1].unit) {
+        } else if (i === 0 || ingredientArr[i].unit !== ingredientArr[i-1].unit || (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient)
+        ) {
                 finalArr.push({...ingredientArr[i]})
         }
     }
