@@ -1,6 +1,7 @@
 import { useState } from "react";
 import unitConvert from "../../../functions/unitConvert";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AddRecipeForm = () => {
   // set state values for form inputs
@@ -70,9 +71,10 @@ const AddRecipeForm = () => {
 
   console.log(recipeIngredients);
 
-  const handleAddRecipe = () => {
+  const handleAddRecipe = async (e) => {
+    e.preventDefault();
     // create body object
-    const newRecipe = {
+    const recipeObj = {
       title,
       instruction,
       image,
@@ -82,7 +84,9 @@ const AddRecipeForm = () => {
       recipeIngredients,
     };
     // make backend call to add a user recipe to the db and save it to user
-    const res = axios.post("/api/addRecipe", newRecipe);
+    const res = await axios.post("/api/create-recipe", { recipeObj });
+
+    console.log(res.data);
 
     // if succesfful
     if (res.data.success) {
@@ -134,9 +138,8 @@ const AddRecipeForm = () => {
         <label htmlFor="image">Image URL</label>
         <input
           value={image}
-          type="text"
+          type="url"
           placeholder="https://www.glorioustreats.com.jpg"
-          required
           onChange={(e) => setImage(e.target.value)}
         />
         <label htmlFor="area">Area</label>
