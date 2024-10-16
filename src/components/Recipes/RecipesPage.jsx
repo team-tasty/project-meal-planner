@@ -9,6 +9,9 @@ import AddUserRecipeButton from "./AddUserRecipeButton";
 const RecipesPage = () => {
   // Mock data to set up card display
   const [recipesData, setRecipesData] = useState(useLoaderData().recipesData);
+  const [externalIds, setExternalIds] = useState(useLoaderData().externalIds);
+  console.log(recipesData);
+  console.log(externalIds);
 
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -21,6 +24,8 @@ const RecipesPage = () => {
         setModalData={setModalData}
         setDisplayModal={setDisplayModal}
         displayModal={displayModal}
+        externalIds={externalIds}
+        setExternalIds={setExternalIds}
       />
     );
   });

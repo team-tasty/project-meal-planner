@@ -86,8 +86,12 @@ const Router = () => {
               searchType: "s",
             };
             const res = await axios.post("/api/recipe-search", searchInfo);
+            const res2 = await axios.get("/api/user-recipe-external-ids");
 
-            return { recipesData: res.data.recipesData };
+            return {
+              recipesData: res.data.recipesData,
+              externalIds: res2.data.externalIds,
+            };
           },
         },
         {
