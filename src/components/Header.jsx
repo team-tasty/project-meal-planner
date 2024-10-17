@@ -7,7 +7,10 @@ const Header = () => {
   console.log(userId);
 
   return (
-    <div className="h-[10vh] border border-black flex justify-around items-center">
+    <div className="h-[10vh] border-b-[1px] border-black flex justify-around items-center">
+       <img src="../../public/pantryPlannerLogo-removebg-preview.png" alt="Pantry Plan Logo" 
+          className="h-[14vh]"
+        />
       <NavLink 
         to="/app/home"
         className={({ isActive }) =>
