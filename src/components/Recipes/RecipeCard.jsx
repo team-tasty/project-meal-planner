@@ -135,7 +135,7 @@ const RecipeCard = ({
     }
   }, [externalIds, recipesData]);
 
-  return (
+  return externalIds ? (
     <div
       onClick={() => {
         setModalData(recipe);
@@ -147,6 +147,43 @@ const RecipeCard = ({
       <div>
         <h1>{recipe.title}</h1>
         <h2>{recipe.category}</h2>
+      </div>
+      {handleDelete && (
+        <button
+          onClick={(e) => {
+            handleDelete(dayIndex, index);
+            e.stopPropagation();
+          }}
+        >
+          Delete
+        </button>
+      )}
+      {!handleDelete && (
+        <GoHeartFill
+          className={
+            saved
+              ? "h-10 w-10 fill-red-500 stroke-red-500 stroke-[1px]"
+              : "h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
+          }
+          onClick={(e) => {
+            handleClick();
+            e.stopPropagation();
+          }}
+        />
+      )}
+    </div>
+  ) : (
+    <div
+      onClick={() => {
+        setModalData(recipe.recipe);
+        setDisplayModal(!displayModal);
+      }}
+      className="h-32 w-72 border border-black flex items-center justify-around"
+    >
+      <img src={`${recipe.recipe.image}`} className="h-20 w-24" />
+      <div>
+        <h1>{recipe.recipe.title}</h1>
+        <h2>{recipe.recipe.category}</h2>
       </div>
       {handleDelete && (
         <button
