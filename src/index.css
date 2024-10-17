@@ -52,22 +52,7 @@
   button.focus {
     outline: none;
   }
-
-  /* Lauryn's entered CSS styles */
-  /* input {
-    border: 1px, solid, black;
-  }
   
-  button {
-    background-color: greenyellow;
-    border: 1px, solid, purple;
-    height: 30px;
-    width: fit-content;
-  }
-  
-  select {
-    border: 1px, solid, black;
-  } */
 }
 
 @layer utilities {
