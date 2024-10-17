@@ -82,7 +82,12 @@ const RecipeCard = ({
         }
       } else {
         // = this component is on the Recipes page
-        const res = await axios.delete(`/api/unsave-recipe/${SOMETHING}`);
+        const userRecipeIdToDelete = externalIds.filter(
+          (ids) => ids.recipe.externalRecipeId === +recipe.recipeId
+        )[0].userRecipeId;
+        const res = await axios.delete(
+          `/api/unsave-recipe/${userRecipeIdToDelete}`
+        );
         console.log(res.data);
 
         // if successful...
@@ -98,15 +103,18 @@ const RecipeCard = ({
 
   useEffect(() => {
     if (externalIds) {
-      // if (userExternalRecipesIds.includes(+recipe.recipeId)) {
-      //   setSaved(true);
-      // }
-      const externalRecipe = externalIds.find((externalRecipe) => {
-        // console.log("RECIPE.RECIPEID:", recipe.recipeId)
-        return externalRecipe.recipe.recipeExternalId === recipe.recipeId;
-      });
-      console.log("EXTERNALRECIPE:", externalRecipe);
-      if (externalRecipe) setSaved(true);
+      if (userExternalRecipesIds.includes(+recipe.recipeId)) {
+        setSaved(true);
+      } else {
+        setSaved(false);
+      }
+      // WHAT SEAN WAS WORKING ON
+      //   const externalRecipe = externalIds.find((externalRecipe) => {
+      //     // console.log("RECIPE.RECIPEID:", recipe.recipeId)
+      //     return externalRecipe.recipe.recipeExternalId === recipe.recipeId;
+      //   });
+      //   console.log("EXTERNALRECIPE:", externalRecipe);
+      //   if (externalRecipe) setSaved(true);
     } else {
       setSaved(true);
     }
