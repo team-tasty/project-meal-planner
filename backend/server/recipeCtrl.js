@@ -362,24 +362,13 @@ export const recipeFns = {
       });
     }
 
-    try {
-      const resObj = await getExternalIds(userId);
+    const resObj = await getExternalIds(userId);
 
-      if (resObj.success) {
-        resObj.message = `Successfully got external recipe Ids from db`;
-      }
-
-      return res.send(resObj);
-    } catch (error) {
-      console.log();
-      console.error(error);
-      console.log();
-
-      return res.send({
-        message: `Error when trying to get external ids`,
-        success: false,
-      });
+    if (resObj.success) {
+      resObj.message = `Successfully got external recipe Ids from db`;
     }
+
+    return res.send(resObj);
   },
 
   createRecipe: async (req, res) => {
