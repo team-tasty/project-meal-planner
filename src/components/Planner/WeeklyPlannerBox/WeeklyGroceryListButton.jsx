@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 const WeeklyGroceryListButton = () => {
   const navigate = useNavigate();
 
-  const handleGeneratelist = () => {
+  const handleGeneratelist = async (weekId) => {
     // make backend call to single grocery list endpoint
+    const res = await axios.get("/api/grocery-list/:weekId");
 
     navigate("/app/groceryList");
   };

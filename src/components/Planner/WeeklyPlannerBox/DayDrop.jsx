@@ -8,8 +8,8 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
   const [modalData, setModalData] = useState([]);
   let placeholders = [null, null, null];
 
-  // console.log(day);
-  // console.log("DAY RECIPES:", dayRecipes);
+  console.log(day);
+  console.log("DAY RECIPES:", dayRecipes);
 
   // map over dayRecipes and render the recipeCards for each recipe
   const recipeCards = placeholders.map((placeholder, index) => {
@@ -18,7 +18,7 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
         key={dayRecipes[index].recipeId}
         index={index}
         dayIndex={dayIndex}
-        recipe={dayRecipes[index].recipe}
+        recipe={dayRecipes[index]}
         setModalData={setModalData}
         displayModal={displayModal}
         setDisplayModal={setDisplayModal}
