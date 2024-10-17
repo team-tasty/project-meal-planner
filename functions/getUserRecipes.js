@@ -32,7 +32,7 @@ const getUserRecipes = async (userId) => {
       ],
     });
 
-    return { success: true, userRecipes };
+    return { success: true, userRecipes: userRecipes.userRecipes };
   } catch (error) {
     console.error(error);
 
