@@ -8,8 +8,8 @@ const Header = () => {
 
   return (
     <div className="h-[10vh] border-b-[1px] border-black flex justify-around items-center">
-       <img src="../../public/pantryPlannerLogo-removebg-preview.png" alt="Pantry Plan Logo" 
-          className="h-[14vh]"
+       <img src="../../public/PPLogo-no-bg.png" alt="Pantry Plan Logo" 
+          className="h-[10vh]"
         />
       <NavLink 
         to="/app/home"

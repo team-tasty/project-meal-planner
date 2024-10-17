@@ -43,34 +43,51 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
 
   return (
     <>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username</label>
-        <input
-          value={username}
-          type="text"
-          required
-          placeholder="user1"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          value={password}
-          type="password"
-          required
-          placeholder="********"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      <h3>Not a member?</h3>
-      <button
-        onClick={() => {
-          setShowRegister(true);
-          setShowLogin(false);
-        }}
-      >
-        Join us
-      </button>
+      <div className="h-[90vh] flex justify-center">
+        <div className="flex flex-col w-[400px] justify-center place-items-center">
+          <img src="../../public/PPLogo-no-bg.png" alt="Pantry Plan Logo" 
+            className="w-[68%]"
+          />
+          <form 
+            className="flex flex-col"
+            onSubmit={handleLogin}>
+            <label 
+              className="font-montserratMedium mb-1"
+              htmlFor="username">Username</label>
+            <input
+              value={username}
+              type="text"
+              required
+              placeholder="user1"
+              className="mb-2"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label 
+              className="font-montserratMedium mb-1"
+              htmlFor="password">Password</label>
+            <input
+              value={password}
+              type="password"
+              required
+              placeholder="********"
+              className="mb-4"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span className="self-center mb-2">
+              <button type="submit">Login</button>
+            </span>
+          </form>
+          <h2 className="mb-2">Not a member?</h2>
+          <button
+            onClick={() => {
+              setShowRegister(true);
+              setShowLogin(false);
+            }}
+          >
+            Join us
+          </button>
+        </div>
+      </div>
     </>
   );
 };
