@@ -8,6 +8,7 @@ const PlannerPage = () => {
   // get userRecipes from a loader function?
   const [userRecipes, setUserRecipes] = useState(useLoaderData().userRecipes);
   const [userWeeks, setUserWeeks] = useState(useLoaderData().userWeeks);
+  console.log(userWeeks);
   // const initialUserRecipes = [
   //   {
   //     recipeId: 1,
@@ -163,7 +164,7 @@ const PlannerPage = () => {
     setPlannedRecipes(newPlannedRecipes);
   };
 
-  // handle a delettion from list 2 (plannedRecipes) NEED HELP HERE
+  // handle a delettion from list 2 (plannedRecipes)
   const handleDelete = (dayIndex, recipeIndex) => {
     const newPlannedRecipes = [...plannedRecipes];
     newPlannedRecipes[dayIndex].splice(recipeIndex, 1);
