@@ -3,7 +3,7 @@ import RecipeCard from "../../Recipes/RecipeCard";
 import { Draggable } from "@hello-pangea/dnd";
 import RecipeModal from "../../Recipes/RecipeModal";
 
-const SearchRecipes = ({ recipesData }) => {
+const SearchRecipes = ({ recipesData, setRecipesData }) => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState(recipesData);
   const [displayModal, setDisplayModal] = useState(false);
@@ -15,7 +15,7 @@ const SearchRecipes = ({ recipesData }) => {
     setSearchInput(term);
 
     const filtered = recipesData.filter((recipe) => {
-      return recipe.title.toLowerCase().includes(term.toLowerCase());
+      return recipe.recipe.title.toLowerCase().includes(term.toLowerCase());
     });
 
     setFilteredData(filtered);
@@ -42,6 +42,8 @@ const SearchRecipes = ({ recipesData }) => {
               displayModal={displayModal}
               setDisplayModal={setDisplayModal}
               modalData={modalData}
+              recipesData={recipesData}
+              setRecipesData={setRecipesData}
             />
           </div>
         )}
