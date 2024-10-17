@@ -21,6 +21,8 @@ const RecipeCard = ({
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
+  console.log(recipesData);
+
   // do map of externalIds to get each userRecipe
   let userExternalRecipesIds;
   let userRecipesIds;
@@ -90,7 +92,10 @@ const RecipeCard = ({
           // const newUserRecipes = [...recipesData];
           // newUserRecipes.splice(indexOfRecipeToDelete, 1);
           // console.log(newUserRecipes);
-          setRecipesData(updatedUserRecipes);
+
+          // for some reason this is not updating the state value. Is it because they are named different things in the grandparent?
+          setRecipesData(res.data.updatedUserRecipes);
+          console.log(res.data.updatedUserRecipes);
         }
       } else {
         // = this component is on the Recipes page
@@ -112,8 +117,10 @@ const RecipeCard = ({
       }
     }
   };
+  console.log(recipesData);
 
   useEffect(() => {
+    // On recipes page
     if (externalIds) {
       if (userExternalRecipesIds.includes(+recipe.recipeId)) {
         setSaved(true);
@@ -127,6 +134,8 @@ const RecipeCard = ({
       //   });
       //   console.log("EXTERNALRECIPE:", externalRecipe);
       //   if (externalRecipe) setSaved(true);
+
+      // on planner page
     } else {
       setSaved(true);
     }
