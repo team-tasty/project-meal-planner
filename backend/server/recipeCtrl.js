@@ -10,6 +10,7 @@ import {
 } from "../db/model.js";
 import convertIngredient from "../../functions/parseIngredient.js";
 import getExternalIds from "../../functions/getExternalIds.js";
+import getUserRecipes from "../../functions/getUserRecipes.js";
 
 export const recipeFns = {
   recipeSearch: async (req, res) => {
@@ -302,51 +303,12 @@ export const recipeFns = {
       });
     }
 
-    const savedRecipes = await User.findByPk(userId, {
-      attributes: ["userId"],
-      separate: true,
-      include: [
-        {
-          model: UserRecipe,
-          separate: true,
-          include: [
-            {
-              model: Recipe,
-              include: [
-                {
-                  model: RecipeIngredient,
-                  include: [Ingredient, MeasurementQuantity, MeasurementUnit],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    });
+    const resObj = await getUserRecipes(userId);
 
-    try {
-      if (savedRecipes.userRecipes.length === 0) {
-        return res.send({
-          message: "No saved recipes found",
-          success: false,
-        });
-      }
-    } catch (error) {
-      console.log();
-      console.error(error);
-      console.log();
-
-      return res.send({
-        message: `Error getting user's saved recipes`,
-        success: false,
-      });
+    if (resObj.success) {
+      resObj.message = `Successfully got userRecipes from db`;
     }
-
-    return res.send({
-      message: `Successfully got user's saved recipes`,
-      success: true,
-      userRecipes: savedRecipes.userRecipes,
-    });
+    return res.send(resObj);
   },
 
   externalRecipeIds: async (req, res) => {
@@ -359,24 +321,13 @@ export const recipeFns = {
       });
     }
 
-    try {
-      const resObj = await getExternalIds(userId);
+    const resObj = await getExternalIds(userId);
 
-      if (resObj.success) {
-        resObj.message = `Successfully got external recipe Ids from db`;
-      }
-
-      return res.send(resObj);
-    } catch (error) {
-      console.log();
-      console.error(error);
-      console.log();
-
-      return res.send({
-        message: `Error when trying to get external ids`,
-        success: false,
-      });
+    if (resObj.success) {
+      resObj.message = `Successfully got external recipe Ids from db`;
     }
+
+    return res.send(resObj);
   },
 
   createRecipe: async (req, res) => {
