@@ -10,6 +10,7 @@ import {
 } from "../db/model.js";
 import convertIngredient from "../../functions/parseIngredient.js";
 import getExternalIds from "../../functions/getExternalIds.js";
+import getUserRecipes from "../../functions/getUserRecipes.js";
 
 export const recipeFns = {
   recipeSearch: async (req, res) => {
@@ -302,51 +303,53 @@ export const recipeFns = {
       });
     }
 
-    const savedRecipes = await User.findByPk(userId, {
-      attributes: ["userId"],
-      separate: true,
-      include: [
-        {
-          model: UserRecipe,
-          separate: true,
-          include: [
-            {
-              model: Recipe,
-              include: [
-                {
-                  model: RecipeIngredient,
-                  include: [Ingredient, MeasurementQuantity, MeasurementUnit],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    });
+    // const savedRecipes = await User.findByPk(userId, {
+    //   attributes: ["userId"],
+    //   separate: true,
+    //   include: [
+    //     {
+    //       model: UserRecipe,
+    //       separate: true,
+    //       include: [
+    //         {
+    //           model: Recipe,
+    //           include: [
+    //             {
+    //               model: RecipeIngredient,
+    //               include: [Ingredient, MeasurementQuantity, MeasurementUnit],
+    //             },
+    //           ],
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // });
 
-    try {
-      if (savedRecipes.userRecipes.length === 0) {
-        return res.send({
-          message: "No saved recipes found",
-          success: false,
-        });
-      }
-    } catch (error) {
-      console.log();
-      console.error(error);
-      console.log();
+    const resObj = await getUserRecipes(userId);
 
-      return res.send({
-        message: `Error getting user's saved recipes`,
-        success: false,
-      });
+    if (resObj.success) {
+      resObj.message = `Successfully got userRecipes from db`;
     }
 
-    return res.send({
-      message: `Successfully got user's saved recipes`,
-      success: true,
-      userRecipes: savedRecipes.userRecipes,
-    });
+    // try {
+    //   if (savedRecipes.userRecipes.length === 0) {
+    //     return res.send({
+    //       message: "No saved recipes found",
+    //       success: false,
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.log();
+    //   console.error(error);
+    //   console.log();
+
+    //   return res.send({
+    //     message: `Error getting user's saved recipes`,
+    //     success: false,
+    //   });
+    // }
+
+    return res.send(resObj);
   },
 
   externalRecipeIds: async (req, res) => {
