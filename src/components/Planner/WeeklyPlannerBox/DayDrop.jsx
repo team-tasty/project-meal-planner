@@ -8,24 +8,12 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
   const [modalData, setModalData] = useState([]);
   let placeholders = [null, null, null];
 
-  console.log(day);
-  console.log("DAY RECIPES:", dayRecipes);
+  // console.log(day);
+  // console.log("DAY RECIPES:", dayRecipes);
 
   // map over dayRecipes and render the recipeCards for each recipe
   const recipeCards = placeholders.map((placeholder, index) => {
     return dayRecipes[index] ? (
-      // <Draggable
-      //   key={recipe.recipeId}
-      //   draggableId={recipe.recipeId + ""}
-      //   index={index}
-      // >
-      //   {(provided, snapshot) => (
-      // <div
-      //   // ref={provided.innerRef}
-      //   // {...provided.draggableProps}
-      //   // {...provided.dragHandleProps}
-      //   className="border border-orange-500 h-60 w-96"
-      // >
       <RecipeCard
         key={dayRecipes[index].recipeId}
         index={index}
@@ -38,11 +26,6 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
       />
     ) : (
       <div></div>
-      //   )}
-      // // </Draggable>
-      // <div className="border border-black h-32 w-72 flex items-center justify-center">
-      //   Drag Recipe Here
-      // </div>
     );
   });
 

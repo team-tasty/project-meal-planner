@@ -32,7 +32,6 @@ const RecipeModal = ({ setDisplayModal, modalData }) => {
       );
     }
   });
-  console.log(ingredients);
 
   // loop to find all ingredients and get them to display in the modal
 

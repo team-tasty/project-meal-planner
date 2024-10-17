@@ -9,16 +9,13 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
 
-  console.log(recipesData);
-
   // create a function to handle search and filter data
   const handleSearch = (e) => {
     const term = e.target.value;
     setSearchInput(term);
 
     const filtered = recipesData.filter((recipe) => {
-      console.log(recipe);
-      return recipe.title.toLowerCase().includes(term.toLowerCase());
+      return recipe.recipe.title.toLowerCase().includes(term.toLowerCase());
     });
 
     setFilteredData(filtered);

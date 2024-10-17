@@ -134,12 +134,7 @@ const PlannerPage = () => {
   const [plannedRecipes, setPlannedRecipes] = useState(initialPlannedRecipes);
 
   const handleOnDragEnd = (result) => {
-    console.log("HIT FUNCTION");
-
     const { source, destination } = result;
-    console.log(`SOURCE:`, source);
-    console.log("DESTINATION:", destination);
-    console.log(plannedRecipes);
 
     // if dropped outside of any droppable, do nothing
     if (!destination) return;
@@ -167,8 +162,6 @@ const PlannerPage = () => {
     // set state
     setPlannedRecipes(newPlannedRecipes);
   };
-
-  console.log(plannedRecipes);
 
   // handle a delettion from list 2 (plannedRecipes) NEED HELP HERE
   const handleDelete = (dayIndex, recipeIndex) => {

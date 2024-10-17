@@ -21,9 +21,6 @@ const RecipeCard = ({
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
-  console.log("USER RECIPES:", recipesData);
-  console.log("RECIPE:", recipe);
-
   // do map of externalIds to get each userRecipe
   let userExternalRecipesIds;
   let userRecipesIds;
@@ -146,7 +143,7 @@ const RecipeCard = ({
       <img src={`${recipe.image}`} className="h-20 w-24" />
       <div>
         <h1>{recipe.title}</h1>
-        <h2>{recipe.category}</h2>
+        <h3>{recipe.category}</h3>
       </div>
       {handleDelete && (
         <button
@@ -183,7 +180,7 @@ const RecipeCard = ({
       <img src={`${recipe.recipe.image}`} className="h-20 w-24" />
       <div>
         <h1>{recipe.recipe.title}</h1>
-        <h2>{recipe.recipe.category}</h2>
+        <h3>{recipe.recipe.category}</h3>
       </div>
       {handleDelete && (
         <button
