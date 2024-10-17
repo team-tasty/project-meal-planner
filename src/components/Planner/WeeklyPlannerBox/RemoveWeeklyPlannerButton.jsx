@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const RemoveWeeklyPlannerButton = () => {
-  const handleRemoveWeek = () => {
+  const handleRemoveWeek = async (weekId) => {
     // make backend call to remove current week
+    const res = await axios.delete("/api/delete-week/:weekId");
   };
 
   return (
