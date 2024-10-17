@@ -17,19 +17,31 @@ let hashedPassword = bcryptjs.hashSync("test", bcryptjs.genSaltSync(10))
 // Creates 3 users to add
 for (let i = 0; i < 3; i++) {
     const username = `user${i}`
-    await User.create({ 
+    const newUser = await User.create({ 
         firstName: fakeUserFirst[i],
         lastName: fakeUserLast,
         userName: username,
         password: hashedPassword,
     })
+
+    const newWeek = await Week.create({
+        userId: newUser.userId
+    })
 }
 // Creates the Admin User
-await User.create({
+const admin = await User.create({
     firstName: 'Admin',
     lastName: 'Istrator',
     userName: '1',
     password: hashedPassword,
+})
+
+const adminWeek1 = await Week.create({
+    userId: admin.userId,
+})
+
+const adminWeek2 = await Week.create({
+    userId: admin.userId,
 })
 
 // Add the Days to our DB
@@ -86,6 +98,48 @@ for (let i=0; i < recipeData.length; i++) {
             })
         } else {
             break
+        }
+    }
+
+    if (userCalc === 1) {
+        await WeekMeal.create({
+            weekId: 1,
+            dayId: 2,
+            recipeId: recipeCreated.recipeId,
+        })
+    } else if (userCalc === 2) {
+        if (recipeCreated.recipeId === 3) {
+            await WeekMeal.create({
+                weekId: 2,
+                dayId: 1,
+                recipeId: recipeCreated.recipeId,
+            })
+        } else {
+            await WeekMeal.create({
+                weekId: 2,
+                dayId: 6,
+                recipeId: recipeCreated.recipeId,
+            })
+        }
+    } else if (userCalc === 3) {
+        await WeekMeal.create({
+            weekId: 3,
+            dayId: 4,
+            recipeId: recipeCreated.recipeId,
+        })
+    } else {
+        if (recipeCreated.recipeId === 7) {
+            await WeekMeal.create({
+                weekId: 4,
+                dayId: 1,
+                recipeId: recipeCreated.recipeId,
+            })
+        } else {
+            await WeekMeal.create({
+                weekId: 5,
+                dayId: 6,
+                recipeId: recipeCreated.recipeId,
+            })
         }
     }
 }
