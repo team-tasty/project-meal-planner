@@ -52,7 +52,7 @@
   button.focus {
     outline: none;
   }
-  
+
 }
 
 @layer utilities {
@@ -82,7 +82,6 @@
     position: relative;
     padding: 2px;
     font-family: "Montserrat-Medium";
-    /* border-bottom: 1px solid white; */
   }
   .headerLink::after {
     content: "";
@@ -114,7 +113,6 @@
     position: relative;
     padding: 2px;
     font-family: "Montserrat-Medium";
-    /* border-bottom: 1px solid #529100; */
   }
 
   .headerLinkActive::after {
