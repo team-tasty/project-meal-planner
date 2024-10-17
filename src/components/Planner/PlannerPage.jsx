@@ -187,7 +187,10 @@ const PlannerPage = () => {
               plannedRecipes={plannedRecipes}
               handleDelete={handleDelete}
             />
-            <UserRecipes userRecipes={userRecipes} />
+            <UserRecipes
+              userRecipes={userRecipes}
+              setUserRecipes={setUserRecipes}
+            />
           </div>
         </div>
       </div>

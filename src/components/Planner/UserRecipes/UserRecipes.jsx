@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Droppable } from "@hello-pangea/dnd";
 import AddUserRecipeButton from "../../Recipes/AddUserRecipeButton.jsx";
 
-const UserRecipes = ({ userRecipes }) => {
+const UserRecipes = ({ userRecipes, setUserRecipes }) => {
   // const [userSavedRecipes, setUserSavedRecipes] = useState([
   //   {
   //     recipeId: 1,
@@ -125,7 +125,10 @@ const UserRecipes = ({ userRecipes }) => {
           {...provided.droppableProps}
         >
           <h2>Saved Recipes:</h2>
-          <SearchRecipes recipesData={userRecipes} />
+          <SearchRecipes
+            recipesData={userRecipes}
+            setRecipesData={setUserRecipes}
+          />
           <AddUserRecipeButton />
           {provided.placeholder}
         </div>

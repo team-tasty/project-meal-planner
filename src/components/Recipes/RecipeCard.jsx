@@ -12,12 +12,17 @@ const RecipeCard = ({
   dayIndex,
   externalIds,
   setExternalIds,
+  recipesData,
+  setRecipesData,
 }) => {
   // set state values
   const [saved, setSaved] = useState(false);
   const [userRecipeId, setUserRecipeId] = useState(null);
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
+
+  console.log("USER RECIPES:", recipesData);
+  console.log("RECIPE:", recipe);
 
   // do map of externalIds to get each userRecipe
   let userExternalRecipesIds;
@@ -30,8 +35,6 @@ const RecipeCard = ({
       return userRecipe.userRecipeId; // returns an array with all the userRecipe ids
     });
   }
-
-  // console.log("RECIPE:", recipe);
   // console.log("externalIds: ", externalIds);
   // console.log("userExternalRecipesIds: ", userExternalRecipesIds);
 
@@ -78,7 +81,19 @@ const RecipeCard = ({
         console.log(res.data);
 
         if (res.data.success) {
-          // do what? update userRecipes?
+          // const userRecipeToDelete = recipesData.filter((element) => {
+          //   return element.userRecipeId === +recipe.userRecipeId;
+          // });
+          // console.log(userRecipeToDelete);
+
+          // const indexOfRecipeToDelete = recipesData.indexOf(
+          //   userRecipeToDelete[0]
+          // );
+          // console.log(indexOfRecipeToDelete);
+          // const newUserRecipes = [...recipesData];
+          // newUserRecipes.splice(indexOfRecipeToDelete, 1);
+          // console.log(newUserRecipes);
+          setRecipesData(updatedUserRecipes);
         }
       } else {
         // = this component is on the Recipes page
@@ -118,7 +133,7 @@ const RecipeCard = ({
     } else {
       setSaved(true);
     }
-  }, [externalIds]);
+  }, [externalIds, recipesData]);
 
   return (
     <div
