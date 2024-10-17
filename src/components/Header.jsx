@@ -8,10 +8,38 @@ const Header = () => {
 
   return (
     <div className="h-[10vh] border border-black flex justify-around items-center">
-      <NavLink to="/app/home">Home</NavLink>
-      <NavLink to="/app/recipes">Recipes</NavLink>
-      <NavLink to="/app/planner">Weekly Planner</NavLink>
-      <NavLink to="/app/groceryList">Grocery List</NavLink>
+      <NavLink 
+        to="/app/home"
+        className={({ isActive }) =>
+          isActive || location.pathname === "/" ?
+          "headerLinkActive"
+          : "headerLink"
+        }
+      >Home
+      </NavLink>
+      <NavLink 
+        to="/app/recipes"
+        className={({ isActive }) => 
+          isActive ? "headerLinkActive"
+          : "headerLink"
+        }
+      >Recipes
+      </NavLink>
+      <NavLink 
+        to="/app/planner"
+        className={({ isActive }) => 
+          isActive ? "headerLinkActive"
+          : "headerLink"
+        }
+      >Weekly Planner
+      </NavLink>
+      <NavLink 
+        to="/app/groceryList"
+        className={({ isActive }) => 
+          isActive ? "headerLinkActive"
+          : "headerLink"
+        }  
+      >Grocery List</NavLink>
       {userId && <LogoutButton />}
     </div>
   );

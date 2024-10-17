@@ -20,7 +20,9 @@ const LogoutButton = () => {
 
   return (
     <>
-      <button onClick={handleLogout}>Logout</button>
+      <p 
+        className="headerLink cursor-pointer"
+        onClick={handleLogout}>Logout</p>
     </>
   );
 };
