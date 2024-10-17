@@ -303,52 +303,11 @@ export const recipeFns = {
       });
     }
 
-    // const savedRecipes = await User.findByPk(userId, {
-    //   attributes: ["userId"],
-    //   separate: true,
-    //   include: [
-    //     {
-    //       model: UserRecipe,
-    //       separate: true,
-    //       include: [
-    //         {
-    //           model: Recipe,
-    //           include: [
-    //             {
-    //               model: RecipeIngredient,
-    //               include: [Ingredient, MeasurementQuantity, MeasurementUnit],
-    //             },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // });
-
     const resObj = await getUserRecipes(userId);
 
     if (resObj.success) {
       resObj.message = `Successfully got userRecipes from db`;
     }
-
-    // try {
-    //   if (savedRecipes.userRecipes.length === 0) {
-    //     return res.send({
-    //       message: "No saved recipes found",
-    //       success: false,
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.log();
-    //   console.error(error);
-    //   console.log();
-
-    //   return res.send({
-    //     message: `Error getting user's saved recipes`,
-    //     success: false,
-    //   });
-    // }
-
     return res.send(resObj);
   },
 

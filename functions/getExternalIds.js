@@ -47,14 +47,6 @@ const getExternalIds = async (userId) => {
       success: false,
     };
   }
-
-  // if (externalIds.userRecipes.length === 0) {
-  //   return {
-  //     message: `No saved recipes found for this user`,
-  //     success: false
-  //   }
-  // }
-
 };
 
 export default getExternalIds;
