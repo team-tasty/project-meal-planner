@@ -104,12 +104,12 @@ const AddRecipeForm = () => {
       return (
         <li 
           key={`${ingredient.ingredient.ingreident}${index}`}
-          className="mb-2 flex before:content-['•'] before:mr-2">
-          <h3 className="grow">
+          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
+          <h3 className="grow text-wrap">
             {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
           </h3>
           <FaRegTrashCan 
-            className="self-center cursor-pointer"
+            className="self-center cursor-pointer mx-1 shrink-0"
             onClick={(e) => handleDeleteIngredient(index)}/>
         </li>
       );
@@ -117,13 +117,13 @@ const AddRecipeForm = () => {
       return (
         <li 
           key={`${ingredient.ingredient.ingredient}${index}`}
-          className="mb-2 flex before:content-['•'] before:mr-2">
-          <h3 className="grow">
+          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
+          <h3 className="grow text-wrap">
             {ingredient.measurementQuantity.quantity}{" "}
             {ingredient.ingredient.ingredient}
           </h3>
           <FaRegTrashCan 
-            className="self-center cursor-pointer"
+            className="self-center cursor-pointer mx-1 shrink-0"
             onClick={(e) => handleDeleteIngredient(index)}/>
         </li>
       );
@@ -131,13 +131,13 @@ const AddRecipeForm = () => {
       return (
         <li 
           key={`${ingredient.ingredient.ingredient}${index}`}
-          className="mb-2 flex before:content-['•'] before:mr-2">
-            <h3 className="grow">
+          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
+            <h3 className="grow text-wrap">
               {ingredient.measurementQuantity.quantity}{" "}
               {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
             </h3>
             <FaRegTrashCan 
-              className="self-center cursor-pointer"
+              className="self-center cursor-pointer mx-1 shrink-0"
               onClick={(e) => handleDeleteIngredient(index)}/>
         </li>
       );
