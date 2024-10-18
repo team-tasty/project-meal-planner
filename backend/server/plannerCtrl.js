@@ -179,6 +179,13 @@ export const plannerFns = {
 
     const { weekId, dayId, recipeId } = req.body;
 
+    if (!weekId || !dayId || !recipeId) {
+      return res.send({
+        message: `Body object variables are null or undefined`,
+        success: false,
+      });
+    }
+
     try {
       const newWeekMeal = await WeekMeal.create({
         weekId,
