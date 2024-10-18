@@ -32,7 +32,10 @@ const WeeklyPlannerBox = ({
       /> */}
       {weeklyPlanners}
       <div className="flex justify-center gap-4">
-        <AddWeeklyPlannerButton setUserWeeks={setUserWeeks} />
+        <AddWeeklyPlannerButton
+          setUserWeeks={setUserWeeks}
+          userWeeks={userWeeks}
+        />
         <CreateListButton />
       </div>
     </div>

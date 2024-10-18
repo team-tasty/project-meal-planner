@@ -1,9 +1,14 @@
 import axios from "axios";
 
-const ResetWeeklyPlannerButton = () => {
-  const handleResetWeek = async (weekId) => {
+const ResetWeeklyPlannerButton = ({ weekId, setUserWeeks }) => {
+  const handleResetWeek = async () => {
     // make backend call to reset the week
-    const res = await axios.delete("/api/reset-week/:weekId");
+    const res = await axios.delete(`/api/reset-week/${weekId}`);
+    console.log(res.data);
+
+    if (res.data.success) {
+      setUserWeeks(res.data.userWeeks);
+    }
   };
   return (
     <div>
