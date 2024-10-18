@@ -147,7 +147,7 @@ const RecipeCard = ({
         setModalData(recipe);
         setDisplayModal(!displayModal);
       }}
-      className="recipeCard flex justify-between items-center"
+      className="recipeCard my-2 mx-[2px] flex justify-between items-center"
     >
       <img src={`${recipe.image}`} className="h-20 w-24 m-1 rounded-[5px] shrink-0" />
       <div className="grow m-1">
