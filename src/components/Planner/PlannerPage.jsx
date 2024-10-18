@@ -59,7 +59,7 @@ const PlannerPage = () => {
       weekId,
       dayId,
     };
-    const res = await axios.post("/api/add-week-meal/", { bodyObj });
+    const res = await axios.post("/api/add-week-meal/", bodyObj );
     console.log(res.data);
 
     if (res.data.success) {
