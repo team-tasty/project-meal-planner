@@ -74,8 +74,11 @@ const PlannerPage = () => {
     // need a calla to the backend to update the db?
     // make a call to remove recipe from the weakMeals (will need weakMealId)
     const res = await axios.delete(`/api/delete-week-meal/${weekMealId}`);
-    // if successfull setUserWeeks to res.data.updatedUserWeeks
-    setUserWeeks(res.data.userWeeks);
+    console.log(res.data);
+    if (res.data.success) {
+      // if successfull setUserWeeks to res.data.updatedUserWeeks
+      setUserWeeks(res.data.userWeeks);
+    }
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
