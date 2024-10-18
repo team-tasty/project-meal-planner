@@ -105,7 +105,7 @@ const AddRecipeForm = () => {
         <li 
           key={`${ingredient.ingredient.ingreident}${index}`}
           className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
-          <h3 className="grow text-wrap">
+          <h3 className="grow text-wrap me-1">
             {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
           </h3>
           <FaRegTrashCan 
@@ -118,7 +118,7 @@ const AddRecipeForm = () => {
         <li 
           key={`${ingredient.ingredient.ingredient}${index}`}
           className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
-          <h3 className="grow text-wrap">
+          <h3 className="grow text-wrap me-1">
             {ingredient.measurementQuantity.quantity}{" "}
             {ingredient.ingredient.ingredient}
           </h3>
@@ -132,7 +132,7 @@ const AddRecipeForm = () => {
         <li 
           key={`${ingredient.ingredient.ingredient}${index}`}
           className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
-            <h3 className="grow text-wrap">
+            <h3 className="grow text-wrap me-1">
               {ingredient.measurementQuantity.quantity}{" "}
               {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
             </h3>
