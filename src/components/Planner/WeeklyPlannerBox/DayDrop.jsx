@@ -25,7 +25,7 @@ const DayDrop = ({
   const recipeCards = dayRecipes.map((recipe, index) => {
     return (
       <RecipeCard
-        key={recipe.recipeId}
+        key={recipe.weekMealId}
         index={index}
         dayIndex={dayIndex}
         recipe={recipe}
