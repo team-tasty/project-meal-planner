@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { GoHeartFill } from "react-icons/go";
 import axios from "axios";
 import { FaR, FaRegTrashCan } from "react-icons/fa6";
+import { PiBowlFood } from "react-icons/pi";
 
 const RecipeCard = ({
   recipe,
@@ -144,6 +145,8 @@ const RecipeCard = ({
     }
   }, [externalIds, recipesData]);
 
+  console.log(`${recipe.title} image:`, recipe.image)
+
   return externalIds ? (
     <div
       onClick={() => {
@@ -152,10 +155,17 @@ const RecipeCard = ({
       }}
       className="recipeCard my-2 mx-[2px] flex justify-between items-center"
     >
-      <img
-        src={`${recipe.image}`}
-        className="h-20 w-24 m-1 rounded-[5px] shrink-0"
-      />
+      {recipe.image &&
+        <img
+          src={`${recipe.image}`}
+          className="h-20 w-24 m-1 rounded-[5px] shrink-0"
+        />
+      }
+      {!recipe.image &&
+        <div className="h-20 w-24 m-1 rounded-[5px] shrink-0 flex justify-center items-center">
+          <PiBowlFood size={25}/>
+        </div>
+      }
       <div className="grow m-1">
         <h1 className="line-clamp-2">{recipe.title}</h1>
         <h3>{recipe.category}</h3>
@@ -192,10 +202,14 @@ const RecipeCard = ({
       }}
       className="recipeCard flex justify-between items-center"
     >
-      <img
-        src={`${recipe.recipe.image}`}
-        className="h-20 w-24 m-1 rounded-[5px] shrink-0"
-      />
+      {recipe.recipe.image &&
+        <img src={`${recipe.recipe.image}`} className="h-20 w-24 m-1 rounded-[5px] shrink-0" />
+      }
+      {!recipe.recipe.image &&
+        <div className="h-20 w-24 m-1 rounded-[5px] shrink-0 flex justify-center items-center">
+          <PiBowlFood size={25}/>
+        </div>
+      }
       <div className="grow m-1">
         <h1 className="line-clamp-2">{recipe.recipe.title}</h1>
         <h3>{recipe.recipe.category}</h3>
