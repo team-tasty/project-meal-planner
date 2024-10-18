@@ -17,7 +17,8 @@ const WeeklyPlannerBox = ({
       weekId={week.weekId}
       plannedRecipes={week.weekMeals}
       handleDelete={handleDelete}
-      userWeeks={setUserWeeks}
+      userWeeks={userWeeks}
+      setUserWeeks={setUserWeeks}
       daysData={daysData}
       handleOnDragEnd={handleOnDragEnd}
     />
@@ -31,7 +32,7 @@ const WeeklyPlannerBox = ({
       /> */}
       {weeklyPlanners}
       <div className="flex justify-center gap-4">
-        <AddWeeklyPlannerButton />
+        <AddWeeklyPlannerButton setUserWeeks={setUserWeeks} />
         <CreateListButton />
       </div>
     </div>

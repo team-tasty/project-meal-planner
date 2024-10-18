@@ -67,7 +67,10 @@ const WeeklyPlanner = ({
       {dayCards}
       <div className="flex justify-center gap-4">
         <ResetWeeklyPlannerButton />
-        <RemoveWeeklyPlannerButton />
+        <RemoveWeeklyPlannerButton
+          weekId={weekId}
+          setUserWeeks={setUserWeeks}
+        />
         <WeeklyGroceryListButton />
       </div>
     </div>
