@@ -34,10 +34,9 @@ const RecipeModal = ({ setDisplayModal, modalData }) => {
   });
 
   // loop to find all ingredients and get them to display in the modal
-  // top-[6vh] left-[10vw] bottom-[6vh] right-[10vw]
 
   return (
-    <div className="fixed flex justify-center z-20 recipeCard h-[88vh] w-[80vw] snap-center overflow-y-auto top-[6vh]">
+    <div className="fixed flex justify-center z-20 recipeCard h-[88vh] w-[80vw] snap-center overflow-y-auto top-[6vh] left-[10vw] bottom-[6vh] right-[10vw]">
       <div className="flex flex-col gap-5 p-3">
         <div className="flex items-center justify-between">
           <img src={`${modalData.image}`} className="h-32 w-36 rounded-[5px] m-1" />
