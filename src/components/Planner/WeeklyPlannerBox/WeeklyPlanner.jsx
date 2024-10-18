@@ -72,7 +72,7 @@ const WeeklyPlanner = ({
           setUserWeeks={setUserWeeks}
           userWeeks={userWeeks}
         />
-        <WeeklyGroceryListButton />
+        <WeeklyGroceryListButton weekId={weekId} />
       </div>
     </div>
   );

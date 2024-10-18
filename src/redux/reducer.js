@@ -1,6 +1,7 @@
 const initialState = {
   userId: null,
   loading: true,
+  groceryList: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         userId: null,
         loading: false,
+      };
+
+    case "UPDATE_GROCERY_LIST":
+      return {
+        ...state,
+        groceryList: action.payload,
       };
     default:
       return state;
