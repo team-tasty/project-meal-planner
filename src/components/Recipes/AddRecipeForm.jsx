@@ -91,7 +91,7 @@ const AddRecipeForm = () => {
 
     // if succesfful
     if (res.data.success) {
-      navigate(-1);
+      navigate("/app/planner");
     } else {
       return <p>{res.data.message}</p>;
     }
@@ -102,43 +102,49 @@ const AddRecipeForm = () => {
   const ingredientList = recipeIngredients.map((ingredient, index) => {
     if (!ingredient.measurementQuantity.quantity) {
       return (
-        <li 
+        <li
           key={`${ingredient.ingredient.ingreident}${index}`}
-          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
+          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]"
+        >
           <h3 className="grow text-wrap me-1">
             {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
           </h3>
-          <FaRegTrashCan 
+          <FaRegTrashCan
             className="self-center cursor-pointer mx-1 shrink-0"
-            onClick={(e) => handleDeleteIngredient(index)}/>
+            onClick={(e) => handleDeleteIngredient(index)}
+          />
         </li>
       );
     } else if (ingredient.measurementUnit.unit === "null") {
       return (
-        <li 
+        <li
           key={`${ingredient.ingredient.ingredient}${index}`}
-          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
+          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]"
+        >
           <h3 className="grow text-wrap me-1">
             {ingredient.measurementQuantity.quantity}{" "}
             {ingredient.ingredient.ingredient}
           </h3>
-          <FaRegTrashCan 
+          <FaRegTrashCan
             className="self-center cursor-pointer mx-1 shrink-0"
-            onClick={(e) => handleDeleteIngredient(index)}/>
+            onClick={(e) => handleDeleteIngredient(index)}
+          />
         </li>
       );
     } else {
       return (
-        <li 
+        <li
           key={`${ingredient.ingredient.ingredient}${index}`}
-          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]">
-            <h3 className="grow text-wrap me-1">
-              {ingredient.measurementQuantity.quantity}{" "}
-              {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
-            </h3>
-            <FaRegTrashCan 
-              className="self-center cursor-pointer mx-1 shrink-0"
-              onClick={(e) => handleDeleteIngredient(index)}/>
+          className="mb-2 flex before:content-['•'] before:mr-2 before:ms-1 before:self-center max-w-[270px]"
+        >
+          <h3 className="grow text-wrap me-1">
+            {ingredient.measurementQuantity.quantity}{" "}
+            {ingredient.measurementUnit.unit} {ingredient.ingredient.ingredient}
+          </h3>
+          <FaRegTrashCan
+            className="self-center cursor-pointer mx-1 shrink-0"
+            onClick={(e) => handleDeleteIngredient(index)}
+          />
         </li>
       );
     }
@@ -146,13 +152,16 @@ const AddRecipeForm = () => {
   return (
     <div className="flex flex-col place-items-center my-4">
       <div className="">
-        <h1 className="text-2xl text-center pb-2 mb-2 border-b-[1px] border-lineGreen">Add Your Own Recipe</h1>
-        <form 
+        <h1 className="text-2xl text-center pb-2 mb-2 border-b-[1px] border-lineGreen">
+          Add Your Own Recipe
+        </h1>
+        <form
           className="flex flex-col justify-center"
-          onSubmit={handleAddRecipe}>
-          <label 
-            className="font-montserratMedium mb-1"
-            htmlFor="title">Recipe Title*</label>
+          onSubmit={handleAddRecipe}
+        >
+          <label className="font-montserratMedium mb-1" htmlFor="title">
+            Recipe Title*
+          </label>
           <input
             value={title}
             type="text"
@@ -161,9 +170,9 @@ const AddRecipeForm = () => {
             className="mb-2"
             onChange={(e) => setTitle(e.target.value)}
           />
-          <label 
-            className="font-montserratMedium mb-1"
-            htmlFor="category">Category*</label>
+          <label className="font-montserratMedium mb-1" htmlFor="category">
+            Category*
+          </label>
           <input
             value={category}
             type="text"
@@ -172,9 +181,9 @@ const AddRecipeForm = () => {
             className="mb-2"
             onChange={(e) => setCategory(e.target.value)}
           />
-          <label 
-            className="font-montserratMedium mb-1"
-            htmlFor="instruction">Cooking Instructions*</label>
+          <label className="font-montserratMedium mb-1" htmlFor="instruction">
+            Cooking Instructions*
+          </label>
           <textarea
             value={instruction}
             type="text"
@@ -183,9 +192,9 @@ const AddRecipeForm = () => {
             className="mb-2"
             onChange={(e) => setInstruction(e.target.value)}
           />
-          <label 
-            className="font-montserratMedium mb-1"
-            htmlFor="image">Image URL</label>
+          <label className="font-montserratMedium mb-1" htmlFor="image">
+            Image URL
+          </label>
           <input
             value={image}
             type="url"
@@ -193,33 +202,31 @@ const AddRecipeForm = () => {
             className="mb-2"
             onChange={(e) => setImage(e.target.value)}
           />
-          <label 
-            className="font-montserratMedium mb-1"
-            htmlFor="area">Area</label>
+          <label className="font-montserratMedium mb-1" htmlFor="area">
+            Area
+          </label>
           <input
             value={area}
             type="text"
             placeholder="American"
-            required
             className="mb-2"
             onChange={(e) => setArea(e.target.value)}
           />
-          <label 
-            className="font-montserratMedium mb-1"
-            htmlFor="tag">Tags</label>
+          <label className="font-montserratMedium mb-1" htmlFor="tag">
+            Tags
+          </label>
           <input
             value={tag}
             type="text"
             placeholder="e.g. baking,chocolate,gooey"
-            required
             className="mb-2"
             onChange={(e) => setTag(e.target.value)}
           />
 
-          <h2 className="pb-2 mb-4 border-b-[1px] border-lineGreen">* = required</h2>
-          <ul>
-            {ingredientList}
-          </ul>
+          <h2 className="pb-2 mb-4 border-b-[1px] border-lineGreen">
+            * = required
+          </h2>
+          <ul>{ingredientList}</ul>
           {!isAddingNewIngredient && (
             <span className="self-center my-2">
               <button
@@ -228,16 +235,16 @@ const AddRecipeForm = () => {
                   setIsAddingNewIngredient(!isAddingNewIngredient);
                 }}
                 type="button"
-                >
+              >
                 Add Ingredient
               </button>
             </span>
           )}
           {isAddingNewIngredient && (
             <div className="flex flex-col">
-              <label 
-                className="font-montserratMedium mb-1"
-                htmlFor="quantity">Quantity</label>
+              <label className="font-montserratMedium mb-1" htmlFor="quantity">
+                Quantity
+              </label>
               <input
                 value={quantity}
                 type="number"
@@ -247,9 +254,9 @@ const AddRecipeForm = () => {
                 className="mb-2"
                 onChange={(e) => setQuantity(e.target.value)}
               />
-              <label 
-                className="font-montserratMedium mb-1"
-                htmlFor="unit">Unit</label>
+              <label className="font-montserratMedium mb-1" htmlFor="unit">
+                Unit
+              </label>
               <input
                 value={unit}
                 type="text"
@@ -259,9 +266,9 @@ const AddRecipeForm = () => {
                 className="mb-2"
                 onChange={(e) => setUnit(e.target.value)}
               />
-              <label 
-                className="font-montserratMedium mb-1"
-                htmlFor="name">Name</label>
+              <label className="font-montserratMedium mb-1" htmlFor="name">
+                Name
+              </label>
               <input
                 value={name}
                 type="text"
@@ -280,13 +287,15 @@ const AddRecipeForm = () => {
                     handleAddIngredient();
                   }}
                   type="button"
-                  >
+                >
                   Save Ingredient
                 </button>
               </span>
             </div>
           )}
-          <h2 className="text-center pb-2 mb-4 border-b-[1px] border-lineGreen">At least 1 ingredient is required</h2>
+          <h2 className="text-center pb-2 mb-4 border-b-[1px] border-lineGreen">
+            At least 1 ingredient is required
+          </h2>
           <span className="self-center">
             <button type="submit">Submit Recipe</button>
           </span>
