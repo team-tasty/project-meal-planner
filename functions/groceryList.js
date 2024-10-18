@@ -57,9 +57,13 @@ const groceryList = (objRecipes) => {
         if (unitAOrder < unitBOrder) return -1
         if (unitAOrder > unitBOrder) return 1
 
+        // Sort by units next if both units aren't on the getUnitOrder list
+        if (a.unit < b.unit) return -1
+        if (a.unit > b.unit) return 1
+
         // If the singular forms are the same, prioritize singular over plural
-        if (a.ingredient.length < b.ingredient.length) return -1
-        if (a.ingredient.length > b.ingredient.length) return 1
+        // if (a.ingredient.length < b.ingredient.length) return -1
+        // if (a.ingredient.length > b.ingredient.length) return 1
 
         return 0
     })
