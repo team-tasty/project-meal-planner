@@ -31,7 +31,7 @@ const RecipesPage = () => {
   });
 
   return (
-    <div className="mt-4 flex flex-col place-items-center">
+    <div className="my-4 flex flex-col place-items-center">
       {displayModal && (
         <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
       )}

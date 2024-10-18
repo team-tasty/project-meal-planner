@@ -144,7 +144,7 @@ const AddRecipeForm = () => {
     }
   });
   return (
-    <div className="flex flex-col place-items-center mt-4">
+    <div className="flex flex-col place-items-center my-4">
       <div className="">
         <h1 className="text-2xl text-center pb-2 mb-2 border-b-[1px] border-lineGreen">Add Your Own Recipe</h1>
         <form 
