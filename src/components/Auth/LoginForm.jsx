@@ -43,7 +43,7 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
 
   return (
     <>
-      <div className="h-[90vh] flex justify-center">
+      <div className="h-[90vh] flex justify-center my-4">
         <div className="flex flex-col w-[400px] justify-center place-items-center">
           <img src="../../public/PPLogo-no-bg.png" alt="Pantry Plan Logo" 
             className="w-[68%]"
