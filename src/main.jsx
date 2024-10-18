@@ -104,10 +104,12 @@ const Router = () => {
           loader: async () => {
             const res = await axios.get("/api/user-recipes");
             const res2 = await axios.get("/api/user-weeks");
+            const res3 = await axios.get("/api/days");
 
             return {
               userRecipes: res.data.userRecipes,
               userWeeks: res2.data.userWeeks,
+              daysData: res3.data.days,
             };
           },
         },
