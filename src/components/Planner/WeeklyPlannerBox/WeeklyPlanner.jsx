@@ -11,6 +11,8 @@ const WeeklyPlanner = ({
   userWeeks,
   setUserWeeks,
   daysData,
+  weekId,
+  handleOnDragEnd,
 }) => {
   // set state values
   // const [daysData, setDaysData] = useState([
@@ -27,19 +29,24 @@ const WeeklyPlanner = ({
   // map over plannedRecipes will give us each object (weekMeal) in that week
 
   const dayCards = daysData.map((day, index) => {
-    const recipeObjs = plannedRecipes.filter((recipe) => {
-      return recipe.day.dayId === day.dayId;
+    const weekMealObjs = plannedRecipes.filter((weekMeal) => {
+      return weekMeal.day.dayId === day.dayId;
     });
 
-    console.log(`days recipe objects:`, recipeObjs);
+    console.log(`days recipe objects:`, weekMealObjs);
+    // console.log("weekId?", weekMealObjs[0].weekId);
 
     return (
       <DayDrop
         key={day.dayId}
         day={day}
-        dayRecipes={recipeObjs}
+        dayRecipes={weekMealObjs}
         handleDelete={handleDelete}
         dayIndex={index}
+        userWeeks={userWeeks}
+        weekId={weekId}
+        setUserWeeks={setUserWeeks}
+        handleOnDragEnd={handleOnDragEnd}
       />
     );
   });

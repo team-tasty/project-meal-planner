@@ -8,16 +8,18 @@ const WeeklyPlannerBox = ({
   userWeeks,
   setUserWeeks,
   daysData,
+  handleOnDragEnd,
 }) => {
   // do a map to generate weeklyPlanners to match the number of elements in the array userWeeks (get from parent)
   const weeklyPlanners = userWeeks.map((week) => (
     <WeeklyPlanner
       key={week.weekId}
-      id={week.weekId}
+      weekId={week.weekId}
       plannedRecipes={week.weekMeals}
       handleDelete={handleDelete}
       userWeeks={setUserWeeks}
       daysData={daysData}
+      handleOnDragEnd={handleOnDragEnd}
     />
   ));
 

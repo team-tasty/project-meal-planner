@@ -22,6 +22,8 @@ const RecipeCard = ({
   // to display in each card: image, title, category
 
   console.log(recipesData);
+  // console.log("RECIPE", recipe);
+  const weekMealId = recipe.weekMealId;
 
   // do map of externalIds to get each userRecipe
   let userExternalRecipesIds;
@@ -194,7 +196,7 @@ const RecipeCard = ({
       {handleDelete && (
         <button
           onClick={(e) => {
-            handleDelete(dayIndex, index);
+            handleDelete(weekMealId);
             e.stopPropagation();
           }}
         >

@@ -3,13 +3,23 @@ import RecipeCard from "../../Recipes/RecipeCard";
 import { useState } from "react";
 import RecipeModal from "../../Recipes/RecipeModal";
 
-const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
+const DayDrop = ({
+  day,
+  dayRecipes,
+  handleDelete,
+  dayIndex,
+  userWeeks,
+  weekId,
+  setUserWeeks,
+  handleOnDragEnd,
+}) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
   let placeholders = [null, null, null];
 
   console.log(day);
   console.log("DAY RECIPES:", dayRecipes);
+  console.log(weekId);
 
   // map over dayRecipes and render the recipeCards for each recipe
   const recipeCards = placeholders.map((placeholder, index) => {
@@ -23,6 +33,9 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
         displayModal={displayModal}
         setDisplayModal={setDisplayModal}
         handleDelete={handleDelete}
+        weekId={weekId}
+        handleOnDragEnd={handleOnDragEnd}
+        setUserWeeks={setUserWeeks}
       />
     ) : (
       <div></div>
@@ -30,7 +43,7 @@ const DayDrop = ({ day, dayRecipes, handleDelete, dayIndex }) => {
   });
 
   return (
-    <Droppable droppableId={`${day.dayId}`} direction="vertical">
+    <Droppable droppableId={`${weekId}-${day.dayId}`} direction="vertical">
       {(provided) => (
         <div
           className="min-h-20 min-w-[800px] border border-black flex"
