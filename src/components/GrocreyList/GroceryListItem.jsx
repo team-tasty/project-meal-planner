@@ -2,8 +2,6 @@ import groceryList from "../../../functions/groceryList.js";
 import groceryListPracticeData from "../../../functions/groceryListPracticeData.js";
 import userWeeksExampleRes2 from "../../../functions/userWeeksExampleRes2.js";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useState } from "react";
 
 const GroceryListItem = () => {
   const groceryList = useSelector((state) => state.groceryList);
