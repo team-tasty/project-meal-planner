@@ -15,20 +15,20 @@ const DayDrop = ({
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
-  let placeholders = [null, null, null];
+  // let placeholders = [null, null, null];
 
-  console.log(day);
-  console.log("DAY RECIPES:", dayRecipes);
-  console.log(weekId);
+  // console.log(day);
+  // console.log("DAY RECIPES:", dayRecipes);
+  // // console.log(weekId);
 
   // map over dayRecipes and render the recipeCards for each recipe
-  const recipeCards = placeholders.map((placeholder, index) => {
-    return dayRecipes[index] ? (
+  const recipeCards = dayRecipes.map((recipe, index) => {
+    return (
       <RecipeCard
-        key={dayRecipes[index].recipeId}
+        key={recipe.weekMealId}
         index={index}
         dayIndex={dayIndex}
-        recipe={dayRecipes[index]}
+        recipe={recipe}
         setModalData={setModalData}
         displayModal={displayModal}
         setDisplayModal={setDisplayModal}
@@ -37,8 +37,6 @@ const DayDrop = ({
         handleOnDragEnd={handleOnDragEnd}
         setUserWeeks={setUserWeeks}
       />
-    ) : (
-      <div></div>
     );
   });
 

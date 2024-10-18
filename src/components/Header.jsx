@@ -43,7 +43,7 @@ const Header = () => {
           : "headerLink"
         }  
       >Grocery List</NavLink>
-      {userId && <LogoutButton />}
+      <LogoutButton />
     </div>
   );
 };

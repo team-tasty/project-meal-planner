@@ -23,7 +23,7 @@ const RecipeCard = ({
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
-  console.log(recipesData);
+  // console.log(recipesData);
   // console.log("RECIPE", recipe);
   const weekMealId = recipe.weekMealId;
 
@@ -99,7 +99,7 @@ const RecipeCard = ({
 
           // for some reason this is not updating the state value. Is it because they are named different things in the grandparent?
           setRecipesData(res.data.updatedUserRecipes);
-          console.log(res.data.updatedUserRecipes);
+          // console.log(res.data.updatedUserRecipes);
         }
       } else {
         // = this component is on the Recipes page
@@ -121,7 +121,7 @@ const RecipeCard = ({
       }
     }
   };
-  console.log(recipesData);
+  // console.log(recipesData);
 
   useEffect(() => {
     // On recipes page
@@ -156,7 +156,10 @@ const RecipeCard = ({
       className="recipeCard my-2 mx-[2px] flex justify-between items-center"
     >
       {recipe.image &&
-        <img src={`${recipe.image}`} className="h-20 w-24 m-1 rounded-[5px] shrink-0" />
+        <img
+          src={`${recipe.image}`}
+          className="h-20 w-24 m-1 rounded-[5px] shrink-0"
+        />
       }
       {!recipe.image &&
         <div className="h-20 w-24 m-1 rounded-[5px] shrink-0 flex justify-center items-center">
@@ -169,12 +172,13 @@ const RecipeCard = ({
       </div>
       {handleDelete && (
         <FaRegTrashCan
-          size={25} 
+          size={25}
           className="mx-1 cursor-pointer"
           onClick={(e) => {
             handleDelete(dayIndex, index);
             e.stopPropagation();
-          }}/>
+          }}
+        />
       )}
       {!handleDelete && (
         <GoHeartFill
@@ -211,13 +215,14 @@ const RecipeCard = ({
         <h3>{recipe.recipe.category}</h3>
       </div>
       {handleDelete && (
-        <FaRegTrashCan 
+        <FaRegTrashCan
           size={25}
           className="mx-1 cursor-pointer"
           onClick={(e) => {
             handleDelete(weekMealId);
             e.stopPropagation();
-          }}/>
+          }}
+        />
       )}
       {!handleDelete && (
         <GoHeartFill
