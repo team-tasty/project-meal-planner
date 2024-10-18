@@ -7,7 +7,7 @@ const Header = () => {
   console.log(userId);
 
   return (
-    <div className="h-[10vh] border-b-[1px] border-black flex justify-around items-center">
+    <div className="h-[10vh] border-b-[1px] border-black flex justify-around items-center sticky top-0 bg-white">
        <img src="../../public/PPLogo-no-bg.png" alt="Pantry Plan Logo" 
           className="h-[10vh]"
         />

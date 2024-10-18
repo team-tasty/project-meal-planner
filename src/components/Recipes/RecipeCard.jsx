@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GoHeartFill } from "react-icons/go";
 import axios from "axios";
+import { FaR, FaRegTrashCan } from "react-icons/fa6";
 
 const RecipeCard = ({
   recipe,
@@ -149,29 +150,28 @@ const RecipeCard = ({
         setModalData(recipe);
         setDisplayModal(!displayModal);
       }}
-      className="h-32 w-72 border border-black flex items-center justify-around"
+      className="recipeCard my-2 mx-[2px] flex justify-between items-center"
     >
-      <img src={`${recipe.image}`} className="h-20 w-24" />
-      <div>
-        <h1>{recipe.title}</h1>
+      <img src={`${recipe.image}`} className="h-20 w-24 m-1 rounded-[5px] shrink-0" />
+      <div className="grow m-1">
+        <h1 className="line-clamp-2">{recipe.title}</h1>
         <h3>{recipe.category}</h3>
       </div>
       {handleDelete && (
-        <button
+        <FaRegTrashCan
+          size={25} 
+          className="mx-1 cursor-pointer"
           onClick={(e) => {
             handleDelete(dayIndex, index);
             e.stopPropagation();
-          }}
-        >
-          Delete
-        </button>
+          }}/>
       )}
       {!handleDelete && (
         <GoHeartFill
           className={
             saved
-              ? "h-10 w-10 fill-red-500 stroke-red-500 stroke-[1px]"
-              : "h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
+              ? "h-10 w-10 m-1 shrink-0 fill-red-500 stroke-red-500 stroke-[1px]"
+              : "h-10 w-10 m-1 shrink-0 fill-white stroke-red-500 stroke-[1px]"
           }
           onClick={(e) => {
             handleClick();
@@ -186,29 +186,28 @@ const RecipeCard = ({
         setModalData(recipe.recipe);
         setDisplayModal(!displayModal);
       }}
-      className="h-32 w-72 border border-black flex items-center justify-around"
+      className="recipeCard flex justify-between items-center"
     >
-      <img src={`${recipe.recipe.image}`} className="h-20 w-24" />
-      <div>
-        <h1>{recipe.recipe.title}</h1>
+      <img src={`${recipe.recipe.image}`} className="h-20 w-24 m-1 rounded-[5px] shrink-0" />
+      <div className="grow m-1">
+        <h1 className="line-clamp-2">{recipe.recipe.title}</h1>
         <h3>{recipe.recipe.category}</h3>
       </div>
       {handleDelete && (
-        <button
+        <FaRegTrashCan 
+          size={25}
+          className="mx-1 cursor-pointer"
           onClick={(e) => {
             handleDelete(weekMealId);
             e.stopPropagation();
-          }}
-        >
-          Delete
-        </button>
+          }}/>
       )}
       {!handleDelete && (
         <GoHeartFill
           className={
             saved
-              ? "h-10 w-10 fill-red-500 stroke-red-500 stroke-[1px]"
-              : "h-10 w-10 fill-white stroke-red-500 stroke-[1px]"
+              ? "h-10 w-10 m-1 shrink-0 fill-red-500 stroke-red-500 stroke-[1px]"
+              : "h-10 w-10 m-1 shrink-0 fill-white stroke-red-500 stroke-[1px]"
           }
           onClick={(e) => {
             handleClick();

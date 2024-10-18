@@ -4,7 +4,7 @@ const AddUserRecipeButton = () => {
   const navigate = useNavigate();
   return (
     <button onClick={() => navigate("/app/addRecipe")}>
-      + Add Your Own Recipe
+      Add Your Own
     </button>
   );
 };
