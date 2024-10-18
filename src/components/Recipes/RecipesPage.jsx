@@ -35,7 +35,7 @@ const RecipesPage = () => {
       {displayModal && (
         <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
       )}
-      <div className="w-[430px]">
+      <div className="w-[440px]">
         <h1 className="mb-4 text-2xl text-center">Recipes Page</h1>
         <SearchAPI setRecipesData={setRecipesData} />
         {recipeCards}

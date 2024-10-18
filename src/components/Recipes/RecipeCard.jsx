@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GoHeartFill } from "react-icons/go";
 import axios from "axios";
+import { FaR, FaRegTrashCan } from "react-icons/fa6";
 
 const RecipeCard = ({
   recipe,
@@ -155,14 +156,13 @@ const RecipeCard = ({
         <h3>{recipe.category}</h3>
       </div>
       {handleDelete && (
-        <button
+        <FaRegTrashCan
+          size={25} 
+          className="mx-1 cursor-pointer"
           onClick={(e) => {
             handleDelete(dayIndex, index);
             e.stopPropagation();
-          }}
-        >
-          Delete
-        </button>
+          }}/>
       )}
       {!handleDelete && (
         <GoHeartFill
@@ -192,14 +192,13 @@ const RecipeCard = ({
         <h3>{recipe.recipe.category}</h3>
       </div>
       {handleDelete && (
-        <button
+        <FaRegTrashCan 
+          size={25}
+          className="mx-1 cursor-pointer"
           onClick={(e) => {
             handleDelete(dayIndex, index);
             e.stopPropagation();
-          }}
-        >
-          Delete
-        </button>
+          }}/>
       )}
       {!handleDelete && (
         <GoHeartFill

@@ -40,6 +40,7 @@ const SearchAPI = ({ setRecipesData }) => {
             type="text"
             placeholder="Search recipes"
             value={searchInput}
+            className="mx-[3px]"
             onChange={(e) => setSearchInput(e.target.value)}
           />
           {/* Search by dropdown */}
