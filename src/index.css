@@ -24,10 +24,12 @@
 
   h1 {
     font-family: "Montserrat-Medium";
+
   }
 
   h2 {
     font-family: "Montserrat-Regular";
+
   }
 
   h3 {
@@ -37,13 +39,15 @@
   input {
     border: none;
     border-radius: 5px;
-    padding: 2px;
+    padding: 2px 4px;
+    margin: 0px 3px;
     font-family: "Montserrat-Regular";
     background-color: #d9d9d9;
   }
 
   button {
     padding: 2px 8px;
+    margin: 0px 3px;
     background-color: #68B800;
     border-radius: 5px;
     font-family: "Montserrat-Regular";
@@ -69,6 +73,7 @@
 
   .recipeCard {
     padding: 2px;
+    margin: 8px 2px;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 4px 1px rgb(0 0 0 / 0.25);

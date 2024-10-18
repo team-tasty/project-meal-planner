@@ -31,17 +31,14 @@ const RecipesPage = () => {
   });
 
   return (
-    <div className="flex justify-between">
+    <div className="mt-4 flex flex-col place-items-center">
       {displayModal && (
         <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
       )}
-      <div>
-        Recipes Page
+      <div className="w-[430px]">
+        <h1 className="mb-4 text-2xl text-center">Recipes Page</h1>
         <SearchAPI setRecipesData={setRecipesData} />
         {recipeCards}
-      </div>
-      <div>
-        <AddUserRecipeButton />
       </div>
     </div>
   );

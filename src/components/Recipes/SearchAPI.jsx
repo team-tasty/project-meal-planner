@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import AddUserRecipeButton from "./AddUserRecipeButton";
 
 const SearchAPI = ({ setRecipesData }) => {
   // set state values
@@ -30,29 +31,36 @@ const SearchAPI = ({ setRecipesData }) => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <label htmlFor="search"></label>
-      <input
-        type="text"
-        placeholder="Search recipes"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-      />
-      {/* Search by dropdown */}
-      {/* <label htmlFor="dropDown">Search By:</label>
-      <select
-        value={searchType}
-        required
-        onChange={(e) => setSearchType(e.target.value)}
-      >
-        <option value="" disabled></option>
-        <option value="s">Title</option>
-        <option value="i">Ingredient</option>
-        <option value="c">Category</option>
-        <option value="a">Area</option>
-      </select> */}
-      <button type="submit">Search</button>
-    </form>
+    <>
+    <div className="flex justify-center pb-2 mb-2 border-b-[1px] border-lineGreen">
+      <div className="flex flex-row"> 
+        <form onSubmit={handleSearch}>
+          <label htmlFor="search"></label>
+          <input
+            type="text"
+            placeholder="Search recipes"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          {/* Search by dropdown */}
+          {/* <label htmlFor="dropDown">Search By:</label>
+          <select
+            value={searchType}
+            required
+            onChange={(e) => setSearchType(e.target.value)}
+          >
+            <option value="" disabled></option>
+            <option value="s">Title</option>
+            <option value="i">Ingredient</option>
+            <option value="c">Category</option>
+            <option value="a">Area</option>
+          </select> */}
+          <button type="submit">Search</button>
+        </form>
+        <AddUserRecipeButton />
+      </div>
+    </div>
+    </>
   );
 };
 
