@@ -22,7 +22,7 @@ const PlannerPage = () => {
   const handleOnDragEnd = async (result) => {
     const { source, destination } = result;
     console.log("SOURCE", source);
-    console.log("DESTINATION", source);
+    console.log("DESTINATION", destination);
     console.log("RESULT", result);
 
     // if dropped outside of any droppable, do nothing
@@ -42,7 +42,11 @@ const PlannerPage = () => {
     const idArray = destination.droppableId.split("-");
     const weekId = +idArray[0];
     const dayId = +idArray[1];
-    console.log("NEEDED", recipeId, weekId, dayId);
+
+    const dayArrayLength = userWeeks
+      .filter((week) => week.weekId === weekId)[0]
+      .weekMeals.filter((weekMeals) => weekMeals.dayId === dayId).length;
+    console.log("********", dayArrayLength);
 
     // Add the item to list 2 (plannedRecipes)
 
@@ -59,11 +63,14 @@ const PlannerPage = () => {
       weekId,
       dayId,
     };
-    const res = await axios.post("/api/add-week-meal/", bodyObj);
-    console.log(res.data);
+    // logic to prevent adding more that 3 recipes to a day
+    if (dayArrayLength < 3) {
+      const res = await axios.post("/api/add-week-meal/", bodyObj);
+      console.log(res.data);
 
-    if (res.data.success) {
-      setUserWeeks(res.data.userWeeks);
+      if (res.data.success) {
+        setUserWeeks(res.data.userWeeks);
+      }
     }
   };
 

@@ -24,8 +24,8 @@ const WeeklyPlanner = ({
   //   { dayId: 6, day: "Day 6" },
   //   { dayId: 7, day: "Day 7" },
   // ]);
-  console.log(userWeeks);
-  console.log(plannedRecipes);
+  // console.log(userWeeks);
+  // console.log(plannedRecipes);
   // map over plannedRecipes will give us each object (weekMeal) in that week
 
   const dayCards = daysData.map((day, index) => {
@@ -33,7 +33,7 @@ const WeeklyPlanner = ({
       return weekMeal.day.dayId === day.dayId;
     });
 
-    console.log(`days recipe objects:`, weekMealObjs);
+    // console.log(`days recipe objects:`, weekMealObjs);
     // console.log("weekId?", weekMealObjs[0].weekId);
 
     return (
