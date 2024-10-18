@@ -2,13 +2,32 @@ import WeeklyPlanner from "./WeeklyPlanner";
 import AddWeeklyPlannerButton from "./AddWeeklyPlannerButton";
 import CreateListButton from "./FullGroceryListButton";
 
-const WeeklyPlannerBox = ({ plannedRecipes, handleDelete }) => {
+const WeeklyPlannerBox = ({
+  // plannedRecipes,
+  handleDelete,
+  userWeeks,
+  setUserWeeks,
+  daysData,
+}) => {
+  // do a map to generate weeklyPlanners to match the number of elements in the array userWeeks (get from parent)
+  const weeklyPlanners = userWeeks.map((week) => (
+    <WeeklyPlanner
+      key={week.weekId}
+      id={week.weekId}
+      plannedRecipes={week.weekMeals}
+      handleDelete={handleDelete}
+      userWeeks={setUserWeeks}
+      daysData={daysData}
+    />
+  ));
+
   return (
     <div className="border border-green-800">
-      <WeeklyPlanner
+      {/* <WeeklyPlanner
         plannedRecipes={plannedRecipes}
         handleDelete={handleDelete}
-      />
+      /> */}
+      {weeklyPlanners}
       <div className="flex justify-center gap-4">
         <AddWeeklyPlannerButton />
         <CreateListButton />
