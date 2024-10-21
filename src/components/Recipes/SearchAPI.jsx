@@ -32,15 +32,15 @@ const SearchAPI = ({ setRecipesData }) => {
 
   return (
     <>
-    <div className="flex justify-center pb-2 mb-2 border-b-[1px] border-lineGreen">
-      <div className="flex flex-row"> 
+    <div className="flex justify-center pb-2 border-b-[1px] border-lineGreen">
+      <div className="flex flex-row items-start flex-wrap justify-center"> 
         <form onSubmit={handleSearch}>
-          <label htmlFor="search"></label>
+          {/* <label htmlFor="search"></label> */}
           <input
             type="text"
             placeholder="Search recipes"
             value={searchInput}
-            className="mx-[3px]"
+            className="mx-[3px] mb-2"
             onChange={(e) => setSearchInput(e.target.value)}
           />
           {/* Search by dropdown */}
@@ -58,7 +58,9 @@ const SearchAPI = ({ setRecipesData }) => {
           </select> */}
           <button type="submit">Search</button>
         </form>
-        <AddUserRecipeButton />
+        <div className="flex item-stretch h-[28px]">
+          <AddUserRecipeButton />
+        </div>
       </div>
     </div>
     </>

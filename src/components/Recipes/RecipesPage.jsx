@@ -31,14 +31,14 @@ const RecipesPage = () => {
   });
 
   return (
-    <div className="my-4 flex flex-col items-center h-[90vh]">
+    <div className="flex flex-col items-center h-[90vh] box-border">
       {displayModal && (
         <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
       )}
       <div className="flex flex-col items-center h-full">
-        <h1 className="mb-4 text-2xl text-center">Recipes Page</h1>
+        <h1 className="my-4 text-2xl text-center">Recipes Page</h1>
         <SearchAPI setRecipesData={setRecipesData} />
-        <div className="flex flex-col items-stretch overflow-auto max-w-md w-[95vw]">
+        <div className="flex flex-col items-stretch overflow-auto max-w-[400px] w-[95vw]">
           {recipeCards}
         </div>
       </div>
