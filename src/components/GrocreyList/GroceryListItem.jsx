@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const GroceryListItem = () => {
   const groceryList = useSelector((state) => state.groceryList);
-  console.log(groceryList);
 
   const testData = groceryList;
 
