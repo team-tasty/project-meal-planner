@@ -2,6 +2,7 @@ import groceryListPracticeData from "./groceryListPracticeData.js"
 import userWeeksExampleRes2 from "./userWeeksExampleRes2.js" 
 import unitCombine from "./unitCombine.js"
 import util from 'util'
+import similarIngredient from "./similarIngredient.js"
 
 const groceryList = (objRecipes) => {
     let ingredientArr = []
@@ -39,13 +40,15 @@ const groceryList = (objRecipes) => {
         ingredientArr[i].ingredient = ingredientArr[i].ingredient.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|mashed ?|whipped ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold /gi, "")
     }
     ingredientArr.sort((a, b) => {
+
         // Removes the 's' at the end of a pluralized word to normalize singular/plural forms
-        const singularA = a.ingredient.replace(/(es|s)$/, '')
-        const singularB = b.ingredient.replace(/(es|s)$/, '')
+        const singularA = a.ingredient.replace(/(es|s)$/, '').split(/\s+/)
+        const singularB = b.ingredient.replace(/(es|s)$/, '').split(/\s+/)
+        // For ingredients with 
 
         // Compare the singular forms alphabetically
-        if (singularA < singularB) return -1
-        if (singularA > singularB) return 1
+        if (singularA[singularA.length - 1] < singularB[singularB.length - 1]) return -1
+        if (singularA[singularA.length - 1] > singularB[singularB.length - 1]) return 1
 
         // If both are the same length, check the unit and organize alphabetically
         // We're also sorting first by standard units, and then other units
@@ -65,6 +68,7 @@ const groceryList = (objRecipes) => {
 
         return 0
     })
+    console.log(ingredientArr)
     // console.log(util.inspect(ingredientArr, {maxArrayLength: null}))
 
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
@@ -76,28 +80,61 @@ const groceryList = (objRecipes) => {
             i < ingredientArr.length 
             &&
             ( 
-            i === 0 || 
-            ingredientArr[i].unit !== ingredientArr[(i-1)].unit ||
-            (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient)
+            i === 0 
+            || 
+            // (ingredientArr[i].unit !== ingredientArr[(i-1)].unit && 
+            // `${ingredientArr[i].unit}s` !== ingredientArr[(i-1)].unit &&
+            // ingredientArr[i].unit !== `${ingredientArr[(i-1)].unit}s` &&
+            ((`${ingredientArr[i].unit}es` !== ingredientArr[(i-1)].unit &&
+            ingredientArr[i].unit !== `${ingredientArr[(i-1)].unit}es`) &&
+            (!similarIngredient(ingredientArr[i].unit, ingredientArr[(i-1)].unit)))
+            ||
+            // (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient && 
+            ((ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient) &&
+            (!similarIngredient(ingredientArr[i].ingredient, ingredientArr[(i-1)].ingredient)))
             )
         )
         && 
         // Check if the next ingredient matches
+        // (
+        //     i+1 < ingredientArr.length && 
+        //     (ingredientArr[i].ingredient === ingredientArr[(i+1)].ingredient || `${ingredientArr[i].ingredient}s` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}s` || `${ingredientArr[i].ingredient}es` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}es`)
+        // )
         (
-            i+1 < ingredientArr.length && 
-            (ingredientArr[i].ingredient === ingredientArr[(i+1)].ingredient || `${ingredientArr[i].ingredient}s` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}s` || `${ingredientArr[i].ingredient}es` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}es`)
+            i+1 < ingredientArr.length &&
+            ((`${ingredientArr[i].ingredient}es` === ingredientArr[(i+1)].ingredient || ingredientArr[i].ingredient === `${ingredientArr[(i+1)].ingredient}es`) ||
+            similarIngredient(ingredientArr[i].ingredient, ingredientArr[i+1].ingredient))
         )
         &&
         // Check if the units are the same
-        (ingredientArr[i].unit === ingredientArr[(i+1)].unit)
+        // (ingredientArr[i].unit === ingredientArr[(i+1)].unit || 
+        // `${ingredientArr[i].unit}s` === ingredientArr[(i+1)].unit ||
+        // ingredientArr[i].unit === `${ingredientArr[(i+1)].unit}s` ||
+        // `${ingredientArr[i].unit}es` === ingredientArr[(i+1)].unit ||
+        // ingredientArr[i].unit === `${ingredientArr[(i+1)].unit}es`
+        // )
+        ((`${ingredientArr[i].unit}es` === ingredientArr[(i+1)].unit ||
+        ingredientArr[i].unit === `${ingredientArr[(i+1)].unit}es`) ||
+        similarIngredient(ingredientArr[i].unit, ingredientArr[i+1].unit))
         ) 
         {
             for (let j = i; j < ingredientArr.length; j++) {
                 // sums the quantities of all matching ingredients **********
                 if (
-                    (j === i || ingredientArr[j].ingredient === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}s` || `${ingredientArr[j].ingredient}s` === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient)
+                    // (j === i || ingredientArr[j].ingredient === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}s` || `${ingredientArr[j].ingredient}s` === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient)
+                    ((j === i || 
+                    similarIngredient(ingredientArr[j].ingredient, ingredientArr[j-1].ingredient) || (ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient)))
                     &&
-                    (j === i || ingredientArr[j].unit === ingredientArr[(j-1)].unit)
+                    (j === i || 
+                    // ingredientArr[j].unit === ingredientArr[(j-1)].unit || 
+                    // `${ingredientArr[j].unit}s` === ingredientArr[(j-1)].unit ||
+                    // ingredientArr[j].unit === `${ingredientArr[(j-1)].unit}s` ||
+                    // `${ingredientArr[j].unit}es` === ingredientArr[(j-1)].unit ||
+                    // ingredientArr[j].unit === `${ingredientArr[(j-1)].unit}es`
+                    (`${ingredientArr[j].unit}es` === ingredientArr[(j-1)].unit ||
+                    ingredientArr[j].unit === `${ingredientArr[(j-1)].unit}es`) ||
+                    similarIngredient(ingredientArr[j].unit, ingredientArr[j-1].unit)
+                    )
                 ) {
                     qtySum += ingredientArr[j].quantity
                 } else {
@@ -132,7 +169,21 @@ const groceryList = (objRecipes) => {
             }
 
         // If we don't match the above, then just place the entry into the array
-        } else if (i === 0 || ingredientArr[i].unit !== ingredientArr[i-1].unit || (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient)
+        } else if (
+            i === 0 
+            || 
+            // (ingredientArr[i].unit !== ingredientArr[(i-1)].unit && 
+            // `${ingredientArr[i].unit}s` !== ingredientArr[(i-1)].unit &&
+            // ingredientArr[i].unit !== `${ingredientArr[(i-1)].unit}s` &&
+            // `${ingredientArr[i].unit}es` !== ingredientArr[(i-1)].unit &&
+            // ingredientArr[i].unit !== `${ingredientArr[(i-1)].unit}es`)
+            (`${ingredientArr[i].unit}es` !== ingredientArr[(i-1)].unit &&
+            ingredientArr[i].unit !== `${ingredientArr[(i-1)].unit}es`) &&
+            (!similarIngredient(ingredientArr[i].unit, ingredientArr[(i-1)].unit)) 
+            || 
+            // (ingredientArr[i].ingredient !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}s` && `${ingredientArr[i].ingredient}s` !== ingredientArr[(i-1)].ingredient && ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient)
+            (ingredientArr[i].ingredient !== `${ingredientArr[(i-1)].ingredient}es` && `${ingredientArr[i].ingredient}es` !== ingredientArr[(i-1)].ingredient) &&
+            (!similarIngredient(ingredientArr[i].ingredient, ingredientArr[(i-1)].ingredient))
         ) {
                 finalArr.push({...ingredientArr[i]})
         }
