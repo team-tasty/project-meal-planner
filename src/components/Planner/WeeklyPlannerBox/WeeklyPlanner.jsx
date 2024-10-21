@@ -64,12 +64,12 @@ const WeeklyPlanner = ({
   }, []);
 
   return (
-    <div className="w-[95vw] flex flex-col mb-3">
+    <div className="w-[95vw] lg:w-[35vw] flex flex-col mb-3 max-w-[600px] lg:items-center">
       <div className="flex items-center justify-center">
-        <h2>Week {weekNumber}</h2>
+        <h2 className="font-bold mt-1">Week {weekNumber}</h2>
       </div>
       {dayCards}
-      <div className="flex justify-center gap-4 m-2">
+      <div className="flex justify-center gap-4 m-2 lg:mt-4">
         <ResetWeeklyPlannerButton weekId={weekId} setUserWeeks={setUserWeeks} />
         <RemoveWeeklyPlannerButton
           weekId={weekId}

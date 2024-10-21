@@ -17,7 +17,7 @@ const RemoveWeeklyPlannerButton = ({ weekId, setUserWeeks, userWeeks }) => {
 
   return (
     <div>
-      <button className="text-xs" onClick={handleRemoveWeek}>
+      <button className="text-xs lg:text-small" onClick={handleRemoveWeek}>
         Remove Current Week
       </button>
     </div>

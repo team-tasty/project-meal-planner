@@ -137,4 +137,12 @@
     transition-duration: 700ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .time-picker-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .time-picker-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #bdbfc0;
+    border-radius: 9999px;
+  }
 }
