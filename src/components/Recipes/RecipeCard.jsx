@@ -220,7 +220,7 @@ const RecipeCard = ({
       {handleDelete && (
         <FaRegTrashCan
           size={25}
-          className="mx-1 cursor-pointer"
+          className="mx-1 cursor-pointer shrink-0"
           onClick={(e) => {
             handleDelete(weekMealId);
             e.stopPropagation();

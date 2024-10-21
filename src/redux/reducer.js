@@ -22,6 +22,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         userId: null,
         loading: false,
+        groceryList: [],
       };
 
     case "LOADING":
