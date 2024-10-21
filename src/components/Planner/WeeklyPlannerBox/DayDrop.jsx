@@ -51,7 +51,7 @@ const DayDrop = ({
           <div className="flex items-center">
             <h2>{day.day}:</h2>
           </div>
-          <div className="flex flex-col mt-1 pb-2 mb-2 border-b-[1px] w-[70vw] lg:w-[30vw] border-lineGreen">
+          <div className="flex flex-col mt-1 pb-2 mb-2 border-b-[1px] w-[70vw] lg:w-[30vw] max-w-[430px] border-lineGreen">
             {recipeCards}
           </div>
           {displayModal && (

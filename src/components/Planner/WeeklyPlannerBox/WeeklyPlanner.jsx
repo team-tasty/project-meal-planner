@@ -64,7 +64,7 @@ const WeeklyPlanner = ({
   }, []);
 
   return (
-    <div className="w-[95vw] lg:w-[35vw] flex flex-col mb-3 lg:items-center">
+    <div className="w-[95vw] lg:w-[35vw] flex flex-col mb-3 max-w-[600px] lg:items-center">
       <div className="flex items-center justify-center">
         <h2 className="font-bold mt-1">Week {weekNumber}</h2>
       </div>
