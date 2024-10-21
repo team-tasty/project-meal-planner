@@ -26,8 +26,10 @@ const WeeklyPlannerBox = ({
   ));
 
   return (
-    <div className="">
-      {weeklyPlanners}
+    <div>
+      <div className="border border-black rounded-md overflow-auto">
+        {weeklyPlanners}
+      </div>
       <div className="flex justify-center gap-4">
         <AddWeeklyPlannerButton
           setUserWeeks={setUserWeeks}

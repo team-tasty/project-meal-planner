@@ -90,7 +90,7 @@ const PlannerPage = () => {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div className="flex flex-col justify-between items-center">
-        <div className="flex flex-col h-[30vh] overflow-auto">
+        <div className="flex flex-col h-[30vh] overflow-auto my-3 border border-black rounded-md">
           <UserRecipes
             userRecipes={userRecipes}
             setUserRecipes={setUserRecipes}

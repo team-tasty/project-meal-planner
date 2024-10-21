@@ -24,7 +24,7 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
         >
           {(provided, snapshot) => (
             <div
-              className="my-2"
+              className=""
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
@@ -48,7 +48,7 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
   console.log(recipeCards);
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="flex justify-center pb-2 mb-2 border-b-[1px] border-lineGreen">
         <form className="flex items-center">
           <label htmlFor="search"></label>
@@ -71,7 +71,7 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
           />
         )}
       </div>
-      <div className="">{recipeCards}</div>
+      <div className="flex flex-col w-[70vw]">{recipeCards}</div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const UserRecipes = ({ userRecipes, setUserRecipes }) => {
     <Droppable droppableId="droppable-user-recipes">
       {(provided) => (
         <div
-          className=" w-[95vw] border border-black flex flex-col items-center"
+          className=" w-[95vw] flex flex-col items-center"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
