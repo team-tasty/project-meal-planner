@@ -10,16 +10,15 @@ const UserRecipes = ({ userRecipes, setUserRecipes }) => {
     <Droppable droppableId="droppable-user-recipes">
       {(provided) => (
         <div
-          className=" w-[350px] border border-black"
+          className=" w-[95vw] border border-black flex flex-col items-center"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <h2>Saved Recipes:</h2>
+          <h2>Saved Recipes</h2>
           <SearchRecipes
             recipesData={userRecipes}
             setRecipesData={setUserRecipes}
           />
-          <AddUserRecipeButton />
           {provided.placeholder}
         </div>
       )}

@@ -89,23 +89,21 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex justify-between h-[90vh]">
-        <div>
-          Weekly Planner
-          <div className="flex justify-between w-[98vw]">
-            <WeeklyPlannerBox
-              // plannedRecipes={plannedRecipes}
-              handleDelete={handleDelete}
-              userWeeks={userWeeks}
-              setUserWeeks={setUserWeeks}
-              daysData={daysData}
-              handleOnDragEnd={handleOnDragEnd}
-            />
-            <UserRecipes
-              userRecipes={userRecipes}
-              setUserRecipes={setUserRecipes}
-            />
-          </div>
+      <div className="flex flex-col justify-between items-center">
+        <div className="flex flex-col h-[30vh] overflow-auto">
+          <UserRecipes
+            userRecipes={userRecipes}
+            setUserRecipes={setUserRecipes}
+          />
+        </div>
+        <div className="flex flex-col h-[60vh] overflow-auto">
+          <WeeklyPlannerBox
+            handleDelete={handleDelete}
+            userWeeks={userWeeks}
+            setUserWeeks={setUserWeeks}
+            daysData={daysData}
+            handleOnDragEnd={handleOnDragEnd}
+          />
         </div>
       </div>
     </DragDropContext>

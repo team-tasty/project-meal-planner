@@ -44,11 +44,11 @@ const DayDrop = ({
     <Droppable droppableId={`${weekId}-${day.dayId}`} direction="vertical">
       {(provided) => (
         <div
-          className="min-h-20 min-w-[800px] border border-black flex"
+          className="flex pb-2 mb-2 border-b-[1px] min-h-[100px] border-lineGreen"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <div className="mt-5">
+          <div className="flex items-center">
             <h2>{day.day}:</h2>
           </div>
           <div className="flex flex-col mt-5">{recipeCards}</div>
