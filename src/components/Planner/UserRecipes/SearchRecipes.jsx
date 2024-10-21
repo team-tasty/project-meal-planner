@@ -2,6 +2,7 @@ import { useState } from "react";
 import RecipeCard from "../../Recipes/RecipeCard";
 import { Draggable } from "@hello-pangea/dnd";
 import RecipeModal from "../../Recipes/RecipeModal";
+import AddUserRecipeButton from "../../Recipes/AddUserRecipeButton";
 
 const SearchRecipes = ({ recipesData, setRecipesData }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -23,6 +24,7 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
         >
           {(provided, snapshot) => (
             <div
+              className=""
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
@@ -46,21 +48,30 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
   console.log(recipeCards);
 
   return (
-    <div>
-      <form>
-        <label htmlFor="search"></label>
-        <input
-          type="text"
-          placeholder="Search recipes"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-      {displayModal && (
-        <RecipeModal setDisplayModal={setDisplayModal} modalData={modalData} />
-      )}
-      {recipeCards}
+    <div className="flex flex-col items-center">
+      <div className="flex justify-center pb-2 mb-2 border-b-[1px] border-lineGreen">
+        <form className="flex items-center">
+          <label htmlFor="search"></label>
+          <input
+            className="w-40 h-6"
+            type="text"
+            placeholder="Search recipes"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <button className="text-xs h-6 flex items-center" type="submit">
+            Search
+          </button>
+        </form>
+        <AddUserRecipeButton />
+        {displayModal && (
+          <RecipeModal
+            setDisplayModal={setDisplayModal}
+            modalData={modalData}
+          />
+        )}
+      </div>
+      <div className="flex flex-col w-[70vw]">{recipeCards}</div>
     </div>
   );
 };

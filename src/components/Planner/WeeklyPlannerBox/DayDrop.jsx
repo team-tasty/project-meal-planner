@@ -44,14 +44,16 @@ const DayDrop = ({
     <Droppable droppableId={`${weekId}-${day.dayId}`} direction="vertical">
       {(provided) => (
         <div
-          className="min-h-20 min-w-[800px] border border-black flex"
+          className="flex justify-between mx-3 min-h-[100px]"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <div className="mt-5">
+          <div className="flex items-center">
             <h2>{day.day}:</h2>
           </div>
-          <div className="flex flex-col mt-5">{recipeCards}</div>
+          <div className="flex flex-col mt-1 pb-2 mb-2 border-b-[1px] w-[70vw] border-lineGreen">
+            {recipeCards}
+          </div>
           {displayModal && (
             <RecipeModal
               setDisplayModal={setDisplayModal}

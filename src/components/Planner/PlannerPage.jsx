@@ -4,6 +4,8 @@ import { DragDropContext } from "@hello-pangea/dnd";
 import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
+import AddWeeklyPlannerButton from "./WeeklyPlannerBox/AddWeeklyPlannerButton.jsx";
+import FullGroceryListButton from "./WeeklyPlannerBox/FullGroceryListButton.jsx";
 
 const PlannerPage = () => {
   // get userRecipes from a loader function?
@@ -89,23 +91,28 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex justify-between h-[90vh]">
-        <div>
-          Weekly Planner
-          <div className="flex justify-between w-[98vw]">
-            <WeeklyPlannerBox
-              // plannedRecipes={plannedRecipes}
-              handleDelete={handleDelete}
-              userWeeks={userWeeks}
-              setUserWeeks={setUserWeeks}
-              daysData={daysData}
-              handleOnDragEnd={handleOnDragEnd}
-            />
-            <UserRecipes
-              userRecipes={userRecipes}
-              setUserRecipes={setUserRecipes}
-            />
-          </div>
+      <div className="flex flex-col justify-between items-center h-[90vh] box-border">
+        <div className="flex flex-col h-[30vh] mt-4 overflow-auto border border-black rounded-md">
+          <UserRecipes
+            userRecipes={userRecipes}
+            setUserRecipes={setUserRecipes}
+          />
+        </div>
+        <div className="flex flex-col h-[50vh] overflow-auto border border-black rounded-md">
+          <WeeklyPlannerBox
+            handleDelete={handleDelete}
+            userWeeks={userWeeks}
+            setUserWeeks={setUserWeeks}
+            daysData={daysData}
+            handleOnDragEnd={handleOnDragEnd}
+          />
+        </div>
+        <div className="flex justify-center items-center gap-4 h-[5vh]">
+          <AddWeeklyPlannerButton
+            setUserWeeks={setUserWeeks}
+            userWeeks={userWeeks}
+          />
+          <FullGroceryListButton />
         </div>
       </div>
     </DragDropContext>

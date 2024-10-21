@@ -13,6 +13,7 @@ const WeeklyPlanner = ({
   daysData,
   weekId,
   handleOnDragEnd,
+  weekNumber,
 }) => {
   // set state values
   // const [daysData, setDaysData] = useState([
@@ -63,9 +64,12 @@ const WeeklyPlanner = ({
   }, []);
 
   return (
-    <div className="border border-blue-800">
+    <div className="w-[95vw] flex flex-col mb-3">
+      <div className="flex items-center justify-center">
+        <h2>Week {weekNumber}</h2>
+      </div>
       {dayCards}
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-4 m-2">
         <ResetWeeklyPlannerButton weekId={weekId} setUserWeeks={setUserWeeks} />
         <RemoveWeeklyPlannerButton
           weekId={weekId}

@@ -145,7 +145,7 @@ const RecipeCard = ({
     }
   }, [externalIds, recipesData]);
 
-  console.log(`${recipe.title} image:`, recipe.image)
+  console.log(`${recipe.title} image:`, recipe.image);
 
   return externalIds ? (
     <div
@@ -155,17 +155,17 @@ const RecipeCard = ({
       }}
       className="recipeCard my-2 mx-[2px] flex justify-between items-center"
     >
-      {recipe.image &&
+      {recipe.image && (
         <img
           src={`${recipe.image}`}
           className="h-20 w-24 m-1 rounded-[5px] shrink-0"
         />
-      }
-      {!recipe.image &&
+      )}
+      {!recipe.image && (
         <div className="h-20 w-24 m-1 rounded-[5px] shrink-0 flex justify-center items-center">
-          <PiBowlFood size={25}/>
+          <PiBowlFood size={25} />
         </div>
-      }
+      )}
       <div className="grow m-1">
         <h1 className="line-clamp-2">{recipe.title}</h1>
         <h3>{recipe.category}</h3>
@@ -173,7 +173,7 @@ const RecipeCard = ({
       {handleDelete && (
         <FaRegTrashCan
           size={25}
-          className="mx-1 cursor-pointer"
+          className="mx-1 cursor-pointer shrink-0"
           onClick={(e) => {
             handleDelete(dayIndex, index);
             e.stopPropagation();
@@ -200,16 +200,19 @@ const RecipeCard = ({
         setModalData(recipe.recipe);
         setDisplayModal(!displayModal);
       }}
-      className="recipeCard flex justify-between items-center"
+      className="recipeCard my-2 flex justify-between items-center"
     >
-      {recipe.recipe.image &&
-        <img src={`${recipe.recipe.image}`} className="h-20 w-24 m-1 rounded-[5px] shrink-0" />
-      }
-      {!recipe.recipe.image &&
+      {recipe.recipe.image && (
+        <img
+          src={`${recipe.recipe.image}`}
+          className="h-20 w-24 m-1 rounded-[5px] shrink-0"
+        />
+      )}
+      {!recipe.recipe.image && (
         <div className="h-20 w-24 m-1 rounded-[5px] shrink-0 flex justify-center items-center">
-          <PiBowlFood size={25}/>
+          <PiBowlFood size={25} />
         </div>
-      }
+      )}
       <div className="grow m-1">
         <h1 className="line-clamp-2">{recipe.recipe.title}</h1>
         <h3>{recipe.recipe.category}</h3>

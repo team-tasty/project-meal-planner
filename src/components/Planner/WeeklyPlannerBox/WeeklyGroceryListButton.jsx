@@ -23,7 +23,9 @@ const WeeklyGroceryListButton = ({ weekId }) => {
   };
   return (
     <div>
-      <button onClick={handleGeneratelist}>Generate Grocery List</button>
+      <button className="text-xs" onClick={handleGeneratelist}>
+        Generate Grocery List
+      </button>
     </div>
   );
 };

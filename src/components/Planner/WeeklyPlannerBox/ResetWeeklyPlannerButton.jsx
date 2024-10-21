@@ -12,7 +12,9 @@ const ResetWeeklyPlannerButton = ({ weekId, setUserWeeks }) => {
   };
   return (
     <div>
-      <button onClick={handleResetWeek}>Reset Weekly Planner</button>
+      <button className="text-xs" onClick={handleResetWeek}>
+        Reset Weekly Planner
+      </button>
     </div>
   );
 };

@@ -11,10 +11,11 @@ const WeeklyPlannerBox = ({
   handleOnDragEnd,
 }) => {
   // do a map to generate weeklyPlanners to match the number of elements in the array userWeeks (get from parent)
-  const weeklyPlanners = userWeeks.map((week) => (
+  const weeklyPlanners = userWeeks.map((week, index) => (
     <WeeklyPlanner
       key={week.weekId}
       weekId={week.weekId}
+      weekNumber={index + 1}
       plannedRecipes={week.weekMeals}
       handleDelete={handleDelete}
       userWeeks={userWeeks}
@@ -25,19 +26,15 @@ const WeeklyPlannerBox = ({
   ));
 
   return (
-    <div className="border border-green-800">
-      {/* <WeeklyPlanner
-        plannedRecipes={plannedRecipes}
-        handleDelete={handleDelete}
-      /> */}
-      {weeklyPlanners}
-      <div className="flex justify-center gap-4">
+    <div>
+      <div className="">{weeklyPlanners}</div>
+      {/* <div className="flex justify-center gap-4">
         <AddWeeklyPlannerButton
           setUserWeeks={setUserWeeks}
           userWeeks={userWeeks}
         />
         <CreateListButton />
-      </div>
+      </div> */}
     </div>
   );
 };
