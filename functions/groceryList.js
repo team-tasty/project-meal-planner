@@ -33,11 +33,11 @@ const groceryList = (objRecipes) => {
     }
     // We need to remove the adjectives from the words. Modifiers such as "chopped", "minced", etc. should be removed to allow for better combining
     for (let i = 0; i < ingredientArr.length; i++) {
-        ingredientArr[i].unit = ingredientArr[i].unit.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|whipped ?|mashed ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold /gi, "")
+        ingredientArr[i].unit = ingredientArr[i].unit.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|whipped ?|mashed ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold |shredded ?|grated ?/gi, "")
         if (ingredientArr[i].unit === "") {
             ingredientArr[i].unit = "null"
         }
-        ingredientArr[i].ingredient = ingredientArr[i].ingredient.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|mashed ?|whipped ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold /gi, "")
+        ingredientArr[i].ingredient = ingredientArr[i].ingredient.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|mashed ?|whipped ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold |shredded ?|grated ?/gi, "")
     }
     ingredientArr.sort((a, b) => {
 
@@ -46,9 +46,19 @@ const groceryList = (objRecipes) => {
         const singularB = b.ingredient.replace(/(es|s)$/, '').split(/\s+/)
         // For ingredients with 
 
-        // Compare the singular forms alphabetically
+        // Compare the singular forms alphabetically, using the last word
         if (singularA[singularA.length - 1] < singularB[singularB.length - 1]) return -1
         if (singularA[singularA.length - 1] > singularB[singularB.length - 1]) return 1
+
+        // If the end words are the same, organize by the second to last word
+        if (singularA.length > 1 && singularB.length > 1) {
+            if (singularA[singularA.length - 2] < singularB[singularB.length - 2]) return -1
+            if (singularA[singularA.length - 2] > singularB[singularB.length - 2]) return 1
+        } else if (singularA.length === 1 && singularB.length > 1) {
+            return -1
+        } else if (singularA.length > 1 && singularB.length === 1) {
+            return 1
+        }
 
         // If both are the same length, check the unit and organize alphabetically
         // We're also sorting first by standard units, and then other units
