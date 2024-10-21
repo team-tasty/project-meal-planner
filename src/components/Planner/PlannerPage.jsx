@@ -4,6 +4,8 @@ import { DragDropContext } from "@hello-pangea/dnd";
 import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import axios from "axios";
+import AddWeeklyPlannerButton from "./WeeklyPlannerBox/AddWeeklyPlannerButton.jsx";
+import FullGroceryListButton from "./WeeklyPlannerBox/FullGroceryListButton.jsx";
 
 const PlannerPage = () => {
   // get userRecipes from a loader function?
@@ -89,14 +91,14 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex flex-col justify-between items-center">
-        <div className="flex flex-col h-[30vh] overflow-auto my-3 border border-black rounded-md">
+      <div className="flex flex-col justify-between items-center h-[90vh] box-border">
+        <div className="flex flex-col h-[30vh] mt-4 overflow-auto border border-black rounded-md">
           <UserRecipes
             userRecipes={userRecipes}
             setUserRecipes={setUserRecipes}
           />
         </div>
-        <div className="flex flex-col h-[60vh] overflow-auto">
+        <div className="flex flex-col h-[50vh] overflow-auto border border-black rounded-md">
           <WeeklyPlannerBox
             handleDelete={handleDelete}
             userWeeks={userWeeks}
@@ -104,6 +106,13 @@ const PlannerPage = () => {
             daysData={daysData}
             handleOnDragEnd={handleOnDragEnd}
           />
+        </div>
+        <div className="flex justify-center items-center gap-4 h-[5vh]">
+          <AddWeeklyPlannerButton
+            setUserWeeks={setUserWeeks}
+            userWeeks={userWeeks}
+          />
+          <FullGroceryListButton />
         </div>
       </div>
     </DragDropContext>
