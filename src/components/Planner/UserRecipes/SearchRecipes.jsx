@@ -71,7 +71,7 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
           />
         )}
       </div>
-      <div className="flex flex-col w-[70vw]">{recipeCards}</div>
+      <div className="flex flex-col w-[70vw] lg:w-[30vw]">{recipeCards}</div>
     </div>
   );
 };

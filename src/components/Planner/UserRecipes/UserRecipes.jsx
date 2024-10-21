@@ -10,11 +10,11 @@ const UserRecipes = ({ userRecipes, setUserRecipes }) => {
     <Droppable droppableId="droppable-user-recipes">
       {(provided) => (
         <div
-          className=" w-[95vw] flex flex-col items-center"
+          className=" w-[95vw] lg:w-[35vw] flex flex-col items-center"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <h2>Saved Recipes</h2>
+          <h2 className="font-bold my-1">Saved Recipes</h2>
           <SearchRecipes
             recipesData={userRecipes}
             setRecipesData={setUserRecipes}

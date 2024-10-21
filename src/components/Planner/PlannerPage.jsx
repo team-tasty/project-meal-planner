@@ -91,14 +91,14 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex flex-col justify-between items-center h-[90vh] box-border">
-        <div className="flex flex-col h-[30vh] mt-4 overflow-auto border border-black rounded-md">
+      <div className="flex flex-col justify-center items-center h-[90vh] box-border lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
+        <div className="flex flex-col h-[30vh] lg:h-[80vh] lg:w-[40vw] lg:items-center mt-1 lg:mt-6 overflow-auto border border-black rounded-md">
           <UserRecipes
             userRecipes={userRecipes}
             setUserRecipes={setUserRecipes}
           />
         </div>
-        <div className="flex flex-col h-[50vh] overflow-auto border border-black rounded-md">
+        <div className="flex flex-col h-[50vh] overflow-auto border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
           <WeeklyPlannerBox
             handleDelete={handleDelete}
             userWeeks={userWeeks}
@@ -107,7 +107,7 @@ const PlannerPage = () => {
             handleOnDragEnd={handleOnDragEnd}
           />
         </div>
-        <div className="flex justify-center items-center gap-4 h-[5vh]">
+        <div className="flex justify-center items-center gap-4 h-[5vh] lg:h-[7vh] lg:fixed lg:bottom-0 lg:left-48">
           <AddWeeklyPlannerButton
             setUserWeeks={setUserWeeks}
             userWeeks={userWeeks}
