@@ -30,16 +30,14 @@ const groceryList = (objRecipes) => {
         }
   
     }
-    // Old connection
-    // for (let i=0; i < arrRecipes.length; i++) {
-    //     for (let j=0; j < arrRecipes[i].recipeIngredients.length; j++) {
-    //         ingredientArr.push({
-    //             quantity: arrRecipes[i].recipeIngredients[j].measurementQuantity.quantity,
-    //             unit: arrRecipes[i].recipeIngredients[j].measurementUnit.unit,
-    //             ingredient: arrRecipes[i].recipeIngredients[j].ingredient.ingredient
-    //         })
-    //     }       
-    // }
+    // We need to remove the adjectives from the words. Modifiers such as "chopped", "minced", etc. should be removed to allow for better combining
+    for (let i = 0; i < ingredientArr.length; i++) {
+        ingredientArr[i].unit = ingredientArr[i].unit.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|whipped ?|mashed ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold /gi, "")
+        if (ingredientArr[i].unit === "") {
+            ingredientArr[i].unit = "null"
+        }
+        ingredientArr[i].ingredient = ingredientArr[i].ingredient.replace(/chopped ?|minced ?|diced ?|sliced ?|peeled ?|cubed ?|julienned ?|whisked ?|blended ?|mashed ?|whipped ?|pur[ée]eed ?|roasted ?|baked ?|boiled ?|steamed ?|saut[ée]ed|simmered ?|grilled ?|broiled ?|caramelized ?|poached ?|large ?|medium ?|small ?|finely ?|coarsely ?|hot |cold /gi, "")
+    }
     ingredientArr.sort((a, b) => {
         // Removes the 's' at the end of a pluralized word to normalize singular/plural forms
         const singularA = a.ingredient.replace(/(es|s)$/, '')
