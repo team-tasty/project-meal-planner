@@ -1,6 +1,3 @@
-import groceryList from "../../../functions/groceryList.js";
-import groceryListPracticeData from "../../../functions/groceryListPracticeData.js";
-import userWeeksExampleRes2 from "../../../functions/userWeeksExampleRes2.js";
 import { useSelector } from "react-redux";
 
 const GroceryListItem = () => {
@@ -135,10 +132,6 @@ const GroceryListItem = () => {
         </li>
       );
     });
-
-  // useEffect(() => {
-
-  // }, [groceryList])
 
   return (
     <>

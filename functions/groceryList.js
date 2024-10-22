@@ -1,7 +1,4 @@
-import groceryListPracticeData from "./groceryListPracticeData.js"
-import userWeeksExampleRes2 from "./userWeeksExampleRes2.js" 
 import unitCombine from "./unitCombine.js"
-import util from 'util'
 import similarIngredient from "./similarIngredient.js"
 
 const groceryList = (objRecipes) => {
@@ -78,7 +75,6 @@ const groceryList = (objRecipes) => {
 
         return 0
     })
-    // console.log(util.inspect(ingredientArr, {maxArrayLength: null}))
 
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
     let qtySum = 0
@@ -126,7 +122,7 @@ const groceryList = (objRecipes) => {
             // similarIngredient(ingredientArr[i].unit, ingredientArr[i+1].unit))
             ) {
             for (let j = i; j < ingredientArr.length; j++) {
-                // sums the quantities of all matching ingredients **********
+                // sums the quantities of all matching ingredients
                 if (
                     // (j === i || ingredientArr[j].ingredient === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}s` || `${ingredientArr[j].ingredient}s` === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient)
                     ((j === i || 
