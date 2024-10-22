@@ -53,9 +53,10 @@
   button {
     padding: 2px 8px;
     margin: 0px 3px;
-    background-color: #68b800;
+    background-color: #529100;
     border-radius: 5px;
     font-family: "Montserrat-Regular";
+    color: white;
   }
 
   button.focus {
@@ -66,9 +67,10 @@
 @layer utilities {
   .greenButton {
     padding: 2px 8px;
-    background-color: #68b800;
+    background-color: #529100;
     border-radius: 5px;
     font-family: "Montserrat-Regular";
+    color: white;
   }
 
   .greenButton.focus {
