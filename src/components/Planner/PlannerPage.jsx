@@ -50,14 +50,6 @@ const PlannerPage = () => {
       .weekMeals.filter((weekMeals) => weekMeals.dayId === dayId).length;
     console.log("********", dayArrayLength);
 
-    // Add the item to list 2 (plannedRecipes)
-
-    // const newPlannedRecipes = [...plannedRecipes];
-
-    // if (newPlannedRecipes[+destination.droppableId - 1].length < 3) {
-    //   newPlannedRecipes[+destination.droppableId - 1].push(draggedItem);
-    // }
-
     // set request to update the db
     // make a call to add a weakMeal entry (will need recipeId, weekId, dayId in the body obj)
     const bodyObj = {
@@ -91,32 +83,12 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex flex-col justify-center items-center h-[90vh] lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
-        <div className="time-picker-scrollbar flex flex-col h-[30vh] lg:h-[80vh] lg:w-[40vw] lg:items-center mt-1 lg:mt-6 overflow-auto border border-black rounded-md">
+      <div>
+        <div className="flex flex-col justify-center items-center h-[90vh] box-border lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
           <UserRecipes
             userRecipes={userRecipes}
             setUserRecipes={setUserRecipes}
           />
-        </div>
-        <div className="hidden lg:flex lg:flex-col">
-          <div className="time-picker-scrollbar flex flex-col h-[50vh] overflow-auto border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
-            <WeeklyPlannerBox
-              handleDelete={handleDelete}
-              userWeeks={userWeeks}
-              setUserWeeks={setUserWeeks}
-              daysData={daysData}
-              handleOnDragEnd={handleOnDragEnd}
-            />
-          </div>
-          <div className="flex justify-center items-center gap-4 h-[5vh] lg:h-[7vh]">
-            <AddWeeklyPlannerButton
-              setUserWeeks={setUserWeeks}
-              userWeeks={userWeeks}
-            />
-            <FullGroceryListButton />
-          </div>
-        </div>
-        <div className="flex flex-col h-[50vh] time-picker-scrollbar overflow-auto lg:hidden border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
           <WeeklyPlannerBox
             handleDelete={handleDelete}
             userWeeks={userWeeks}
@@ -124,16 +96,46 @@ const PlannerPage = () => {
             daysData={daysData}
             handleOnDragEnd={handleOnDragEnd}
           />
-        </div>
-        <div className="flex justify-center lg:hidden items-center gap-4 h-[5vh] lg:h-[7vh]">
-          <AddWeeklyPlannerButton
-            setUserWeeks={setUserWeeks}
-            userWeeks={userWeeks}
-          />
-          <FullGroceryListButton />
+          <div className="flex justify-center items-center gap-4 h-[5vh] lg:h-[7vh] lg:fixed lg:bottom-0">
+            <AddWeeklyPlannerButton
+              setUserWeeks={setUserWeeks}
+              userWeeks={userWeeks}
+            />
+            <FullGroceryListButton />
+          </div>
         </div>
       </div>
     </DragDropContext>
+    //     <div className="hidden lg:flex lg:flex-col">
+    //       <div className="time-picker-scrollbar flex flex-col h-[50vh] overflow-auto border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
+    //         {/* <WeeklyPlannerBox
+    //           handleDelete={handleDelete}
+    //           userWeeks={userWeeks}
+    //           setUserWeeks={setUserWeeks}
+    //           daysData={daysData}
+    //           handleOnDragEnd={handleOnDragEnd}
+    //         /> */}
+    //       </div>
+
+    //     </div>
+    //     <div className="flex flex-col h-[50vh] overflow-auto lg:hidden border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
+    //       <WeeklyPlannerBox
+    //         handleDelete={handleDelete}
+    //         userWeeks={userWeeks}
+    //         setUserWeeks={setUserWeeks}
+    //         daysData={daysData}
+    //         handleOnDragEnd={handleOnDragEnd}
+    //       />
+    //     </div>
+    //     <div className="flex justify-center lg:hidden items-center gap-4 h-[5vh] lg:h-[7vh]">
+    //       <AddWeeklyPlannerButton
+    //         setUserWeeks={setUserWeeks}
+    //         userWeeks={userWeeks}
+    //       />
+    //       <FullGroceryListButton />
+    //     </div>
+    //   </div>
+    // </DragDropContext>
   );
 };
 

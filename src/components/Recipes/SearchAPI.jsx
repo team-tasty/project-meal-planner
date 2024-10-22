@@ -5,7 +5,6 @@ import AddUserRecipeButton from "./AddUserRecipeButton";
 const SearchAPI = ({ setRecipesData }) => {
   // set state values
   const [searchInput, setSearchInput] = useState("");
-  // const [searchType, setSearchType] = useState("");
 
   // create function to handle search
   const handleSearch = async (e) => {

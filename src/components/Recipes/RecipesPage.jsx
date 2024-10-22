@@ -2,16 +2,12 @@ import SearchAPI from "./SearchAPI";
 import RecipeCard from "./RecipeCard";
 import RecipeModal from "./RecipeModal";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useLoaderData } from "react-router-dom";
-import AddUserRecipeButton from "./AddUserRecipeButton";
 
 const RecipesPage = () => {
   // Mock data to set up card display
   const [recipesData, setRecipesData] = useState(useLoaderData().recipesData);
   const [externalIds, setExternalIds] = useState(useLoaderData().externalIds);
-  console.log(recipesData);
-  console.log(externalIds);
 
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);

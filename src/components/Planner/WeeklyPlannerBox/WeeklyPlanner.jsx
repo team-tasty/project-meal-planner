@@ -15,27 +15,10 @@ const WeeklyPlanner = ({
   handleOnDragEnd,
   weekNumber,
 }) => {
-  // set state values
-  // const [daysData, setDaysData] = useState([
-  //   { dayId: 1, day: "Day 1" },
-  //   { dayId: 2, day: "Day 2" },
-  //   { dayId: 3, day: "Day 3" },
-  //   { dayId: 4, day: "Day 4" },
-  //   { dayId: 5, day: "Day 5" },
-  //   { dayId: 6, day: "Day 6" },
-  //   { dayId: 7, day: "Day 7" },
-  // ]);
-  // console.log(userWeeks);
-  // console.log(plannedRecipes);
-  // map over plannedRecipes will give us each object (weekMeal) in that week
-
   const dayCards = daysData.map((day, index) => {
     const weekMealObjs = plannedRecipes.filter((weekMeal) => {
       return weekMeal.day.dayId === day.dayId;
     });
-
-    // console.log(`days recipe objects:`, weekMealObjs);
-    // console.log("weekId?", weekMealObjs[0].weekId);
 
     return (
       <DayDrop
@@ -64,7 +47,7 @@ const WeeklyPlanner = ({
   }, []);
 
   return (
-    <div className="w-[95vw] lg:w-[35vw] flex flex-col mb-3 max-w-[600px] lg:items-center">
+    <div className="">
       <div className="flex items-center justify-center">
         <h2 className="font-bold mt-1">Week {weekNumber}</h2>
       </div>
