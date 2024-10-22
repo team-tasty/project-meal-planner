@@ -1,5 +1,6 @@
 import handleConversion from "./handleConversion.js"
 import handleCategory from "./handleCategory.js"
+import similarIngredient from "./similarIngredient.js"
 
 const conversionVolSet = new Set (["C", "pt", "qt", "gal", "oz", "tsp", "Tbsp", "ml", "L"])
 const conversionWeightSet = new Set(["lb", "g", "kg"])
@@ -10,7 +11,9 @@ const unitCombine = (arrIng) => {
         if (
             i + 1 < arrIng.length 
             &&
-            (arrIng[i].ingredient === arrIng[i+1].ingredient || `${arrIng[i].ingredient}s` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}s` || `${arrIng[i].ingredient}es` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}es`) 
+            // (arrIng[i].ingredient === arrIng[i+1].ingredient || `${arrIng[i].ingredient}s` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}s` || 
+            (similarIngredient(arrIng[i].ingredient, arrIng[i+1].ingredient) ||
+            `${arrIng[i].ingredient}es` === arrIng[i+1].ingredient || arrIng[i].ingredient === `${arrIng[i+1].ingredient}es`) 
             &&
             ((conversionVolSet.has(arrIng[i].unit) && conversionVolSet.has(arrIng[i+1].unit)) || (conversionWeightSet.has(arrIng[i].unit) && conversionWeightSet.has(arrIng[i+1].unit)))
         ) {
@@ -26,7 +29,6 @@ const unitCombine = (arrIng) => {
             convertedArr.push(arrIng[i])
         }
     }
-    // return convertedArr
     return handleCategory(convertedArr)
 } 
 
