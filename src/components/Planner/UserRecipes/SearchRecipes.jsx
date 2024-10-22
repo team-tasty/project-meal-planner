@@ -45,7 +45,6 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
         </Draggable>
       );
     });
-  console.log(recipeCards);
 
   return (
     <div className="flex flex-col items-center">
@@ -59,7 +58,10 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <button className="text-xs h-6 flex items-center" type="submit">
+          <button
+            className="text-xs lg:text-sm h-6 flex items-center"
+            type="submit"
+          >
             Search
           </button>
         </form>
@@ -71,7 +73,7 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
           />
         )}
       </div>
-      <div className="flex flex-col w-[70vw] lg:w-[30vw] max-w-[430px]">
+      <div className="flex flex-col w-[70vw] lg:w-[26vw] max-w-[400px]">
         {recipeCards}
       </div>
     </div>

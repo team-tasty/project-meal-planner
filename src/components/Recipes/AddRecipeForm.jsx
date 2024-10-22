@@ -70,8 +70,6 @@ const AddRecipeForm = () => {
     setRecipeIngredients(newIngredients);
   };
 
-  console.log(recipeIngredients);
-
   const handleAddRecipe = async (e) => {
     e.preventDefault();
     // create body object
@@ -86,8 +84,6 @@ const AddRecipeForm = () => {
     };
     // make backend call to add a user recipe to the db and save it to user
     const res = await axios.post("/api/create-recipe", { recipeObj });
-
-    console.log(res.data);
 
     // if succesfful
     if (res.data.success) {
@@ -218,7 +214,7 @@ const AddRecipeForm = () => {
           <input
             value={tag}
             type="text"
-            placeholder="e.g. baking,chocolate,gooey"
+            placeholder="e.g. baking, chocolate, gooey"
             className="mb-2"
             onChange={(e) => setTag(e.target.value)}
           />

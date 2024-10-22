@@ -5,7 +5,6 @@ import AddUserRecipeButton from "./AddUserRecipeButton";
 const SearchAPI = ({ setRecipesData }) => {
   // set state values
   const [searchInput, setSearchInput] = useState("");
-  // const [searchType, setSearchType] = useState("");
 
   // create function to handle search
   const handleSearch = async (e) => {
@@ -16,7 +15,6 @@ const SearchAPI = ({ setRecipesData }) => {
     // create body object
     const searchInfo = {
       searchInput,
-      // searchType,
     };
 
     // make call to backend endpoint
@@ -32,37 +30,24 @@ const SearchAPI = ({ setRecipesData }) => {
 
   return (
     <>
-    <div className="flex justify-center pb-2 border-b-[1px] border-lineGreen">
-      <div className="flex flex-row items-start flex-wrap justify-center"> 
-        <form onSubmit={handleSearch}>
-          {/* <label htmlFor="search"></label> */}
+      <div className="flex justify-center items-center pb-2 border-b-[1px] border-lineGreen">
+        <form className="flex items-center" onSubmit={handleSearch}>
           <input
             type="text"
             placeholder="Search recipes"
             value={searchInput}
-            className="mx-[3px] mb-2"
+            className="w-40 h-6"
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          {/* Search by dropdown */}
-          {/* <label htmlFor="dropDown">Search By:</label>
-          <select
-            value={searchType}
-            required
-            onChange={(e) => setSearchType(e.target.value)}
+          <button
+            className="text-xs lg:text-sm h-6 flex items-center"
+            type="submit"
           >
-            <option value="" disabled></option>
-            <option value="s">Title</option>
-            <option value="i">Ingredient</option>
-            <option value="c">Category</option>
-            <option value="a">Area</option>
-          </select> */}
-          <button type="submit">Search</button>
+            Search
+          </button>
         </form>
-        <div className="flex item-stretch h-[28px]">
-          <AddUserRecipeButton />
-        </div>
+        <AddUserRecipeButton />
       </div>
-    </div>
     </>
   );
 };

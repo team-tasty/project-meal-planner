@@ -1,16 +1,12 @@
 import SearchRecipes from "./SearchRecipes.jsx";
-import RecipeCard from "../../Recipes/RecipeCard.jsx";
-import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
 import { Droppable } from "@hello-pangea/dnd";
-import AddUserRecipeButton from "../../Recipes/AddUserRecipeButton.jsx";
 
 const UserRecipes = ({ userRecipes, setUserRecipes }) => {
   return (
     <Droppable droppableId="droppable-user-recipes">
       {(provided) => (
         <div
-          className=" w-[95vw] lg:w-[35vw] flex flex-col items-center max-w-[600px]"
+          className="time-picker-scrollbar flex flex-col w-[95vw] h-[30vh] max-w-[600px] lg:h-[80vh] lg:w-[40vw] items-center mt-1 lg:mt-6 overflow-auto border border-black rounded-md"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >

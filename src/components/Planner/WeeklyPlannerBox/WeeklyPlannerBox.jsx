@@ -27,14 +27,9 @@ const WeeklyPlannerBox = ({
 
   return (
     <div>
-      <div className="">{weeklyPlanners}</div>
-      {/* <div className="flex justify-center gap-4">
-        <AddWeeklyPlannerButton
-          setUserWeeks={setUserWeeks}
-          userWeeks={userWeeks}
-        />
-        <CreateListButton />
-      </div> */}
+      <div className="time-picker-scrollbar flex flex-col w-[95vw] h-[50vh] max-w-[600px] lg:h-[80vh] lg:w-[40vw] items-center mt-1 lg:mt-6 overflow-auto border border-black rounded-md">
+        {weeklyPlanners}
+      </div>
     </div>
   );
 };

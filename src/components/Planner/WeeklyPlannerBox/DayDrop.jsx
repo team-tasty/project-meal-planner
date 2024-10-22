@@ -41,29 +41,30 @@ const DayDrop = ({
   });
 
   return (
-    <Droppable droppableId={`${weekId}-${day.dayId}`} direction="vertical">
-      {(provided) => (
-        <div
-          className="flex justify-between mx-3 min-h-[100px] lg:w-[35vw]"
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-        >
-          <div className="flex items-center">
-            <h2>{day.day}:</h2>
-          </div>
-          <div className="flex flex-col mt-1 pb-2 mb-2 border-b-[1px] w-[70vw] lg:w-[30vw] max-w-[430px] border-lineGreen">
+    <div className="flex justify-between px-2 lg:px-4">
+      <div className="flex items-center min-w-[49px]">
+        <h2>{day.day}:</h2>
+      </div>
+      <Droppable droppableId={`${weekId}-${day.dayId}`}>
+        {(provided) => (
+          <div
+            className="border-b-[1px] min-w-[275px] w-[70vw] lg:w-[26vw] border-lineGreen min-h-[100px] mt-1 pb-2 mb-2 max-w-[400px] lg:min-w-[26vw]"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
             {recipeCards}
+
+            {displayModal && (
+              <RecipeModal
+                setDisplayModal={setDisplayModal}
+                modalData={modalData}
+              />
+            )}
+            {provided.placeholder}
           </div>
-          {displayModal && (
-            <RecipeModal
-              setDisplayModal={setDisplayModal}
-              modalData={modalData}
-            />
-          )}
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
+        )}
+      </Droppable>
+    </div>
   );
 };
 
