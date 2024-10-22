@@ -41,23 +41,19 @@ const DayDrop = ({
   });
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between px-2 lg:px-4">
       <div className="flex items-center min-w-[49px]">
         <h2>{day.day}:</h2>
       </div>
       <Droppable droppableId={`${weekId}-${day.dayId}`}>
         {(provided) => (
           <div
-            className="border-b-[1px] min-w-[275px] sm:max-w-[275px] border-lineGreen min-h-[100px] lg:min-w-[400px]"
+            className="border-b-[1px] min-w-[275px] w-[70vw] lg:w-[26vw] border-lineGreen min-h-[100px] mt-1 pb-2 mb-2 max-w-[400px] lg:min-w-[26vw]"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div
-            // className="flex flex-col mt-1 pb-2 mb-2 border-b-[1px] w-[70vw]
-            // lg:w-[30vw] max-w-[430px] border-lineGreen"
-            >
-              {recipeCards}
-            </div>
+            {recipeCards}
+
             {displayModal && (
               <RecipeModal
                 setDisplayModal={setDisplayModal}

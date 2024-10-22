@@ -84,7 +84,7 @@ const PlannerPage = () => {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
-        <div className="flex flex-col justify-center items-center h-[90vh] box-border lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
+        <div className="flex flex-col justify-around items-center h-[90vh] box-border lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
           <UserRecipes
             userRecipes={userRecipes}
             setUserRecipes={setUserRecipes}
