@@ -59,7 +59,10 @@ const SearchRecipes = ({ recipesData, setRecipesData }) => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <button className="text-xs h-6 flex items-center" type="submit">
+          <button
+            className="text-xs lg:text-sm h-6 flex items-center"
+            type="submit"
+          >
             Search
           </button>
         </form>

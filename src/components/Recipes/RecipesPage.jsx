@@ -38,7 +38,7 @@ const RecipesPage = () => {
       <div className="flex flex-col items-center h-full">
         <h1 className="my-4 text-2xl text-center">Recipes Page</h1>
         <SearchAPI setRecipesData={setRecipesData} />
-        <div className="flex flex-col items-stretch overflow-auto max-w-[400px] w-[95vw]">
+        <div className="time-picker-scrollbar flex flex-col items-stretch overflow-auto max-w-[400px] w-[95vw]">
           {recipeCards}
         </div>
       </div>
