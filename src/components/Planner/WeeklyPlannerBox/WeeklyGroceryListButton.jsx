@@ -22,11 +22,9 @@ const WeeklyGroceryListButton = ({ weekId }) => {
     navigate("/app/groceryList");
   };
   return (
-    <div>
-      <button className="text-xs lg:text-small" onClick={handleGeneratelist}>
-        Generate Grocery List
-      </button>
-    </div>
+    <button className="text-xs md:text-sm" onClick={handleGeneratelist}>
+      Generate Grocery List
+    </button>
   );
 };
 

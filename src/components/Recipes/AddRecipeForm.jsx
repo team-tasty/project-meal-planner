@@ -298,6 +298,9 @@ const AddRecipeForm = () => {
           </h2>
           <span className="self-center">
             <button type="submit">Submit Recipe</button>
+            <button onClick={() => navigate(-1)} type="button">
+              Cancel
+            </button>
           </span>
         </form>
       </div>

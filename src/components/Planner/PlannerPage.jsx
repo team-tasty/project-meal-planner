@@ -91,7 +91,7 @@ const PlannerPage = () => {
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className="flex flex-col justify-center items-center h-[90vh] box-border lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
+      <div className="flex flex-col justify-center items-center h-[90vh] lg:justify-around lg:flex lg:flex-row-reverse lg:items-start">
         <div className="time-picker-scrollbar flex flex-col h-[30vh] lg:h-[80vh] lg:w-[40vw] lg:items-center mt-1 lg:mt-6 overflow-auto border border-black rounded-md">
           <UserRecipes
             userRecipes={userRecipes}
@@ -116,7 +116,7 @@ const PlannerPage = () => {
             <FullGroceryListButton />
           </div>
         </div>
-        <div className="flex flex-col h-[50vh] overflow-auto lg:hidden border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
+        <div className="flex flex-col h-[50vh] time-picker-scrollbar overflow-auto lg:hidden border my-3 lg:h-[80vh] lg:w-[40vw] lg:items-center lg:mt-6 lg:my-0 border-black rounded-md">
           <WeeklyPlannerBox
             handleDelete={handleDelete}
             userWeeks={userWeeks}
