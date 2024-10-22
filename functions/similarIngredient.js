@@ -14,6 +14,6 @@ const similarIngredient = (str1, str2, threshold = 1.5) => {
     return allTokensMatch
 }
 
-// console.log(similarIngredient("clove garlic", "garlic cloves"))
+console.log(similarIngredient("leek", "bay leaf", 1.5))
 
 export default similarIngredient

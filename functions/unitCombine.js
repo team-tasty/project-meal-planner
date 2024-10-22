@@ -2,7 +2,7 @@ import handleConversion from "./handleConversion.js"
 import handleCategory from "./handleCategory.js"
 
 const conversionVolSet = new Set (["C", "pt", "qt", "gal", "oz", "tsp", "Tbsp", "ml", "L"])
-const conversionWeightSet = new Set(["lb", "g"])
+const conversionWeightSet = new Set(["lb", "g", "kg"])
 
 const unitCombine = (arrIng) => {
     let convertedArr = []

@@ -10,6 +10,7 @@ const tbspSet = new Set(["tablespoons", "tablespoon", "tbls", "tbsps", "tbsp", "
 
 // Metric measurements
 const gramSet = new Set(["grams", "gram", "g"])
+const kilogramSet = new Set(["kilograms", "kilogram", "kilo grams", "kilo gram", "kgs", "kg"])
 const mlSet = new Set(["milliliters", "milliliter", "mls", "ml"])
 const literSet = new Set(["liters", "liter", "l"])
 
@@ -40,6 +41,8 @@ const unitConvert = (arr) => {
             finalArr.push("Tbsp")
         } else if (gramSet.has(arrLC)) {
             finalArr.push("g")
+        } else if (kilogramSet.has(arrLC)) {
+            finalArr.push("kg")
         } else if (mlSet.has(arrLC)) {
             finalArr.push("ml")
         } else if (literSet.has("arrLC")) {
