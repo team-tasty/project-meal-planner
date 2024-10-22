@@ -78,7 +78,6 @@ const groceryList = (objRecipes) => {
 
         return 0
     })
-    console.log(ingredientArr)
     // console.log(util.inspect(ingredientArr, {maxArrayLength: null}))
 
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
