@@ -5,7 +5,7 @@ const UserLandingPage = () => {
   return (
     <>
       <div className="bg-landing-pic bg-right-bottom h-[90vh] flex flex-col justify-center place-items-center">
-        <div className="bg-[#D9D9D9]/85 p-3 rounded-[5px] flex flex-col">
+        <div className="bg-[#D9D9D9]/85 p-3 rounded-[5px] flex flex-col mx-2">
           <h1
             className="self-center mb-4 text-2xl"
           >Welcome to Meal Planner</h1>
