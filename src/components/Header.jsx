@@ -4,12 +4,10 @@ import { useSelector } from "react-redux";
 import { HiOutlineMenu } from "react-icons/hi";
 import { useState } from "react";
 
-
 const Header = () => {
   const userId = useSelector((state) => state.userId);
-  // console.log(userId);
 
-  const [ showMenu, setShowMenu ] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <>
@@ -33,7 +31,7 @@ const Header = () => {
             />
           </div>
         </div>
-        {showMenu &&
+        {showMenu && (
           <div className="absolute top-[10vh] left-0 right-0 bg-white flex flex-col items-center border-b-[1px] border-black py-6">
             <NavLink
               to="/app/home"
@@ -77,9 +75,9 @@ const Header = () => {
               Grocery List
             </NavLink>
 
-            <LogoutButton onClick={() => setShowMenu(false)} /> 
+            <LogoutButton onClick={() => setShowMenu(false)} />
           </div>
-        }
+        )}
       </div>
 
       {/* Desktop View */}

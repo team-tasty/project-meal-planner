@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { GoHeartFill } from "react-icons/go";
 import axios from "axios";
-import { FaR, FaRegTrashCan } from "react-icons/fa6";
+import { FaRegTrashCan } from "react-icons/fa6";
 import { PiBowlFood } from "react-icons/pi";
 
 const RecipeCard = ({
@@ -23,8 +23,6 @@ const RecipeCard = ({
   // map over all recipes received from the recipes page and create cards for them
   // to display in each card: image, title, category
 
-  // console.log(recipesData);
-  // console.log("RECIPE", recipe);
   const weekMealId = recipe.weekMealId;
 
   // do map of externalIds to get each userRecipe
@@ -38,11 +36,6 @@ const RecipeCard = ({
       return userRecipe.userRecipeId; // returns an array with all the userRecipe ids
     });
   }
-  // console.log("externalIds: ", externalIds);
-  // console.log("userExternalRecipesIds: ", userExternalRecipesIds);
-
-  // const [recipeData, setRecipeData] = useState([recipe]);
-  // console.log(recipeData);
 
   const handleClick = async () => {
     // make call to backend to save the recipe to our database
@@ -61,12 +54,11 @@ const RecipeCard = ({
     // make axios call
     if (!saved) {
       const res = await axios.post("/api/save-recipe", { recipeObj });
-      console.log(res.data);
 
       // if successful...
       if (res.data.success) {
         // change the fill color of the heart/checkmark/star
-        // setSaved(true);
+
         // update the externalIds Array
         setExternalIds(res.data.externalIds);
       }
@@ -81,25 +73,9 @@ const RecipeCard = ({
         const res = await axios.delete(
           `/api/unsave-recipe/${recipe.userRecipeId}`
         );
-        console.log(res.data);
-
         if (res.data.success) {
-          // const userRecipeToDelete = recipesData.filter((element) => {
-          //   return element.userRecipeId === +recipe.userRecipeId;
-          // });
-          // console.log(userRecipeToDelete);
-
-          // const indexOfRecipeToDelete = recipesData.indexOf(
-          //   userRecipeToDelete[0]
-          // );
-          // console.log(indexOfRecipeToDelete);
-          // const newUserRecipes = [...recipesData];
-          // newUserRecipes.splice(indexOfRecipeToDelete, 1);
-          // console.log(newUserRecipes);
-
-          // for some reason this is not updating the state value. Is it because they are named different things in the grandparent?
+          // update state
           setRecipesData(res.data.updatedUserRecipes);
-          // console.log(res.data.updatedUserRecipes);
         }
       } else {
         // = this component is on the Recipes page
@@ -109,19 +85,16 @@ const RecipeCard = ({
         const res = await axios.delete(
           `/api/unsave-recipe/${userRecipeIdToDelete}`
         );
-        console.log(res.data);
 
         // if successful...
         if (res.data.success) {
           // change the fill color of save icon to white
-          // setSaved(false);
           // update the externalIds Array
           setExternalIds(res.data.externalIds);
         }
       }
     }
   };
-  // console.log(recipesData);
 
   useEffect(() => {
     // On recipes page
@@ -131,21 +104,11 @@ const RecipeCard = ({
       } else {
         setSaved(false);
       }
-      // WHAT SEAN WAS WORKING ON
-      //   const externalRecipe = externalIds.find((externalRecipe) => {
-      //     // console.log("RECIPE.RECIPEID:", recipe.recipeId)
-      //     return externalRecipe.recipe.recipeExternalId === recipe.recipeId;
-      //   });
-      //   console.log("EXTERNALRECIPE:", externalRecipe);
-      //   if (externalRecipe) setSaved(true);
-
       // on planner page
     } else {
       setSaved(true);
     }
   }, [externalIds, recipesData]);
-
-  console.log(`${recipe.title} image:`, recipe.image);
 
   return externalIds ? (
     <div

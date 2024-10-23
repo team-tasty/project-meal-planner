@@ -35,17 +35,6 @@ const WeeklyPlanner = ({
     );
   });
 
-  // make a backend call to get days within a useEffect?
-  useEffect(() => {
-    const populateDays = async () => {
-      const res = await axios.get("/api/getDays");
-
-      if (res.data.success) {
-        setDaysData(res.data.days);
-      }
-    };
-  }, []);
-
   return (
     <div className="">
       <div className="flex items-center justify-center">

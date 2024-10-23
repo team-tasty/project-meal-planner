@@ -6,7 +6,6 @@ const LogoutButton = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userId = useSelector((state) => state.userId);
-  // console.log(userId);
 
   const handleLogout = async () => {
     const res = await axios.get("/api/logout");
@@ -20,9 +19,9 @@ const LogoutButton = () => {
 
   return (
     <>
-      <p 
-        className="headerLink cursor-pointer"
-        onClick={handleLogout}>Logout</p>
+      <p className="headerLink cursor-pointer" onClick={handleLogout}>
+        Logout
+      </p>
     </>
   );
 };

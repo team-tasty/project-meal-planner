@@ -1,14 +1,11 @@
 import axios from "axios";
 
 const AddWeeklyPlannerButton = ({ setUserWeeks, userWeeks }) => {
-  console.log(userWeeks);
-
   const handleAddWeek = async () => {
     // make backend call to add another week
     if (userWeeks.length <= 3) {
       const res = await axios.get("/api/add-week");
 
-      console.log(res.data);
       if (res.data.success) {
         setUserWeeks(res.data.userWeeks);
       }
