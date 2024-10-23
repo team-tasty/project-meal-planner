@@ -116,7 +116,7 @@ const RecipeCard = ({
         setModalData(recipe);
         setDisplayModal(!displayModal);
       }}
-      className="recipeCard my-2 mx-[2px] flex justify-between items-center"
+      className="recipeCard my-2 mx-[2px] flex justify-between items-center cursor-pointer"
     >
       {recipe.image && (
         <img
@@ -163,7 +163,7 @@ const RecipeCard = ({
         setModalData(recipe.recipe);
         setDisplayModal(!displayModal);
       }}
-      className="recipeCard my-2 flex justify-between items-center"
+      className="recipeCard my-2 flex justify-between items-center cursor-pointer"
     >
       {recipe.recipe.image && (
         <img
