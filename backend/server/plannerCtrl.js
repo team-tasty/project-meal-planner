@@ -13,6 +13,7 @@ import {
 import getUserWeeks from "../../functions/getUserWeeks.js";
 
 export const plannerFns = {
+  // Gets all data for user weeks on planner page
   userWeeks: async (req, res) => {
     const userId = req.session.userId;
 
@@ -32,6 +33,7 @@ export const plannerFns = {
     return res.send(resObj);
   },
 
+  // Gets single week data
   singleWeek: async (req, res) => {
     const userId = req.session.userId;
 
@@ -53,9 +55,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: `Error when trying to get week data by weekId`,
@@ -64,7 +64,6 @@ export const plannerFns = {
   },
 
   addUserWeek: async (req, res) => {
-    // TODO: ensure frontend prevents add if user already has 4 weeks
     const userId = req.session.userId;
 
     if (!userId) {
@@ -74,6 +73,7 @@ export const plannerFns = {
       });
     }
 
+    // Create a week and get user weeks data to send back in response
     try {
       await Week.create({
         userId,
@@ -87,9 +87,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: "Failed to create new week for user in db",
@@ -99,7 +97,6 @@ export const plannerFns = {
   },
 
   deleteUserWeek: async (req, res) => {
-    // TODO: ensure frontend prevents delete if user only has 1 week
     const userId = req.session.userId;
 
     if (!userId) {
@@ -112,16 +109,19 @@ export const plannerFns = {
     const { weekId } = req.params;
 
     try {
+      // Delete all WeekMeals associated with the week to be deleted
       await WeekMeal.destroy({
         where: {
           weekId,
         },
       });
 
+      // Delete week
       const weekToDelete = await Week.findByPk(weekId);
 
       await weekToDelete.destroy();
 
+      // Get user weeks data for response
       const resObj = await getUserWeeks(userId);
 
       if (resObj.success) {
@@ -130,9 +130,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: "Failed to delete week from db",
@@ -141,6 +139,7 @@ export const plannerFns = {
     }
   },
 
+  // Sends name of each day in db. (So that we can easily change names from "Day 1", "Day 2", etc. to "Monday", "Tuesday", etc.)
   days: async (req, res) => {
     const userId = req.session.userId;
 
@@ -167,6 +166,7 @@ export const plannerFns = {
     });
   },
 
+  // Adds recipe to planner DayDrop
   addWeekMeal: async (req, res) => {
     const userId = req.session.userId;
 
@@ -186,6 +186,7 @@ export const plannerFns = {
       });
     }
 
+    // Create new WeekMeal and get weeks data to send in response
     try {
       const newWeekMeal = await WeekMeal.create({
         weekId,
@@ -208,9 +209,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: "Error when creating new weekMeal in db",
@@ -219,6 +218,7 @@ export const plannerFns = {
     }
   },
 
+  // For moving a saved recipe in planner from one DayDrop to another, or to a different week (not used in initial version, possibly implemented later)
   editWeekMeal: async (req, res) => {
     const userId = req.session.userId;
 
@@ -255,9 +255,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: "Error when updating weekMeal in db",
@@ -266,6 +264,7 @@ export const plannerFns = {
     }
   },
 
+  // Removes recipe from planner DayDrop
   deleteWeekMeal: async (req, res) => {
     const userId = req.session.userId;
 
@@ -278,6 +277,7 @@ export const plannerFns = {
 
     const { weekMealId } = req.params;
 
+    // Delete WeekMeal and get user weeks data to send in response
     try {
       const weekMealToDelete = await WeekMeal.findByPk(weekMealId);
 
@@ -291,9 +291,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: "Error when deleting weekMeal from db",
@@ -302,6 +300,7 @@ export const plannerFns = {
     }
   },
 
+  // Removes all WeekMeals from Week (removes all recipes from DayDrop of that week)
   resetWeek: async (req, res) => {
     const userId = req.session.userId;
 
@@ -314,6 +313,7 @@ export const plannerFns = {
 
     const { weekId } = req.params;
 
+    // Delete WeekMeals of that weekId and get user weeks data to send in response
     try {
       await WeekMeal.destroy({
         where: {
@@ -329,9 +329,7 @@ export const plannerFns = {
 
       return res.send(resObj);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: "Error when resetting week in db",
