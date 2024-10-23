@@ -9,6 +9,7 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
   const [password, setPassword] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,23 +36,23 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
       });
       navigate("userLandingPage"); // might not need with the session check?
     } else {
-      return <p>{res.data.message}</p>;
+      setMessage(res.data.message);
     }
   };
 
   return (
     <>
-    <div className="h-[90vh] flex justify-center">
+      <div className="h-[90vh] flex justify-center">
         <div className="flex flex-col w-[400px] justify-center place-items-center">
-          <img src="../../public/PPLogo-no-bg.png" alt="Pantry Plan Logo" 
+          <img
+            src="../../public/PPLogo-no-bg.png"
+            alt="Pantry Plan Logo"
             className="w-[68%]"
           />
-          <form 
-             className="flex flex-col"
-            onSubmit={handleRegister}>
-            <label 
-              className="font-montserratMedium mb-1"
-              htmlFor="fname">First Name</label>
+          <form className="flex flex-col" onSubmit={handleRegister}>
+            <label className="font-montserratMedium mb-1" htmlFor="fname">
+              First Name
+            </label>
             <input
               value={fname}
               type="text"
@@ -61,9 +62,9 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
               onChange={(e) => setFname(e.target.value)}
             />
 
-            <label 
-              className="font-montserratMedium mb-1"
-              htmlFor="lname">Last Name</label>
+            <label className="font-montserratMedium mb-1" htmlFor="lname">
+              Last Name
+            </label>
             <input
               value={lname}
               type="text"
@@ -72,9 +73,9 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
               className="mb-2"
               onChange={(e) => setLname(e.target.value)}
             />
-            <label 
-              className="font-montserratMedium mb-1"
-              htmlFor="username">Username</label>
+            <label className="font-montserratMedium mb-1" htmlFor="username">
+              Username
+            </label>
             <input
               value={username}
               type="text"
@@ -83,9 +84,9 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
               className="mb-2"
               onChange={(e) => setUsername(e.target.value)}
             />
-            <label 
-              className="font-montserratMedium mb-1"
-              htmlFor="password">Password</label>
+            <label className="font-montserratMedium mb-1" htmlFor="password">
+              Password
+            </label>
             <input
               value={password}
               type="password"
@@ -94,6 +95,9 @@ const RegisterForm = ({ setShowRegister, setShowLogin }) => {
               className="mb-4"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {message && (
+              <p className="text-red-600 text-center mb-2">{message}</p>
+            )}
             <span className="self-center mb-2">
               <button type="submit">Create Account</button>
             </span>
