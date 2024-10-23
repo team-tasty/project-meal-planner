@@ -48,7 +48,7 @@ const DayDrop = ({
       <Droppable droppableId={`${weekId}-${day.dayId}`}>
         {(provided) => (
           <div
-            className="border-b-[1px] min-w-[275px] w-[70vw] lg:w-[26vw] border-lineGreen min-h-[100px] mt-1 pb-2 mb-2 max-w-[400px] lg:min-w-[26vw]"
+            className="w-[70vw] lg:w-[26vw] max-w-[400px] min-w-[275px] min-h-[100px] border-b-[1px] border-lineGreen mt-1 pb-2 mb-2"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
