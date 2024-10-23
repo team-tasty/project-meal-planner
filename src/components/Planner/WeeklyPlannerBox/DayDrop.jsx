@@ -1,4 +1,4 @@
-import { Droppable, Draggable } from "@hello-pangea/dnd";
+import { Droppable } from "@hello-pangea/dnd";
 import RecipeCard from "../../Recipes/RecipeCard";
 import { useState } from "react";
 import RecipeModal from "../../Recipes/RecipeModal";
@@ -8,18 +8,12 @@ const DayDrop = ({
   dayRecipes,
   handleDelete,
   dayIndex,
-  userWeeks,
   weekId,
   setUserWeeks,
   handleOnDragEnd,
 }) => {
   const [displayModal, setDisplayModal] = useState(false);
   const [modalData, setModalData] = useState([]);
-  // let placeholders = [null, null, null];
-
-  // console.log(day);
-  // console.log("DAY RECIPES:", dayRecipes);
-  // // console.log(weekId);
 
   // map over dayRecipes and render the recipeCards for each recipe
   const recipeCards = dayRecipes.map((recipe, index) => {

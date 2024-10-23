@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +24,6 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
     // now send this data to our /login endpoint to validate:
     const res = await axios.post("/api/login", formData);
 
-    console.log(res.data);
     // get response and save the userId to the redux store
     if (res.data.success) {
       dispatch({
@@ -45,15 +44,15 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
     <>
       <div className="h-[90vh] flex justify-center my-4">
         <div className="flex flex-col w-[400px] justify-center place-items-center">
-          <img src="../../public/PPLogo-no-bg.png" alt="Pantry Plan Logo" 
+          <img
+            src="../../public/PPLogo-no-bg.png"
+            alt="Pantry Plan Logo"
             className="w-[68%]"
           />
-          <form 
-            className="flex flex-col"
-            onSubmit={handleLogin}>
-            <label 
-              className="font-montserratMedium mb-1"
-              htmlFor="username">Username</label>
+          <form className="flex flex-col" onSubmit={handleLogin}>
+            <label className="font-montserratMedium mb-1" htmlFor="username">
+              Username
+            </label>
             <input
               value={username}
               type="text"
@@ -62,9 +61,9 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
               className="mb-2"
               onChange={(e) => setUsername(e.target.value)}
             />
-            <label 
-              className="font-montserratMedium mb-1"
-              htmlFor="password">Password</label>
+            <label className="font-montserratMedium mb-1" htmlFor="password">
+              Password
+            </label>
             <input
               value={password}
               type="password"

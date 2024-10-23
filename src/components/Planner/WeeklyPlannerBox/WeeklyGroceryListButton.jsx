@@ -10,7 +10,7 @@ const WeeklyGroceryListButton = ({ weekId }) => {
   const handleGeneratelist = async () => {
     // make backend call to single grocery list endpoint
     const res = await axios.get(`/api/grocery-list/${weekId}`);
-    console.log(res.data);
+
     if (res.data.success) {
       dispatch({
         type: "UPDATE_GROCERY_LIST",
@@ -18,8 +18,6 @@ const WeeklyGroceryListButton = ({ weekId }) => {
       });
       navigate("/app/groceryList");
     }
-
-    navigate("/app/groceryList");
   };
   return (
     <button className="text-xs md:text-sm" onClick={handleGeneratelist}>

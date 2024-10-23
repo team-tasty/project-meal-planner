@@ -4,8 +4,6 @@ import useAuth from "../useAuth";
 function ProtectedRoute({ children }) {
   const auth = useAuth();
 
-  console.log("auth", auth);
-
   if (auth.loading) {
     return null; // Or a loading spinner
   }

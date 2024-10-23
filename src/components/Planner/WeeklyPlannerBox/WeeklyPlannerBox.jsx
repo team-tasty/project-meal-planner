@@ -1,6 +1,4 @@
 import WeeklyPlanner from "./WeeklyPlanner";
-import AddWeeklyPlannerButton from "./AddWeeklyPlannerButton";
-import CreateListButton from "./FullGroceryListButton";
 
 const WeeklyPlannerBox = ({
   // plannedRecipes,

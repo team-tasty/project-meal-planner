@@ -1,7 +1,7 @@
 import SearchAPI from "./SearchAPI";
 import RecipeCard from "./RecipeCard";
 import RecipeModal from "./RecipeModal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const RecipesPage = () => {
