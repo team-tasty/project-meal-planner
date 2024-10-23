@@ -7,6 +7,8 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
   // set state values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [invalidLogin, setInvalidLogin] = useState(false);
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
     const res = await axios.post("/api/login", formData);
 
     // get response and save the userId to the redux store
+
     if (res.data.success) {
       dispatch({
         type: "USER_AUTH",
@@ -36,7 +39,10 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
       //navigate to the user landing page
       navigate("/userLandingPage");
     } else {
-      return <p>{res.data.message}</p>;
+      // return <p className="text-red-600">{res.data.message}</p>;
+      setInvalidLogin(true);
+
+      setMessage(res.data.message);
     }
   };
 
@@ -72,10 +78,14 @@ const LoginForm = ({ setShowRegister, setShowLogin }) => {
               className="mb-4"
               onChange={(e) => setPassword(e.target.value)}
             />
+            {invalidLogin && (
+              <p className="text-red-600 text-center mb-2">{message}</p>
+            )}
             <span className="self-center mb-2">
               <button type="submit">Login</button>
             </span>
           </form>
+
           <h2 className="mb-2">Not a member?</h2>
           <button
             onClick={() => {
