@@ -34,7 +34,8 @@ const handleCategory = (convertedArr) => {
             convertedArr[i].ingredient === "sugar" ||
             convertedArr[i].ingredient === "pepper" ||
             convertedArr[i].ingredient === "black pepper"  ||
-            convertedArr[i].ingredient === "clove"
+            convertedArr[i].ingredient === "clove" ||
+            convertedArr[i].ingredient === "salt"
         ) {
             convertedArr[i].category = "baking"
         } else if (
