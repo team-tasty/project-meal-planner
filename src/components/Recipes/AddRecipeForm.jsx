@@ -220,7 +220,7 @@ const AddRecipeForm = () => {
           />
 
           <h2 className="pb-2 mb-4 border-b-[1px] border-lineGreen">
-            * = required
+            *required
           </h2>
           <ul>{ingredientList}</ul>
           {!isAddingNewIngredient && (
@@ -274,9 +274,6 @@ const AddRecipeForm = () => {
                 onChange={(e) => setName(e.target.value)}
               />
               <span className="self-center mb-2">
-                <button onClick={handleCancelIngredient} type="button">
-                  Cancel
-                </button>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -285,6 +282,9 @@ const AddRecipeForm = () => {
                   type="button"
                 >
                   Save Ingredient
+                </button>
+                <button onClick={handleCancelIngredient} type="button">
+                  Cancel
                 </button>
               </span>
             </div>
