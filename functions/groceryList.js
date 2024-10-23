@@ -75,7 +75,7 @@ const groceryList = (objRecipes) => {
 
         return 0
     })
-
+    console.log(ingredientArr)
     // If the ingredient is the same (or pluralized), and the units are equivalent, combine the quantities
     let qtySum = 0
     for (let i = 0; i < ingredientArr.length; i++) {
@@ -126,8 +126,8 @@ const groceryList = (objRecipes) => {
                 if (
                     // (j === i || ingredientArr[j].ingredient === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}s` || `${ingredientArr[j].ingredient}s` === ingredientArr[(j-1)].ingredient || ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient)
                     ((j === i || 
-                    (similarIngredient(ingredientArr[j].ingredient, ingredientArr[j-1].ingredient) 
-                    || (ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient))
+                    (similarIngredient(ingredientArr[j].ingredient, ingredientArr[j-1].ingredient) ||
+                    (ingredientArr[j].ingredient === `${ingredientArr[(j-1)].ingredient}es` || `${ingredientArr[j].ingredient}es` === ingredientArr[(j-1)].ingredient))
                     ))
                     &&
                     (j === i || 
