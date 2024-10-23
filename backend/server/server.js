@@ -45,8 +45,6 @@ app.get("/api/user-recipes", userRecipes);
 app.post("/api/save-recipe", saveRecipe); // needs recipe object in body object
 // user un-saves a recipe
 app.delete("/api/unsave-recipe/:userRecipeId", unsaveRecipe); // needs userRecipeId in req.params
-// display recipe modal (not needed because data is already at front end)
-// app.post('/app/recipe-detail'); // needs recipeId in body object
 // get externalRecipeId's of userRecipes to show if search recipe result is already saved or not
 app.get("/api/user-recipe-external-ids", externalRecipeIds);
 // create new personal recipe
@@ -93,7 +91,6 @@ const { groceryList } = gListFns;
 app.get("/api/grocery-list/:weekId", groceryList); // needs weekId in req.params
 // generate grocery list for all weeks
 app.get("/api/grocery-list", groceryList);
-// app.get('/api/save-grocery-list'); // stretch goal
 
 ViteExpress.listen(app, port, () => {
   console.log(`Server running on http://localhost:${port}`);

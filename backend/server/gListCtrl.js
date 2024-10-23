@@ -17,12 +17,11 @@ export const gListFns = {
 
     let objRecipes;
 
+    // Get user weeks data (if weekId is not provided, it will get data for all weeks of that user)
     try {
       objRecipes = await getUserWeeks(userId, weekId);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: `Error when getting userWeeks data`,
@@ -32,12 +31,12 @@ export const gListFns = {
 
     let groceryListData;
 
+    // Generate grocery list to send in response
+    // (Might be better to have frontend run groceryList fn to reduce work done in the backend)
     try {
       groceryListData = groceryList(objRecipes);
     } catch (error) {
-      console.log();
       console.error(error);
-      console.log();
 
       return res.send({
         message: `Error when invoking groceryList fn`,
