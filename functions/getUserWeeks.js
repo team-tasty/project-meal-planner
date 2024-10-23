@@ -11,48 +11,55 @@ import {
 } from "../backend/db/model.js";
 
 const getUserWeeks = async (userId, weekId) => {
-  const userWeeks = await User.findByPk(userId, {
-    attributes: ["userId"],
-    separate: true,
-    include: [
-      {
-        model: Week,
-        separate: true,
-        where: weekId ? { weekId } : {},
-        include: [
-          {
-            model: WeekMeal,
-            separate: true,
-            include: [
-              Day,
-              {
-                model: Recipe,
-                include: [
-                  {
-                    model: RecipeIngredient,
-                    include: [Ingredient, MeasurementQuantity, MeasurementUnit],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  });
+  // Get all data related to user's planner weeks
+  try {
+    const userWeeks = await User.findByPk(userId, {
+      attributes: ["userId"],
+      separate: true,
+      include: [
+        {
+          model: Week,
+          separate: true,
+          where: weekId ? { weekId } : {},
+          include: [
+            {
+              model: WeekMeal,
+              separate: true,
+              include: [
+                Day,
+                {
+                  model: Recipe,
+                  include: [
+                    {
+                      model: RecipeIngredient,
+                      include: [
+                        Ingredient,
+                        MeasurementQuantity,
+                        MeasurementUnit,
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
 
-  if (userWeeks.weeks === 0) {
+    // Return object to be used as response object (Message will be added by controller function)
+    return {
+      success: true,
+      userWeeks: userWeeks.weeks,
+    };
+  } catch (error) {
+    console.error(error);
+
     return {
       message: "Failed to get user weeks",
       success: false,
     };
   }
-
-  return {
-    // message to be included in controller function
-    success: true,
-    userWeeks: userWeeks.weeks,
-  };
 };
 
 export default getUserWeeks;

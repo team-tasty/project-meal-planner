@@ -3,6 +3,7 @@ import { Op } from "sequelize";
 import getUserRecipes from "./getUserRecipes.js";
 
 const getExternalIds = async (userId) => {
+  // Get user recipes data and recipe ids from TheMealDb (for user saved status on recipes page)
   const userRecipeResObj = await getUserRecipes(userId);
 
   if (!userRecipeResObj.success) {
@@ -34,6 +35,7 @@ const getExternalIds = async (userId) => {
       ],
     });
 
+    // Returns object to be used for response object (Message will be added by individual controller functions)
     return {
       success: true,
       externalIds: externalIds.userRecipes,
